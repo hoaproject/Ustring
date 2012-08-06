@@ -34,35 +34,18 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\String\Unicode {
+namespace Hoa\String {
 
 /**
- * Class \Hoa\String\Unicode\Util.
+ * Class \Hoa\String\Exception.
  *
- * Some useful methods about Unicode.
+ * Extending the \Hoa\Core\Exception class.
  *
  * @author     Ivan Enderlin <ivan.enderlin@hoa-project.net>
  * @copyright  Copyright © 2007-2012 Ivan Enderlin.
  * @license    New BSD License
  */
 
-class Util {
-
-    /**
-     * Return a Unicode from its code.
-     *
-     * @access  public
-     * @param   int  $code    Code.
-     * @return  string
-     */
-    public static function fromCode ( $hexa ) {
-
-        return mb_convert_encoding(
-            '&#x' . dechex($hexa) . ';',
-            'UTF-8',
-            'HTML-ENTITIES'
-        );
-    }
-}
+class Exception extends \Hoa\Core\Exception { }
 
 }
