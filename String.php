@@ -704,6 +704,17 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
+     * Check if a string is encoded in UTF-8.
+     *
+     * @access  public
+     * @return  bool
+     */
+    public static function isUtf8 ( $string ) {
+
+        return (bool) preg_match('//u', $string);
+    }
+
+    /**
      * Transform the object as a string.
      *
      * @access  public
