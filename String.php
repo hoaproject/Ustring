@@ -368,11 +368,11 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * Iterator over chars.
      *
      * @access  public
-     * @return  \ArrayObject
+     * @return  \ArrayIterator
      */
     public function getIterator ( ) {
 
-        return new \ArrayObject(preg_split('#(?<!^)(?!$)#u', $this->_string));
+        return new \ArrayIterator(preg_split('#(?<!^)(?!$)#u', $this->_string));
     }
 
     /**
