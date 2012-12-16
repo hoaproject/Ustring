@@ -58,7 +58,7 @@ class Search {
      * @param   int     $k    Number of differences.
      * @return  array
      */
-    public function approximated ( $y, $x, $k ) {
+    public static function approximated ( $y, $x, $k ) {
 
         $m      = strlen($x);
         $n      = strlen($y);
@@ -81,7 +81,7 @@ class Search {
                              );
                 $a         = substr($x, $l + 1     , $m - $l     );
                 $b         = substr($y, $l + 1 + $d, $n - $l - $d);
-                $L[$q][$d] = $l + $this->lcp($a, $b);
+                $L[$q][$d] = $l + static::lcp($a, $b);
 
                 if(        $L[$q][$d] == $m - 1
                    || $d + $L[$q][$d] == $n - 1) {
@@ -103,7 +103,7 @@ class Search {
      * @param   string  $y    Word.
      * @return  int
      */
-    public function lcp ( $x, $y ) {
+    public static function lcp ( $x, $y ) {
 
         $max = min(strlen($x), strlen($y));
         $i   = 0;
