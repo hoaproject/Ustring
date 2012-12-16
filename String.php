@@ -680,10 +680,10 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * @param   int  $code    Code.
      * @return  string
      */
-    public static function fromCode ( $hexa ) {
+    public static function fromCode ( $code ) {
 
         return mb_convert_encoding(
-            '&#x' . dechex($hexa) . ';',
+            '&#x' . dechex($code) . ';',
             'UTF-8',
             'HTML-ENTITIES'
         );
