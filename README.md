@@ -5,7 +5,7 @@ Moreover, Hoa aims at being a bridge between industrial and research worlds.
 
 # Hoa\String
 
-This library allows to manipulate UTF-8 strings easily with some other search
+This library allows to manipulate UTF-8 strings easily with some search
 algorithms.
 
 ## Quick usage
