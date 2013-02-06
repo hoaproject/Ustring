@@ -23,6 +23,10 @@
     },
     "require": {
         "hoa/core"    : "master",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "ext-iconv"   : "*"
+    },
+    "suggest": {
+        "ext-intl" : "To get a better Hoa\\String::toAscii()."
     }
 }
