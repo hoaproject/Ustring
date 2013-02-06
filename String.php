@@ -716,6 +716,40 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
+     * Transform a UTF-8 string into an ASCII one.
+     *
+     * @access  public
+     * @param   string  $string    String.
+     * @param   bool    $try       Try something if \Normalizer is not present.
+     * @return  string
+     * @throw   \Hoa\String\Exception
+     */
+    public static function toAscii ( $string, $try = false ) {
+
+        if(0 === preg_match('#[\x80-\xff]#', $string))
+            return $string;
+
+        if(false === class_exists('Normalizer', false)) {
+
+            if(false === $try)
+                throw new Exception(
+                    '%s needs the class Normalizer to work properly, ' .
+                    'or you can force a try by using %1$s(…, true).',
+                    1, array(__METHOD__));
+
+
+            $string = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $string);
+
+            return preg_replace('#(?:[\'"`^](\w))#u', '\1', $string);
+        }
+
+        $string = \Normalizer::normalize($string, \Normalizer::NFKD);
+        $string = preg_replace('#\p{Mn}+#u', '', $string);
+
+        return iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $string);
+    }
+
+    /**
      * Transform the object as a string.
      *
      * @access  public
