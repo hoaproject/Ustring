@@ -498,6 +498,21 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
+     * Get a part of a string.
+     *
+     * @access  public
+     * @param   int  $start     Position of first character.
+     * @param   int  $length    Maximum number of characters.
+     * @return  \Hoa\String
+     */
+    public function substr ( $start, $length = null ) {
+
+        $this->_string = mb_substr($this->_string, $start, $length);
+
+        return $this;
+    }
+
+    /**
      * Count number of characters of the current string.
      *
      * @access  public
