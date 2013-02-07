@@ -326,7 +326,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
         $pattern = $this->safePattern($pattern);
 
         if(false === is_callable($replacement))
-            $this->_string = preg_filter(
+            $this->_string = preg_replace(
                 $pattern,
                 $replacement,
                 $this->_string,
