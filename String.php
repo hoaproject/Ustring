@@ -734,7 +734,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * Transform a UTF-8 string into an ASCII one.
      *
      * @access  public
-     * @param   bool  $try  Try something if \Normalizer is not present.
+     * @param   bool  $try    Try something if \Normalizer is not present.
      * @return  \Hoa\String
      * @throw   \Hoa\String\Exception
      */
