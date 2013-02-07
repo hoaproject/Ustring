@@ -734,15 +734,14 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * Transform a UTF-8 string into an ASCII one.
      *
      * @access  public
-     * @param   string  $string    String.
-     * @param   bool    $try       Try something if \Normalizer is not present.
-     * @return  string
+     * @param   bool  $try  Try something if \Normalizer is not present.
+     * @return  \Hoa\String
      * @throw   \Hoa\String\Exception
      */
-    public static function toAscii ( $string, $try = false ) {
+    public function toAscii ( $try = false ) {
 
-        if(0 === preg_match('#[\x80-\xff]#', $string))
-            return $string;
+        if(0 === preg_match('#[\x80-\xff]#', $this->_string))
+            return $this;
 
         if(false === class_exists('Normalizer', false)) {
 
@@ -752,15 +751,17 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
                     'or you can force a try by using %1$s(…, true).',
                     1, array(__METHOD__));
 
-            $string = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $string);
+            $string        = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $this->_string);
+            $this->_string = preg_replace('#(?:[\'"`^](\w))#u', '\1', $string);
 
-            return preg_replace('#(?:[\'"`^](\w))#u', '\1', $string);
+            return $this;
         }
 
-        $string = \Normalizer::normalize($string, \Normalizer::NFKD);
-        $string = preg_replace('#\p{Mn}+#u', '', $string);
+        $string        = \Normalizer::normalize($this->_string, \Normalizer::NFKD);
+        $string        = preg_replace('#\p{Mn}+#u', '', $string);
+        $this->_string = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $string);
 
-        return iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $string);
+        return $this;
     }
 
     /**
