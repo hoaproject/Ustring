@@ -752,7 +752,6 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
                     'or you can force a try by using %1$s(…, true).',
                     1, array(__METHOD__));
 
-
             $string = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $string);
 
             return preg_replace('#(?:[\'"`^](\w))#u', '\1', $string);
