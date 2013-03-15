@@ -748,7 +748,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
             if(false === $try)
                 throw new Exception(
                     '%s needs the class Normalizer to work properly, ' .
-                    'or you can force a try by using %1$s(…, true).',
+                    'or you can force a try by using %1$s(true).',
                     1, array(__METHOD__));
 
             $string        = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $this->_string);
