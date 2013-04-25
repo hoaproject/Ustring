@@ -22,7 +22,7 @@
         "source": "http://git.hoa-project.net/"
     },
     "require": {
-        "hoa/core"    : "master",
+        "hoa/core"    : "dev-master",
         "ext-mbstring": "*",
         "ext-iconv"   : "*"
     },
