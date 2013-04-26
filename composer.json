@@ -26,6 +26,7 @@
         "ext-mbstring": "*",
         "ext-iconv"   : "*"
     },
+    "minimum-stability": "dev",
     "suggest": {
         "ext-intl" : "To get a better Hoa\\String::toAscii()."
     }
