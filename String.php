@@ -162,9 +162,6 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
             throw new Exception(
                 '%s needs the mbstring extension.', 0, get_class($this));
 
-        mb_internal_encoding('UTF-8');
-        mb_regex_encoding('UTF-8');
-
         if(null !== $string)
             $this->append($string);
 
