@@ -258,7 +258,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * @param   string  $pattern    Pattern.
      * @return  string
      */
-    public function safePattern ( $pattern ) {
+    public static function safePattern ( $pattern ) {
 
         $delimiter = mb_substr($pattern, 0, 1);
         $options   = mb_substr(
@@ -288,7 +288,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     public function match ( $pattern, &$matches = null, $flags = 0,
                             $offset = 0, $global = false ) {
 
-        $pattern = $this->safePattern($pattern);
+        $pattern = static::safePattern($pattern);
 
         if(true === $global)
             $flags = PREG_PATTERN_ORDER;
@@ -320,7 +320,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public function replace ( $pattern, $replacement, $limit = -1 ) {
 
-        $pattern = $this->safePattern($pattern);
+        $pattern = static::safePattern($pattern);
 
         if(false === is_callable($replacement))
             $this->_string = preg_replace(
@@ -354,7 +354,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     public function split ( $pattern, $limit = -1, $flags = 0 ) {
 
         return preg_split(
-            $this->safePattern($pattern),
+            static::safePattern($pattern),
             $this->_string,
             $limit,
             $flags
