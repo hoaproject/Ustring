@@ -724,7 +724,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public static function isUtf8 ( $string ) {
 
-        return (bool) preg_match('//u', $string);
+        return (bool) preg_match('##u', $string);
     }
 
     /**
