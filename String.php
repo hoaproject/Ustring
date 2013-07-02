@@ -351,7 +351,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      *                              PREG_SPLIT_OFFSET_CAPTURE.
      * @return  array
      */
-    public function split ( $pattern, $limit = -1, $flags = 0 ) {
+    public function split ( $pattern, $limit = -1, $flags = PREG_SPLIT_NO_EMPTY ) {
 
         return preg_split(
             static::safePattern($pattern),
