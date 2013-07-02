@@ -248,7 +248,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public function compareTo ( $string ) {
 
-        return strcmp($this->_string, $string);
+        return strcmp($this->_string, $string . '');
     }
 
     /**
