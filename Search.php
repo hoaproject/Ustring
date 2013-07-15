@@ -88,7 +88,7 @@ class Search {
 
                     $j            = $m + $d;
                     $i            = max(0, $j - $m);
-                    $offset[$q][] = array('i' => $i, 'j' => $j);
+                    $offset[$q][] = array('i' => $i, 'j' => $j, 'l' => $j - $i);
                 }
             }
 
