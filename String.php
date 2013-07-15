@@ -243,12 +243,12 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * if equal.
      *
      * @access  public
-     * @param   string  $string    String.
+     * @param   mixed  $string    String.
      * @return  int
      */
     public function compareTo ( $string ) {
 
-        return strcmp($this->_string, $string . '');
+        return strcmp($this->_string, (string) $string);
     }
 
     /**
@@ -293,8 +293,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
         if(true === $global)
             $flags = PREG_PATTERN_ORDER;
 
-        if(0 < $offset)
-            $offset = strlen(mb_substr($this->_string, 0, $offset));
+        $offset = strlen(mb_substr($this->_string, 0, $offset));
 
         if(true === $global)
             return preg_match_all(
