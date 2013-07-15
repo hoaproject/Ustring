@@ -60,6 +60,8 @@ class Search {
      */
     public static function approximated ( $y, $x, $k ) {
 
+        $x      = (string) $x;
+        $y      = (string) $y;
         $m      = strlen($x);
         $n      = strlen($y);
         $offset = array();
