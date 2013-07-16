@@ -98,7 +98,7 @@ will do:
     $solutions = array();
 
     foreach($search as $pos)
-        $solutions[] = substr($haystack, $pos['i'], $pos['j'] - $pos['i']);
+        $solutions[] = substr($haystack, $pos['i'], $pos['l']);
 
 We will found `AGATA`, `GATAA`, `ATAAG` and `GAGAA`.
 
