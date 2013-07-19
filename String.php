@@ -68,70 +68,92 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      *
      * @const int
      */
-    const LTR = 0;
+    const LTR             = 0;
 
     /**
      * Right-To-Left.
      *
      * @const int
      */
-    const RTL = 1;
+    const RTL             = 1;
 
     /**
      * ZERO WIDTH NON-BREAKING SPACE (ZWNPBSP, aka byte-order mark, BOM).
      *
      * @const int
      */
-    const BOM = 0xfeff;
+    const BOM             = 0xfeff;
 
     /**
      * LEFT-TO-RIGHT MARK.
      *
      * @const int
      */
-    const LRM = 0x200e;
+    const LRM             = 0x200e;
 
     /**
      * RIGHT-TO-LEFT MARK.
      *
      * @const int
      */
-    const RLM = 0x200f;
+    const RLM             = 0x200f;
 
     /**
      * LEFT-TO-RIGHT EMBEDDING.
      *
      * @const int
      */
-    const LRE = 0x202a;
+    const LRE             = 0x202a;
 
     /**
      * RIGHT-TO-LEFT EMBEDDING.
      *
      * @const int
      */
-    const RLE = 0x202b;
+    const RLE             = 0x202b;
 
     /**
      * POP DIRECTIONAL FORMATTING.
      *
      * @const int
      */
-    const PDF = 0x202c;
+    const PDF             = 0x202c;
 
     /**
      * LEFT-TO-RIGHT OVERRIDE.
      *
      * @const int
      */
-    const LRO = 0x202d;
+    const LRO             = 0x202d;
 
     /**
      * RIGHT-TO-LEFT OVERRIDE.
      *
      * @const int
      */
-    const RLO = 0x202e;
+    const RLO             = 0x202e;
+
+    /**
+     * Split: non-empty pieces is returned.
+     *
+     * @const int
+     */
+    const WITHOUT_EMPTY   = PREG_SPLIT_NO_EMPTY;
+
+    /**
+     * Split: parenthesized expression in the delimiter pattern will be captured
+     * and returned.
+     *
+     * @const int
+     */
+    const WITH_DELIMITERS = PREG_SPLIT_DELIM_CAPTURE;
+
+    /**
+     * Split: offsets of captures will be returned.
+     *
+     * @const int
+     */
+    const WITH_OFFSET     = PREG_SPLIT_OFFSET_CAPTURE;
 
     /**
      * Current string.
@@ -345,12 +367,12 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * @access  public
      * @param   string  $pattern    Pattern (as a regular expression).
      * @param   int     $limit      Maximum of split. -1 for unbound.
-     * @param   int     $flags      Please, see constants PREG_SPLIT_NO_EMPTY,
-     *                              PREG_SPLIT_DELIM_CAPURE and
-     *                              PREG_SPLIT_OFFSET_CAPTURE.
+     * @param   int     $flags      Please, see constants self::WITHOUT_EMPTY,
+     *                              self::WITH_DELIMITERS, self::WITH_OFFSET.
      * @return  array
      */
-    public function split ( $pattern, $limit = -1, $flags = PREG_SPLIT_NO_EMPTY ) {
+    public function split ( $pattern, $limit = -1,
+                            $flags = self::WITHOUT_EMPTY ) {
 
         return preg_split(
             static::safePattern($pattern),
