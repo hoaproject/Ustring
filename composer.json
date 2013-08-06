@@ -27,6 +27,6 @@
     },
     "minimum-stability": "dev",
     "suggest": {
-        "ext-intl" : "To get a better Hoa\\String::toAscii()."
+        "ext-intl" : "To get a better Hoa\\String::toAscii() and Hoa\\String::compareTo()."
     }
 }

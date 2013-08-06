@@ -160,14 +160,21 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      *
      * @var \Hoa\String string
      */
-    protected $_string    = null;
+    protected $_string          = null;
 
     /**
      * Direction. Please see self::LTR and self::RTL constants.
      *
      * @var \Hoa\String int
      */
-    protected $_direction = null;
+    protected $_direction       = null;
+
+    /**
+     * Collator.
+     *
+     * @var \Collator object
+     */
+    protected static $_collator = null;
 
 
 
@@ -270,7 +277,24 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public function compareTo ( $string ) {
 
-        return strcmp($this->_string, (string) $string);
+        if(false === class_exists('Collator', false))
+            return strcmp($this->_string, (string) $string);
+
+        return static::getCollator()->compare($this->_string, $string);
+    }
+
+    /**
+     * Get collator.
+     *
+     * @access  public
+     * @return  \Collator
+     */
+    public static function getCollator ( ) {
+
+        if(null === static::$_collator)
+            static::$_collator = new \Collator(setlocale(LC_COLLATE, null));
+
+        return static::$_collator;
     }
 
     /**
