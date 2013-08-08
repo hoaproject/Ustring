@@ -761,6 +761,20 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
+     * Transcode.
+     *
+     * @access  public
+     * @param   string  $string    String.
+     * @param   string  $from      Original encoding.
+     * @param   string  $to        Final encoding.
+     * @return  string
+     */
+    public static function transcode ( $string, $from, $to = 'UTF-8' ) {
+
+        return iconv($from, $to, $string);
+    }
+
+    /**
      * Check if a string is encoded in UTF-8.
      *
      * @access  public
