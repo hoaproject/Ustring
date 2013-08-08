@@ -267,7 +267,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
-     * Binary safe strings comparison.
+     * Make a comparison with a string.
      * Return < 0 if current string is less than $string, > 0 if greater and 0
      * if equal.
      *
@@ -275,7 +275,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * @param   mixed  $string    String.
      * @return  int
      */
-    public function compareTo ( $string ) {
+    public function compare ( $string ) {
 
         if(false === class_exists('Collator', false))
             return min(-1, max(1, strcmp($this->_string, (string) $string)));
