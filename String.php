@@ -761,6 +761,19 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
+     * Get a binary representation of the decimal code of a specific character.
+     *
+     * @access  public
+     * @param   string  $char      Character.
+     * @param   int     $length    Length of the binary result.
+     * @return  string
+     */
+    public static function toBinaryCode ( $char, $length = 32 ) {
+
+        return vsprintf('%0' . intval($length) . 'b', static::toCode($char));
+    }
+
+    /**
      * Transcode.
      *
      * @access  public
