@@ -540,14 +540,14 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
-     * Get a part of a string.
+     * Reduce the strings.
      *
      * @access  public
      * @param   int  $start     Position of first character.
      * @param   int  $length    Maximum number of characters.
      * @return  \Hoa\String
      */
-    public function substr ( $start, $length = null ) {
+    public function reduce ( $start, $length = null ) {
 
         $this->_string = mb_substr($this->_string, $start, $length);
 
