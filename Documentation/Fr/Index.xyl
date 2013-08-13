@@ -111,7 +111,8 @@ $japanese = new Hoa\String('私はあなたを愛して');</code></pre>
  */</code></pre>
   <p>Nous avons également les méthodes <code>Hoa\String::toLowerCase</code> et
   <code>Hoa\String::toUpperCase</code> pour, respectivement, mettre la chaîne en
-  <strong>minuscules</strong> ou en <strong>majuscules</strong>. Par exemple :</p>
+  <strong>minuscules</strong> ou en <strong>majuscules</strong>. Par
+  exemple :</p>
   <pre><code class="language-php">echo $french->toUpperCase();
 
 /**
