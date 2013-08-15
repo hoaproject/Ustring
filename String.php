@@ -444,14 +444,20 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
-     * Strip whitespaces and other characters (\s) of the current string.
+     * Strip characters (default \s) of the current string.
      *
      * @access  public
+     * @param   string  $regex    Characters to remove.
      * @return  \Hoa\String
      */
-    public function trim ( ) {
+    public function trim ( $regex = '\s' ) {
 
-        $this->_string    = preg_replace('#(^\s+)|(\s+$)#u', '', $this->_string);
+        $regex            = '(?:' . $regex . ')+';
+        $this->_string    = preg_replace(
+            '#(^' . $regex . ')|(' . $regex . '$)#u',
+            '',
+            $this->_string
+        );
         $this->_direction = null;
 
         return $this;

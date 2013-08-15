@@ -133,7 +133,7 @@ $japanese = new Hoa\String('私はあなたを愛して');</code></pre>
  * Will output:
  *                     أحبك
  */</code></pre>
-  <p>Une opération similairement inverse permet de supprimer les
+  <p>Une opération similairement inverse permet de supprimer, par défaut, les
   <strong>espaces</strong> en début et en fin de chaîne grâce à la méthode
   <code>Hoa\String::trim</code>. Par exemple, pour revenir à notre chaîne arabe
   originale :</p>
@@ -143,6 +143,10 @@ $japanese = new Hoa\String('私はあなたを愛して');</code></pre>
  * Will output:
  *     أحبك
  */</code></pre>
+  <p>Si nous voulons supprimer d'autres caractères, nous pouvons utiliser son
+  seul argument qui doit être une expression régulière. Par exemple, pour
+  supprimer tous les nombres et les espaces, nous écrirons :</p>
+  <pre><code class="language-php">$arabic->trim('\s|\d');</code></pre>
   <p>Nous pouvons également <strong>réduire</strong> la chaîne à une
   <strong>sous-chaîne</strong> en précisant la position du premier caractère
   puis la taille de la sous-chaîne à la méthode
