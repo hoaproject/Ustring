@@ -134,6 +134,20 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     const RLO             = 0x202e;
 
     /**
+     * Represent the beginning of the string.
+     *
+     * @const int
+     */
+    const BEGINNING       = 1;
+
+    /**
+     * Represent the end of the string.
+     *
+     * @const int
+     */
+    const END             = 2;
+
+    /**
      * Split: non-empty pieces is returned.
      *
      * @const int
@@ -245,11 +259,11 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * @access  public
      * @param   int     $length    Length.
      * @param   string  $piece     Piece.
-     * @param   bool    $end       Whether we append at the end or the start of
-     *                             the current string.
+     * @param   int     $side      Whether we append at the end or the beginning
+     *                             of the current string.
      * @return  \Hoa\String
      */
-    public function pad ( $length, $piece, $end = true ) {
+    public function pad ( $length, $piece, $side = self::END ) {
 
         $difference = $length - $this->count();
 
@@ -263,7 +277,9 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 
         $handle .= mb_substr($piece, 0, $difference - mb_strlen($handle));
 
-        return true === $end ? $this->append($handle) : $this->prepend($handle);
+        return static::END === $side
+                   ? $this->append($handle)
+                   : $this->prepend($handle);
     }
 
     /**
@@ -448,16 +464,28 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      *
      * @access  public
      * @param   string  $regex    Characters to remove.
+     * @param   int     $side     Whether we trim the beginning, the end or both
+     *                            sides, of the current string.
      * @return  \Hoa\String
      */
-    public function trim ( $regex = '\s' ) {
+    public function trim ( $regex = '\s', $side = 3 /*   static::BEGINNING
+                                                       | static::END */ ) {
 
-        $regex            = '(?:' . $regex . ')+';
-        $this->_string    = preg_replace(
-            '#(^' . $regex . ')|(' . $regex . '$)#u',
-            '',
-            $this->_string
-        );
+        $regex  = '(?:' . $regex . ')+';
+        $handle = null;
+
+        if(0 !== ($side & static::BEGINNING))
+            $handle .= '(^' . $regex . ')';
+
+        if(0 !== ($side & static::END)) {
+
+            if(null !== $handle)
+                $handle .= '|';
+
+            $handle .= '(' . $regex . '$)';
+        }
+
+        $this->_string    = preg_replace('#' . $handle . '#u', '', $this->_string);
         $this->_direction = null;
 
         return $this;

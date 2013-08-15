@@ -124,9 +124,10 @@ $japanese = new Hoa\String('私はあなたを愛して');</code></pre>
   couramment appelée le <em lang="en">padding</em> (pour des raisons historiques
   remontant aux machines à écrire). C'est pourquoi nous trouvons la
   méthode <code>Hoa\String::pad</code> qui prend trois arguments : la taille
-  minimum, les caractères à ajouter et un booléen indiquant si nous devons
-  ajouter en fin ou en début de chaîne (par défaut en fin avec
-  <code>true</code>).</p>
+  minimum, les caractères à ajouter et une constante indiquant si nous devons
+  ajouter en fin ou en début de chaîne (respectivement
+  <code>Hoa\String::END</code>, par défaut, et
+  <code>Hoa\String::BEGINNING</code>).</p>
   <pre><code class="language-php">echo $arabic->pad(20, ' ');
 
 /**
@@ -144,9 +145,16 @@ $japanese = new Hoa\String('私はあなたを愛して');</code></pre>
  *     أحبك
  */</code></pre>
   <p>Si nous voulons supprimer d'autres caractères, nous pouvons utiliser son
-  seul argument qui doit être une expression régulière. Par exemple, pour
-  supprimer tous les nombres et les espaces, nous écrirons :</p>
-  <pre><code class="language-php">$arabic->trim('\s|\d');</code></pre>
+  premier argument qui doit être une expression régulière. Enfin, son second
+  argument permet de préciser de quel côté nous voulons supprimer les
+  caractères : en début, en fin ou les deux, toujours en utilisant les
+  constantes <code>Hoa\String::BEGINNING</code> et <code>Hoa\String::END</code>.
+  Nous pouvons combiner ces constantes pour exprimer « les deux côtés », ce qui
+  est la valeur par défaut : <code class="language-php">Hoa\String::BEGINNING |
+  Hoa\String::END</code>. Par exemple, pour
+  supprimer tous les nombres et les espaces uniquement à la fin, nous
+  écrirons :</p>
+  <pre><code class="language-php">$arabic->trim('\s|\d', Hoa\String::END);</code></pre>
   <p>Nous pouvons également <strong>réduire</strong> la chaîne à une
   <strong>sous-chaîne</strong> en précisant la position du premier caractère
   puis la taille de la sous-chaîne à la méthode
