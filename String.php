@@ -68,91 +68,91 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      *
      * @const int
      */
-    const LTR             = 0;
+    const LTR              = 0;
 
     /**
      * Right-To-Left.
      *
      * @const int
      */
-    const RTL             = 1;
+    const RTL              = 1;
 
     /**
      * ZERO WIDTH NON-BREAKING SPACE (ZWNPBSP, aka byte-order mark, BOM).
      *
      * @const int
      */
-    const BOM             = 0xfeff;
+    const BOM              = 0xfeff;
 
     /**
      * LEFT-TO-RIGHT MARK.
      *
      * @const int
      */
-    const LRM             = 0x200e;
+    const LRM              = 0x200e;
 
     /**
      * RIGHT-TO-LEFT MARK.
      *
      * @const int
      */
-    const RLM             = 0x200f;
+    const RLM              = 0x200f;
 
     /**
      * LEFT-TO-RIGHT EMBEDDING.
      *
      * @const int
      */
-    const LRE             = 0x202a;
+    const LRE              = 0x202a;
 
     /**
      * RIGHT-TO-LEFT EMBEDDING.
      *
      * @const int
      */
-    const RLE             = 0x202b;
+    const RLE              = 0x202b;
 
     /**
      * POP DIRECTIONAL FORMATTING.
      *
      * @const int
      */
-    const PDF             = 0x202c;
+    const PDF              = 0x202c;
 
     /**
      * LEFT-TO-RIGHT OVERRIDE.
      *
      * @const int
      */
-    const LRO             = 0x202d;
+    const LRO              = 0x202d;
 
     /**
      * RIGHT-TO-LEFT OVERRIDE.
      *
      * @const int
      */
-    const RLO             = 0x202e;
+    const RLO              = 0x202e;
 
     /**
      * Represent the beginning of the string.
      *
      * @const int
      */
-    const BEGINNING       = 1;
+    const BEGINNING        = 1;
 
     /**
      * Represent the end of the string.
      *
      * @const int
      */
-    const END             = 2;
+    const END              = 2;
 
     /**
      * Split: non-empty pieces is returned.
      *
      * @const int
      */
-    const WITHOUT_EMPTY   = PREG_SPLIT_NO_EMPTY;
+    const WITHOUT_EMPTY    = PREG_SPLIT_NO_EMPTY;
 
     /**
      * Split: parenthesized expression in the delimiter pattern will be captured
@@ -160,14 +160,29 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      *
      * @const int
      */
-    const WITH_DELIMITERS = PREG_SPLIT_DELIM_CAPTURE;
+    const WITH_DELIMITERS  = PREG_SPLIT_DELIM_CAPTURE;
 
     /**
      * Split: offsets of captures will be returned.
      *
      * @const int
      */
-    const WITH_OFFSET     = PREG_SPLIT_OFFSET_CAPTURE;
+    const WITH_OFFSET      = 260; //   PREG_OFFSET_CAPTURE
+                                  // | PREG_SPLIT_OFFSET_CAPTURE
+
+    /**
+     * Group results by patterns.
+     *
+     * @const int
+     */
+    const GROUP_BY_PATTERN = PREG_PATTERN_ORDER;
+
+    /**
+     * Group results by tuple (set of patterns).
+     *
+     * @const int
+     */
+    const GROUP_BY_TUPLE   = PREG_SET_ORDER;
 
     /**
      * Current string.
@@ -340,8 +355,9 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * @access  public
      * @param   string  $pattern    Pattern.
      * @param   array   $matches    Matches.
-     * @param   int     $flags      Please, see constants PREG_OFFSET_CAPTURE,
-     *                              PREG_PATTERN_ORDER and PREG_SET_ORDER.
+     * @param   int     $flags      Please, see constants self::WITH_OFFSET,
+     *                              self::GROUP_BY_PATTERN and
+     *                              self::GROUP_BY_TUPLE.
      * @param   int     $offset     Alternate place from which to start the
      *                              search.
      * @param   bool    $global     Whether the match is global or not.
@@ -352,8 +368,8 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 
         $pattern = static::safePattern($pattern);
 
-        if(true === $global)
-            $flags = PREG_PATTERN_ORDER;
+        if(true === $global && 0 === $flags)
+            $flags = static::GROUP_BY_PATTERN;
 
         $offset = strlen(mb_substr($this->_string, 0, $offset));
 
