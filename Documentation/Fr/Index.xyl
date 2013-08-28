@@ -14,7 +14,7 @@
 
   <h2 id="Introduction" for="main-toc">Introduction</h2>
 
-  <p>Lorsque que nous manipulons des chaînes de caractères, le format <a
+  <p>Lorsque nous manipulons des chaînes de caractères, le format <a
   href="http://unicode.org/">Unicode</a> s'impose par sa
   <strong>compatibilité</strong> avec les formats de base historiques (comme
   ASCII) et par sa grande capacité à comprendre une très <strong>large</strong>
@@ -236,7 +236,7 @@ echo $title->toAscii();
   nous avons une expression régulière (type
   <a href="http://pcre.org/">PCRE</a>), puis un entier représentant le nombre
   maximum d'éléments à retourner et enfin une combinaison de constantes. Ces
-  constantes sont les même que celles de
+  constantes sont les mêmes que celles de
   <a href="http://php.net/preg_split"><code>preg_split</code></a>.</p>
   <p>Par défaut, le deuxième argument vaut -1, qui symbolise l'infini, et le
   dernier argument vaut <code>PREG_SPLIT_NO_EMPTY</code>. Ainsi, si nous
@@ -271,7 +271,7 @@ echo $title->toAscii();
  *     ك
  */</code></pre>
   <p>Nous remarquons que l'itération se fait suivant la direction du texte,
-  c'est à dire que le premier élément de l'itération est la première lettre de
+  c'est-à-dire que le premier élément de l'itération est la première lettre de
   la chaîne en partant du début.</p>
   <p>Bien sûr, si nous voulons obtenir un tableau des caractères, nous pouvons
   utiliser la fonction
@@ -289,7 +289,7 @@ echo $title->toAscii();
  *         [3] => ك
  *     )
  */</code></pre>
-  <p>Si cette fois nous ne nous intéressons pas aux caractères Unicode mais aux
+  <p>Si cette fois nous ne nous intéressons pas aux caractères Unicode, mais aux
   caractères <strong>machines</strong> <code>char</code> (soit 1 octet), nous
   avons quelques opérations supplémentaires. La première est
   <code>Hoa\String::getBytesLength</code> qui va compter la
@@ -371,8 +371,8 @@ print_r($strings);
  */</code></pre>
   <p>La comparaison entre deux chaînes dépend de la <strong>locale</strong>,
   c'est à dire de la régionalisation du système, comme la langue, le pays, la
-  région etc. Nous pouvons utiliser <a href="@lh:chapter=Locale">la bibliothèque
-  <code>Hoa\Locale</code></a> pour modifier ces données mais ce n'est pas une
+  région, etc. Nous pouvons utiliser <a href="@lh:chapter=Locale">la bibliothèque
+  <code>Hoa\Locale</code></a> pour modifier ces données, mais ce n'est pas une
   dépendance de <code>Hoa\String</code> pour autant.</p>
   <p>Nous pouvons également savoir si une chaîne <strong>correspond</strong> à
   un certain motif, toujours exprimé avec une expression régulière. Pour cela,
@@ -520,7 +520,7 @@ foreach($search as $position)
   <code>AGATA</code>, soit <code>GATA<em>A</em></code> avec un caractère
   déplacé, et <code>AGATA</code> existe bien dans
   <code>C<em>AGATA</em>AGAGAA</code>. Le deuxième résultat est
-  <code>GATAA</code>, notre sous-chaîne, qui existe belle et bien dans
+  <code>GATAA</code>, notre sous-chaîne, qui existe bel et bien dans
   <code>CA<em>GATAA</em>GAGAA</code>. Le troisième résultat est
   <code>ATAAG</code>, soit <code><em>G</em>ATAA</code> avec un caractère
   déplacé, et <code>ATAAG</code> existe bien dans
@@ -530,7 +530,7 @@ foreach($search as $position)
   <code>CAGATAA<em>GAGAA</em></code>.</p>
   <p>Prenons un autre exemple, plus concret cette fois-ci. Nous allons
   considérer la chaîne <code>--testIt --foobar --testThat --testAt</code> (qui
-  représente les options possible d'une ligne de commande), et nous allons
+  représente les options possibles d'une ligne de commande), et nous allons
   chercher <code>--testot</code>, une option qu'aurait pu donner
   l'utilisateur. Cette option n'existe pas telle quelle. Nous allons donc
   utiliser notre algorithme de recherche avec 1 différence au maximum. Voyons
