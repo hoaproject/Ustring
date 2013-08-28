@@ -236,17 +236,10 @@ echo $title->toAscii();
   nous avons une expression régulière (type
   <a href="http://pcre.org/">PCRE</a>), puis un entier représentant le nombre
   maximum d'éléments à retourner et enfin une combinaison de constantes. Ces
-  constantes sont les suivantes :</p>
-  <ul>
-    <li><code>Hoa\String::WITHOUT_EMPTY</code> pour que les sous-chaînes vides
-    ne soient pas retournées ;</li>
-    <li><code>Hoa\String::WITH_DELIMITERS</code> pour que les expressions
-    délimitées soient capturées et retournées ;</li>
-    <li><code>Hoa\String::WITH_OFFSET</code> pour que la position des
-    sous-chaînes soit ajoutée.</li>
-  </ul>
+  constantes sont les même que celles de
+  <a href="http://php.net/preg_split"><code>preg_split</code></a>.</p>
   <p>Par défaut, le deuxième argument vaut -1, qui symbolise l'infini, et le
-  dernier argument vaut <code>Hoa\String::WITHOUT_EMPTY</code>. Ainsi, si nous
+  dernier argument vaut <code>PREG_SPLIT_NO_EMPTY</code>. Ainsi, si nous
   voulons obtenir tous les mots d'une chaîne, nous écrirons :</p>
   <pre><code class="language-php">print_r($title->split('#\b|\s#'));
 
@@ -431,6 +424,31 @@ echo $french;
  * Will output:
  *     Je vous aime
  */</code></pre>
+  <p>La classe <code>Hoa\String</code> propose des constantes qui sont des
+  aliases de constantes PHP et qui permettent une meilleure lecture du code:</p>
+  <ul>
+    <li><code>Hoa\String::WITHOUT_EMPTY</code>, alias de
+    <code>PREG_SPLIT_NO_EMPTY</code> ;</li>
+    <li><code>Hoa\String::WITH_DELIMITERS</code>, alias de
+    <code>PREG_SPLIT_DELIM_CAPTURE</code> ;</li>
+    <li><code>Hoa\String::WITH_OFFSET</code>, alias de
+    <code>PREG_OFFSET_CAPTURE</code> et
+    <code>PREG_SPLIT_OFFSET_CAPTURE</code> ;</li>
+    <li><code>Hoa\String::GROUP_BY_PATTERN</code>, alias de
+    <code>PREG_PATTERN_ORDER</code> ;</li>
+    <li><code>Hoa\String::GROUP_BY_TUPLE</code>, alias de
+    <code>PREG_SET_ORDER</code>.</li>
+  </ul>
+  <p>Comme ce sont des aliases stricts, nous pouvons écrire :</p>
+  <pre><code class="language-php">$string = new Hoa\String('abc1 defg2 hikl3 xyz4');
+$string->match(
+    '#(\w+)(\d)#',
+    $matches,
+    Hoa\String::WITH_OFFSET
+  | Hoa\String::GROUP_BY_TUPLE,
+    0,
+    true
+);</code></pre>
 
   <h3 id="Code-point" for="main-toc">Code-point</h3>
 
