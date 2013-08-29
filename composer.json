@@ -26,7 +26,6 @@
     },
     "minimum-stability": "dev",
     "suggest": {
-        "ext-mbstring": "ext/mbstring must be present (or a third implementation).",
         "ext-intl"    : "To get a better Hoa\\String::toAscii() and Hoa\\String::compareTo()."
     }
 }
