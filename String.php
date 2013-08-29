@@ -216,7 +216,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public function __construct ( $string = null ) {
 
-        if(false === function_exists('mb_strlen'))
+        if(false === function_exists('mb_substr'))
             throw new Exception(
                 '%s needs the mbstring extension.', 0, get_class($this));
 
