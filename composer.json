@@ -22,11 +22,11 @@
     },
     "require": {
         "hoa/core"    : "dev-master",
-        "ext-mbstring": "*",
         "ext-iconv"   : "*"
     },
     "minimum-stability": "dev",
     "suggest": {
-        "ext-intl" : "To get a better Hoa\\String::toAscii() and Hoa\\String::compareTo()."
+        "ext-mbstring": "ext/mbstring must be present (or a third implementation).",
+        "ext-intl"    : "To get a better Hoa\\String::toAscii() and Hoa\\String::compareTo()."
     }
 }
