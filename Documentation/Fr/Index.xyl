@@ -14,8 +14,8 @@
 
   <h2 id="Introduction" for="main-toc">Introduction</h2>
 
-  <p>Lorsque nous manipulons des chaînes de caractères, le format <a
-  href="http://unicode.org/">Unicode</a> s'impose par sa
+  <p>Lorsque nous manipulons des chaînes de caractères, le format
+  <a href="http://unicode.org/">Unicode</a> s'impose par sa
   <strong>compatibilité</strong> avec les formats de base historiques (comme
   ASCII) et par sa grande capacité à comprendre une très <strong>large</strong>
   plage de caractères et de symboles, pour toutes les cultures et toutes les
@@ -271,7 +271,7 @@ echo $title->toAscii();
  *     ك
  */</code></pre>
   <p>Nous remarquons que l'itération se fait suivant la direction du texte,
-  c'est-à-dire que le premier élément de l'itération est la première lettre de
+  c'est à dire que le premier élément de l'itération est la première lettre de
   la chaîne en partant du début.</p>
   <p>Bien sûr, si nous voulons obtenir un tableau des caractères, nous pouvons
   utiliser la fonction
@@ -289,7 +289,7 @@ echo $title->toAscii();
  *         [3] => ك
  *     )
  */</code></pre>
-  <p>Si cette fois nous ne nous intéressons pas aux caractères Unicode, mais aux
+  <p>Si cette fois nous ne nous intéressons pas aux caractères Unicode mais aux
   caractères <strong>machines</strong> <code>char</code> (soit 1 octet), nous
   avons quelques opérations supplémentaires. La première est
   <code>Hoa\String::getBytesLength</code> qui va compter la
@@ -371,9 +371,9 @@ print_r($strings);
  */</code></pre>
   <p>La comparaison entre deux chaînes dépend de la <strong>locale</strong>,
   c'est à dire de la régionalisation du système, comme la langue, le pays, la
-  région, etc. Nous pouvons utiliser <a href="@lh:chapter=Locale">la bibliothèque
-  <code>Hoa\Locale</code></a> pour modifier ces données, mais ce n'est pas une
-  dépendance de <code>Hoa\String</code> pour autant.</p>
+  région etc. Nous pouvons utiliser <a href="@lh:chapter=Locale">la
+  bibliothèque <code>Hoa\Locale</code></a> pour modifier ces données, mais ce
+  n'est pas une dépendance de <code>Hoa\String</code> pour autant.</p>
   <p>Nous pouvons également savoir si une chaîne <strong>correspond</strong> à
   un certain motif, toujours exprimé avec une expression régulière. Pour cela,
   nous allons utiliser la méthode <code>Hoa\String::match</code>. Cette méthode
