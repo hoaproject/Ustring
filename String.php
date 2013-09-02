@@ -235,8 +235,6 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public function append ( $substring ) {
 
-        $direction = $this->getDirection();
-
         if(static::LTR === $this->getDirection())
             $this->_string .= $substring;
         else
@@ -255,8 +253,6 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * @return  \Hoa\String
      */
     public function prepend ( $substring ) {
-
-        $direction = $this->getDirection();
 
         if(static::LTR === $this->getDirection())
             $this->_string  = $substring . $this->_string;
