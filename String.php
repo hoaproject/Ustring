@@ -895,3 +895,12 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 }
 
 }
+
+namespace {
+
+/**
+ * Flex entity.
+ */
+Hoa\Core\Consistency::flexEntity('Hoa\String\String');
+
+}
