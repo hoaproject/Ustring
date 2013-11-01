@@ -15,13 +15,13 @@ search algorithm.
 
 ### Natural UTF-8 strings manipulation
 
-The `Hoa\String` class allows to manipulate easily UTF-8 strings in a very
-natural way. This class implements the `\ArrayAccess`, `\Countable` and
+The `Hoa\String\String` class allows to manipulate easily UTF-8 strings in a
+very natural way. This class implements the `\ArrayAccess`, `\Countable` and
 `\IteratorAggregate` interfaces. We will use the following examples:
 
-    $french   = new Hoa\String('Je t\'aime');
-    $arabic   = new Hoa\String('أحبك');
-    $japanese = new Hoa\String('私はあなたを愛して');
+    $french   = new Hoa\String\String('Je t\'aime');
+    $arabic   = new Hoa\String\String('أحبك');
+    $japanese = new Hoa\String\String('私はあなたを愛して');
 
 To get the first character, we will do:
 
@@ -35,9 +35,10 @@ And to get the last character, we will do `[-1]`. It supports unbounded (and
 modulo) indexes.
 
 We note that it cares about text **direction**. Look at `$arabic[0]`, it returns
-`أ` and not `ك`. To get the direction, we can use the `Hoa\String::getDirection`
-method (which call the `Hoa\String::getCharDirection` static method), it returns
-either `Hoa\String::LTR` (`0`) or `Hoa\String::RTL` (`1`):
+`أ` and not `ك`. To get the direction, we can use the
+`Hoa\String\String::getDirection` method (which call the
+`Hoa\String\String::getCharDirection` static method), it returns either
+`Hoa\String\String::LTR` (`0`) or `Hoa\String\String::RTL` (`1`):
 
     var_dump(
         $french->getDirection(),  // int(0)
@@ -46,7 +47,7 @@ either `Hoa\String::LTR` (`0`) or `Hoa\String::RTL` (`1`):
     );
 
 Text direction is also important for the `append`, `prepend`, `pad`… methods on
-`Hoa\String` for example. 
+`Hoa\String\String` for example. 
 
 To get the length of a string, we can use the `count` function:
 
@@ -73,12 +74,12 @@ Again, text direction is useful here. For `$arabic`, the iteration is done from
 right to left.
 
 Some static methods are helpful, such as `fromCode`, `toCode` or `isUtf8` on
-`Hoa\String`:
+`Hoa\String\String`:
 
     var_dump(
-        Hoa\String::fromCode(0x1a9), // string(2) "Ʃ"
-        Hoa\String::toCode('Ʃ'),     // int(425) == 0x1a9
-        Hoa\String::isUtf8('Ʃ')      // bool(true)
+        Hoa\String\String::fromCode(0x1a9), // string(2) "Ʃ"
+        Hoa\String\String::toCode('Ʃ'),     // int(425) == 0x1a9
+        Hoa\String\String::isUtf8('Ʃ')      // bool(true)
     );
 
 ### Search algorithm

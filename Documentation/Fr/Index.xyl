@@ -38,17 +38,17 @@
   <h2 id="Chaine_de_caracteres_Unicode" for="main-toc">Chaîne de caractères
   Unicode</h2>
 
-  <p>La classe <code>Hoa\String</code> représente une chaîne de caractères
-  Unicode <strong>UTF-8</strong> et permet de la manipuler facilement. Elle
-  implémente les interfaces
+  <p>La classe <code>Hoa\String\String</code> représente une chaîne de
+  caractères Unicode <strong>UTF-8</strong> et permet de la manipuler
+  facilement. Elle implémente les interfaces
   <a href="http://php.net/arrayaccess"><code>ArrayAccess</code></a>,
   <a href="http://php.net/countable"><code>Countable</code></a> et
   <a href="http://php.net/iteratoraggregate"><code>IteratorAggregate</code></a>.
   Nous allons utiliser trois exemples dans trois langues différentes : français,
   arabe et japonais. Ainsi :</p>
-  <pre><code class="language-php">$french   = new Hoa\String('Je t\'aime');
-$arabic   = new Hoa\String('أحبك');
-$japanese = new Hoa\String('私はあなたを愛して');</code></pre>
+  <pre><code class="language-php">$french   = new Hoa\String\String('Je t\'aime');
+$arabic   = new Hoa\String\String('أحبك');
+$japanese = new Hoa\String\String('私はあなたを愛して');</code></pre>
   <p>Maintenant, voyons les opérations possibles sur ces trois chaînes.</p>
 
   <h3 id="Manipulation_de_la_chaine" for="main-toc">Manipulation de la
@@ -74,19 +74,21 @@ $japanese = new Hoa\String('私はあなたを愛して');</code></pre>
   de droite ou de gauche, mais plutôt de <strong>début</strong> ou de
   <strong>fin</strong>, et cela à partir de la <strong>direction</strong> (sens
   d'écriture) du texte. Nous pouvons connaître cette direction grâce à la
-  méthode <code>Hoa\String::getDirection</code>. Elle retourne la valeur d'une
-  des constantes suivantes :</p>
+  méthode <code>Hoa\String\String::getDirection</code>. Elle retourne la valeur
+  d'une des constantes suivantes :</p>
   <ul>
-    <li><code>Hoa\String::LTR</code>, pour <em lang="en">left-to-right</em>, si
-    le texte s'écrit de gauche à droite ;</li>
-    <li><code>Hoa\String::RTL</code>, pour <em lang="en">right-to-left</em>, si
-    le texte s'écrit de droite à gauche.</li>
+    <li><code>Hoa\String\String::LTR</code>, pour
+    <em lang="en">left-to-right</em>, si le texte s'écrit de gauche à
+    droite ;</li>
+    <li><code>Hoa\String\String::RTL</code>, pour
+    <em lang="en">right-to-left</em>, si le texte s'écrit de droite à
+    gauche.</li>
   </ul>
   <p>Observons le résultat sur nos exemples :</p>
   <pre><code class="language-php">var_dump(
-    $french->getDirection()   === Hoa\String::LTR, // is left-to-right?
-    $arabic->getDirection()   === Hoa\String::RTL, // is right-to-left?
-    $japanese->getDirection() === Hoa\String::LTR  // is left-to-right?
+    $french->getDirection()   === Hoa\String\String::LTR, // is left-to-right?
+    $arabic->getDirection()   === Hoa\String\String::RTL, // is right-to-left?
+    $japanese->getDirection() === Hoa\String\String::LTR  // is left-to-right?
 );
 
 /**
@@ -96,22 +98,24 @@ $japanese = new Hoa\String('私はあなたを愛して');</code></pre>
  *     bool(true)
  */</code></pre>
   <p>Le résultat de cette méthode est calculé grâce à la méthode statique
-  <code>Hoa\String::getCharDirection</code> qui calcule la direction d'un seul
-  caractère.</p>
+  <code>Hoa\String\String::getCharDirection</code> qui calcule la direction d'un
+  seul caractère.</p>
   <p>Si nous voulons <strong>concaténer</strong> une autre chaîne à la fin ou au
   début, nous utiliserons respectivement les méthodes
-  <code>Hoa\String::append</code> et <code>Hoa\String::prepend</code>. Ces
-  méthodes, comme la plupart de celles qui modifient la chaîne, retournent
-  l'objet lui-même, ce afin de chaîner les méthodes. Par exemple :</p>
+  <code>Hoa\String\String::append</code> et
+  <code>Hoa\String\String::prepend</code>. Ces méthodes, comme la plupart de
+  celles qui modifient la chaîne, retournent l'objet lui-même, ce afin de
+  chaîner les méthodes. Par exemple :</p>
   <pre><code class="language-php">echo $french->append('… et toi, m\'aimes-tu ?')->prepend('Mam\'zelle ! ');
 
 /**
  * Will output:
  *     Mam'zelle ! Je t'aime… et toi, m'aimes-tu ?
  */</code></pre>
-  <p>Nous avons également les méthodes <code>Hoa\String::toLowerCase</code> et
-  <code>Hoa\String::toUpperCase</code> pour, respectivement, mettre la chaîne en
-  <strong>minuscules</strong> ou en <strong>majuscules</strong>. Par
+  <p>Nous avons également les méthodes
+  <code>Hoa\String\String::toLowerCase</code> et
+  <code>Hoa\String\String::toUpperCase</code> pour, respectivement, mettre la
+  chaîne en <strong>minuscules</strong> ou en <strong>majuscules</strong>. Par
   exemple :</p>
   <pre><code class="language-php">echo $french->toUpperCase();
 
@@ -122,12 +126,12 @@ $japanese = new Hoa\String('私はあなたを愛して');</code></pre>
   <p>Nous pouvons aussi ajouter des caractères en début ou en fin de chaîne pour
   atteindre une taille <strong>minimum</strong>. Cette opération est plus
   couramment appelée le <em lang="en">padding</em> (pour des raisons historiques
-  remontant aux machines à écrire). C'est pourquoi nous trouvons la
-  méthode <code>Hoa\String::pad</code> qui prend trois arguments : la taille
+  remontant aux machines à écrire). C'est pourquoi nous trouvons la méthode
+  <code>Hoa\String\String::pad</code> qui prend trois arguments : la taille
   minimum, les caractères à ajouter et une constante indiquant si nous devons
   ajouter en fin ou en début de chaîne (respectivement
-  <code>Hoa\String::END</code>, par défaut, et
-  <code>Hoa\String::BEGINNING</code>).</p>
+  <code>Hoa\String\String::END</code>, par défaut, et
+  <code>Hoa\String\String::BEGINNING</code>).</p>
   <pre><code class="language-php">echo $arabic->pad(20, ' ');
 
 /**
@@ -136,8 +140,8 @@ $japanese = new Hoa\String('私はあなたを愛して');</code></pre>
  */</code></pre>
   <p>Une opération similairement inverse permet de supprimer, par défaut, les
   <strong>espaces</strong> en début et en fin de chaîne grâce à la méthode
-  <code>Hoa\String::trim</code>. Par exemple, pour revenir à notre chaîne arabe
-  originale :</p>
+  <code>Hoa\String\String::trim</code>. Par exemple, pour revenir à notre chaîne
+  arabe originale :</p>
   <pre><code class="language-php">echo $arabic->trim();
 
 /**
@@ -148,17 +152,17 @@ $japanese = new Hoa\String('私はあなたを愛して');</code></pre>
   premier argument qui doit être une expression régulière. Enfin, son second
   argument permet de préciser de quel côté nous voulons supprimer les
   caractères : en début, en fin ou les deux, toujours en utilisant les
-  constantes <code>Hoa\String::BEGINNING</code> et <code>Hoa\String::END</code>.
-  Nous pouvons combiner ces constantes pour exprimer « les deux côtés », ce qui
-  est la valeur par défaut : <code class="language-php">Hoa\String::BEGINNING |
-  Hoa\String::END</code>. Par exemple, pour
-  supprimer tous les nombres et les espaces uniquement à la fin, nous
-  écrirons :</p>
-  <pre><code class="language-php">$arabic->trim('\s|\d', Hoa\String::END);</code></pre>
+  constantes <code>Hoa\String\String::BEGINNING</code> et
+  <code>Hoa\String\String::END</code>.  Nous pouvons combiner ces constantes
+  pour exprimer « les deux côtés », ce qui est la valeur par défaut :
+  <code class="language-php">Hoa\String\String::BEGINNING |
+  Hoa\String\String::END</code>. Par exemple, pour supprimer tous les nombres et
+  les espaces uniquement à la fin, nous écrirons :</p>
+  <pre><code class="language-php">$arabic->trim('\s|\d', Hoa\String\String::END);</code></pre>
   <p>Nous pouvons également <strong>réduire</strong> la chaîne à une
   <strong>sous-chaîne</strong> en précisant la position du premier caractère
   puis la taille de la sous-chaîne à la méthode
-  <code>Hoa\String::reduce</code> :</p>
+  <code>Hoa\String\String::reduce</code> :</p>
   <pre><code class="language-php">echo $french->reduce(3, 6)->reduce(2, 4);
 
 /**
@@ -197,7 +201,7 @@ echo $french;
   <strong>ASCII</strong>. Attention, ce n'est <em>naturellement</em> pas
   toujours possible. Par exemple, nous pouvons transformer du français en ASCII
   mais pas de l'arabe en ASCII. Ainsi :</p>
-  <pre><code class="language-php">$title = new Hoa\String('Un été brûlant sur la côte');
+  <pre><code class="language-php">$title = new Hoa\String\String('Un été brûlant sur la côte');
 echo $title->toAscii();
 
 /**
@@ -207,23 +211,25 @@ echo $title->toAscii();
   <p>Pour que cette méthode fonctionne correctement, il faut que l'extension
   <a href="http://php.net/intl"><code>intl</code></a> soit présente, pour que la
   classe <a href="http://php.net/normalizer"><code>Normalizer</code></a> existe.
-  Si cette classe n'existe pas, la méthode <code>Hoa\String::toAscii</code> peut
-  quand même essayer une transformation mais moins efficace. Pour cela, il faut
-  passer <code>true</code> en seul argument. Ce tour de force est déconseillé
-  dans la plupart des cas.</p>
+  Si cette classe n'existe pas, la méthode
+  <code>Hoa\String\String::toAscii</code> peut quand même essayer une
+  transformation mais moins efficace. Pour cela, il faut passer
+  <code>true</code> en seul argument. Ce tour de force est déconseillé dans la
+  plupart des cas.</p>
   <p>Plus généralement, pour des changements d'<strong>encodage</strong> brut,
-  nous pouvons utiliser la méthode statique <code>Hoa\String::transcode</code>,
-  avec en premier argument une chaîne de caractères, en deuxième argument
-  l'encodage d'origine et en dernier argument l'encodage final souhaité (par
-  défaut UTF-8). Pour la liste des encodages, il faut se reporter à l'extension
+  nous pouvons utiliser la méthode statique
+  <code>Hoa\String\String::transcode</code>, avec en premier argument une chaîne
+  de caractères, en deuxième argument l'encodage d'origine et en dernier
+  argument l'encodage final souhaité (par défaut UTF-8). Pour la liste des
+  encodages, il faut se reporter à l'extension
   <a href="http://php.net/iconv"><code>iconv</code></a> ou entrer la commande
   suivante dans un terminal :</p>
   <pre><code class="language-php">$ iconv --list</code></pre>
   <p>Pour savoir si une chaîne est encodée en UTF-8, nous pouvons utiliser la
-  méthode statique <code>Hoa\String::isUtf8</code> ; par exemple :</p>
+  méthode statique <code>Hoa\String\String::isUtf8</code> ; par exemple :</p>
   <pre><code class="language-php">var_dump(
-    Hoa\String::isUtf8('a'),
-    Hoa\String::isUtf8(Hoa\String::transcode('a', 'UTF-8', 'UTF-16'))
+    Hoa\String\String::isUtf8('a'),
+    Hoa\String\String::isUtf8(Hoa\String\String::transcode('a', 'UTF-8', 'UTF-16'))
 );
 
 /**
@@ -232,8 +238,8 @@ echo $title->toAscii();
  *     bool(false)
  */</code></pre>
   <p>Nous pouvons <strong>éclater</strong> la chaîne en plusieurs sous-chaînes
-  en utilisant la méthode <code>Hoa\String::split</code>. En premier argument,
-  nous avons une expression régulière (type
+  en utilisant la méthode <code>Hoa\String\String::split</code>. En premier
+  argument, nous avons une expression régulière (type
   <a href="http://pcre.org/">PCRE</a>), puis un entier représentant le nombre
   maximum d'éléments à retourner et enfin une combinaison de constantes. Ces
   constantes sont les mêmes que celles de
@@ -258,7 +264,7 @@ echo $title->toAscii();
   <p>Si nous voulons <strong>itérer</strong> sur tous les
   <strong>caractères</strong>, il est préférable d'exploiter l'interface
   <code>IteratorAggregate</code>, soit la méthode
-  <code>Hoa\String::getIterator</code>. Voyons plutôt sur l'exemple en
+  <code>Hoa\String\String::getIterator</code>. Voyons plutôt sur l'exemple en
   arabe :</p>
   <pre><code class="language-php">foreach($arabic as $letter)
     echo $letter, "\n";
@@ -292,7 +298,7 @@ echo $title->toAscii();
   <p>Si cette fois nous ne nous intéressons pas aux caractères Unicode mais aux
   caractères <strong>machines</strong> <code>char</code> (soit 1 octet), nous
   avons quelques opérations supplémentaires. La première est
-  <code>Hoa\String::getBytesLength</code> qui va compter la
+  <code>Hoa\String\String::getBytesLength</code> qui va compter la
   <strong>taille</strong> de la chaîne en octets :</p>
   <pre><code class="language-php">var_dump(
     $arabic->getBytesLength(),
@@ -305,15 +311,15 @@ echo $title->toAscii();
  *     int(27)
  */</code></pre>
   <p>Si nous comparons ces résultats avec ceux de la méthode
-  <code>Hoa\String::count</code>, nous comprenons que les caractères arabes sont
-  encodés sur 2 octets alors que les caractères japonais sont encodés sur 3
-  octets. Nous pouvons également obtenir un octet précis à l'aide de la méthode
-  <code>Hoa\String::getByteAt</code>. Encore une fois, l'index n'est pas
-  borné.</p>
+  <code>Hoa\String\String::count</code>, nous comprenons que les caractères
+  arabes sont encodés sur 2 octets alors que les caractères japonais sont
+  encodés sur 3 octets. Nous pouvons également obtenir un octet précis à l'aide
+  de la méthode <code>Hoa\String\String::getByteAt</code>. Encore une fois,
+  l'index n'est pas borné.</p>
   <p>Enfin, une autre méthode bien pratique est
-  <code>Hoa\String::getWidth</code> qui calcule la <strong>largeur</strong>
-  d'une chaîne, c'est à dire le nombre de colonnes utilisées par cette chaîne
-  lors de son affichage. Ainsi :</p>
+  <code>Hoa\String\String::getWidth</code> qui calcule la
+  <strong>largeur</strong> d'une chaîne, c'est à dire le nombre de colonnes
+  utilisées par cette chaîne lors de son affichage. Ainsi :</p>
   <pre><code class="language-php">var_dump(
     $french->getWidth(),
     $arabic->getWidth(),
@@ -334,8 +340,8 @@ echo $title->toAscii();
   <h3 id="Comparaison_et_recherche" for="main-toc">Comparaison et recherche</h3>
 
   <p>Les chaînes peuvent également être <strong>comparées</strong> entre elles
-  grâce à la méthode <code>Hoa\String::compare</code> :</p>
-  <pre><code class="language-php">$string = new Hoa\String('abc');
+  grâce à la méthode <code>Hoa\String\String::compare</code> :</p>
+  <pre><code class="language-php">$string = new Hoa\String\String('abc');
 var_dump(
     $string->compare('wxyz')
 );
@@ -348,13 +354,13 @@ var_dump(
   alphabétique), 0 si elle est identique, et 1 si elle vient après. Si nous
   voulons utiliser la pleine
   puissance du mécanisme sous-jacent, nous pouvons appeler la méthode statique
-  <code>Hoa\String::getCollator</code> (si la classe
+  <code>Hoa\String\String::getCollator</code> (si la classe
   <a href="http://php.net/Collator"><code>Collator</code></a> existe, auquel
-  cas, <code>Hoa\String::compare</code> utilisera une comparaison simple octet
-  par octets sans tenir compte d'autres paramètres). Ainsi, si nous voulons
-  trier un tableau de chaînes, nous écrirons plutôt :</p>
+  cas, <code>Hoa\String\String::compare</code> utilisera une comparaison simple
+  octet par octets sans tenir compte d'autres paramètres). Ainsi, si nous
+  voulons trier un tableau de chaînes, nous écrirons plutôt :</p>
   <pre><code class="language-php">$strings = array('c', 'Σ', 'd', 'x', 'α', 'a');
-Hoa\String::getCollator()->sort($strings);
+Hoa\String\String::getCollator()->sort($strings);
 print_r($strings);
 
 /**
@@ -376,8 +382,8 @@ print_r($strings);
   n'est pas une dépendance de <code>Hoa\String</code> pour autant.</p>
   <p>Nous pouvons également savoir si une chaîne <strong>correspond</strong> à
   un certain motif, toujours exprimé avec une expression régulière. Pour cela,
-  nous allons utiliser la méthode <code>Hoa\String::match</code>. Cette méthode
-  repose sur les fonctions
+  nous allons utiliser la méthode <code>Hoa\String\String::match</code>. Cette
+  méthode repose sur les fonctions
   <a href="http://php.net/preg_match"><code>preg_match</code></a> et
   <a href="http://php.net/preg_match_all"><code>preg_match_all</code></a> de
   PHP, mais en modifiant les options du motif afin qu'il supporte Unicode. Nous
@@ -402,8 +408,8 @@ var_dump($matches['direct_object']);
   <p>Similairement, nous pouvons <strong>chercher</strong> et
   <strong>remplacer</strong> des sous-chaînes par d'autres sous-chaînes suivant
   un motif, toujours exprimé avec une expression régulière. Pour cela, nous
-  allons utiliser la méthode <code>Hoa\String::replace</code>. Cette méthode
-  repose sur les fonctions
+  allons utiliser la méthode <code>Hoa\String\String::replace</code>. Cette
+  méthode repose sur les fonctions
   <a href="http://php.net/preg_replace"><code>preg_replace</code></a> et
   <a href="http://php.net/preg_replace_callback"><code>preg_replace_callback</code></a>
   de PHP, mais toujours en modifiant les options du motif afin qu'il supporte
@@ -424,28 +430,28 @@ echo $french;
  * Will output:
  *     Je vous aime
  */</code></pre>
-  <p>La classe <code>Hoa\String</code> propose des constantes qui sont des
+  <p>La classe <code>Hoa\String\String</code> propose des constantes qui sont des
   aliases de constantes PHP et qui permettent une meilleure lecture du code:</p>
   <ul>
-    <li><code>Hoa\String::WITHOUT_EMPTY</code>, alias de
+    <li><code>Hoa\String\String::WITHOUT_EMPTY</code>, alias de
     <code>PREG_SPLIT_NO_EMPTY</code> ;</li>
-    <li><code>Hoa\String::WITH_DELIMITERS</code>, alias de
+    <li><code>Hoa\String\String::WITH_DELIMITERS</code>, alias de
     <code>PREG_SPLIT_DELIM_CAPTURE</code> ;</li>
-    <li><code>Hoa\String::WITH_OFFSET</code>, alias de
+    <li><code>Hoa\String\String::WITH_OFFSET</code>, alias de
     <code>PREG_OFFSET_CAPTURE</code> et
     <code>PREG_SPLIT_OFFSET_CAPTURE</code> ;</li>
-    <li><code>Hoa\String::GROUP_BY_PATTERN</code>, alias de
+    <li><code>Hoa\String\String::GROUP_BY_PATTERN</code>, alias de
     <code>PREG_PATTERN_ORDER</code> ;</li>
-    <li><code>Hoa\String::GROUP_BY_TUPLE</code>, alias de
+    <li><code>Hoa\String\String::GROUP_BY_TUPLE</code>, alias de
     <code>PREG_SET_ORDER</code>.</li>
   </ul>
   <p>Comme ce sont des aliases stricts, nous pouvons écrire :</p>
-  <pre><code class="language-php">$string = new Hoa\String('abc1 defg2 hikl3 xyz4');
+  <pre><code class="language-php">$string = new Hoa\String\String('abc1 defg2 hikl3 xyz4');
 $string->match(
     '#(\w+)(\d)#',
     $matches,
-    Hoa\String::WITH_OFFSET
-  | Hoa\String::GROUP_BY_TUPLE,
+    Hoa\String\String::WITH_OFFSET
+  | Hoa\String\String::GROUP_BY_TUPLE,
     0,
     true
 );</code></pre>
@@ -454,15 +460,15 @@ $string->match(
 
   <p>Chaque caractère est représenté en machine par un entier, appelé
   <strong>code-point</strong>. Pour obtenir le code-point d'un caractère, nous
-  pouvons utiliser la méthode statique <code>Hoa\String::toCode</code>, et pour
-  obtenir un caractère à partir d'un code, nous pouvons utiliser la méthode
-  statique <code>Hoa\String::fromCode</code>. Nous avons aussi la méthode
-  statique <code>Hoa\String::toBinaryCode</code> qui retourne la représentation
-  sous forme binaire d'un caractère. Prenons un exemple :</p>
+  pouvons utiliser la méthode statique <code>Hoa\String\String::toCode</code>,
+  et pour obtenir un caractère à partir d'un code, nous pouvons utiliser la
+  méthode statique <code>Hoa\String\String::fromCode</code>. Nous avons aussi la
+  méthode statique <code>Hoa\String\String::toBinaryCode</code> qui retourne la
+  représentation sous forme binaire d'un caractère. Prenons un exemple :</p>
   <pre><code class="language-php">var_dump(
-    Hoa\String::toCode('Σ'),
-    Hoa\String::toBinaryCode('Σ'),
-    Hoa\String::fromCode(0x1a9)
+    Hoa\String\String::toCode('Σ'),
+    Hoa\String\String::toBinaryCode('Σ'),
+    Hoa\String\String::fromCode(0x1a9)
 );
 
 /**
@@ -472,8 +478,8 @@ $string->match(
  *     string(2) "Σ"
  */</code></pre>
   <p>Nous pouvons préciser la taille de la représentation binaire à l'aide du
-  second argument de la méthode <code>Hoa\String::toBinaryCode</code> (32 par
-  défaut).</p>
+  second argument de la méthode <code>Hoa\String\String::toBinaryCode</code> (32
+  par défaut).</p>
 
   <h2 id="Algorithmes_de_recherche" for="main-toc">Algorithmes de recherche</h2>
 
