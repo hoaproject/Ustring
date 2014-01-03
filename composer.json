@@ -25,13 +25,9 @@
         "ext-iconv"   : "*"
     },
     "minimum-stability": "dev",
-    "target-dir": "Hoa/String",
-    "autoload": {
-        "psr-0": {
-            "Hoa\\String": "."
-        }
-    },
-    "suggest": {
-        "ext-intl"    : "To get a better Hoa\\String::toAscii() and Hoa\\String::compareTo()."
+    "target-dir"       : "Hoa/String",
+    "autoload"         : { "psr-0": { "Hoa\\String": "." } },
+    "suggest"          : {
+        "ext-intl": "To get a better Hoa\\String::toAscii() and Hoa\\String::compareTo()."
     }
 }
