@@ -3,7 +3,7 @@
 Hoa is a **modular**, **extensible** and **structured** set of PHP libraries.
 Moreover, Hoa aims at being a bridge between industrial and research worlds.
 
-# Hoa\String
+# Hoa\String ![state](http://central.hoa-project.net/State/String)
 
 This library allows to manipulate UTF-8 strings easily with some search
 algorithms.
