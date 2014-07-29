@@ -883,6 +883,24 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
+     * @param $string
+     * @return static
+     */
+    public static function getInstance($string)
+    {
+        return new static ($string);
+    }
+
+    /**
+     * Copy current object string
+     * @return String
+     */
+    public function copy()
+    {
+        return static::getInstance($this->_string);
+    }
+
+    /**
      * Transform the object as a string.
      *
      * @access  public
