@@ -882,14 +882,6 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
         return $this;
     }
 
-    /**
-     * @param $string
-     * @return static
-     */
-    public static function getInstance($string)
-    {
-        return new static ($string);
-    }
 
     /**
      * Copy current object string
@@ -897,7 +889,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public function copy()
     {
-        return static::getInstance($this->_string);
+        return clone $this ;
     }
 
     /**
