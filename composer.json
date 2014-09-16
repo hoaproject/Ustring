@@ -21,13 +21,12 @@
         "source": "http://git.hoa-project.net/"
     },
     "require": {
-        "hoa/core"    : "dev-master",
+        "hoa/core"    : "~1.0",
         "ext-iconv"   : "*"
     },
-    "minimum-stability": "dev",
-    "target-dir"       : "Hoa/String",
-    "autoload"         : { "psr-0": { "Hoa\\String": "." } },
-    "suggest"          : {
+    "target-dir": "Hoa/String",
+    "autoload"  : { "psr-0": { "Hoa\\String": "." } },
+    "suggest"   : {
         "ext-intl": "To get a better Hoa\\String::toAscii() and Hoa\\String::compareTo()."
     }
 }
