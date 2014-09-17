@@ -8,6 +8,23 @@ Moreover, Hoa aims at being a bridge between industrial and research worlds.
 This library allows to manipulate UTF-8 strings easily with some search
 algorithms.
 
+## Installation
+
+With [Composer](http://getcomposer.org/), to include this library into your
+dependencies, you need to require
+[`hoa/string`](https://packagist.org/packages/hoa/string):
+
+```json
+{
+    "require": {
+        "hoa/string": "~2.0"
+    }
+}
+```
+
+Please, read the website to [get more informations about how to
+install](http://hoa-project.net/Source.html).
+
 ## Quick usage
 
 We propose a quick overview of two usages: manipulate UTF-8 strings and one
