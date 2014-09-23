@@ -28,5 +28,10 @@
     "autoload"  : { "psr-0": { "Hoa\\String": "." } },
     "suggest"   : {
         "ext-intl": "To get a better Hoa\\String::toAscii() and Hoa\\String::compareTo()."
+    },
+    "extra"     : {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
     }
 }
