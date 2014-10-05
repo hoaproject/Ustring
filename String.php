@@ -885,11 +885,12 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 
     /**
      * Copy current object string
-     * @return String
+     *
+     * @return \Hoa\String
      */
-    public function copy()
-    {
-        return clone $this ;
+    public function copy ( ) {
+
+        return clone $this;
     }
 
     /**
