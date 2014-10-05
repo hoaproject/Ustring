@@ -882,6 +882,16 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
         return $this;
     }
 
+
+    /**
+     * Copy current object string
+     * @return String
+     */
+    public function copy()
+    {
+        return clone $this ;
+    }
+
     /**
      * Transform the object as a string.
      *
