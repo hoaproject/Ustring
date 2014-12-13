@@ -377,7 +377,7 @@ print_r($strings);
  */</code></pre>
   <p>La comparaison entre deux chaînes dépend de la <strong>locale</strong>,
   c'est à dire de la régionalisation du système, comme la langue, le pays, la
-  région etc. Nous pouvons utiliser <a href="@lh:chapter=Locale">la
+  région etc. Nous pouvons utiliser <a href="@hack:chapter=Locale">la
   bibliothèque <code>Hoa\Locale</code></a> pour modifier ces données, mais ce
   n'est pas une dépendance de <code>Hoa\String</code> pour autant.</p>
   <p>Nous pouvons également savoir si une chaîne <strong>correspond</strong> à
