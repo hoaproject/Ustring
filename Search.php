@@ -34,7 +34,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\String {
+namespace Hoa\String;
 
 /**
  * Class \Hoa\String\Search.
@@ -64,8 +64,8 @@ class Search {
         $y      = (string) $y;
         $m      = strlen($x);
         $n      = strlen($y);
-        $offset = array();
-        $L      = array(-1 => array_fill(-1, $n - $m + $k + 3, -2));
+        $offset = [];
+        $L      = [-1 => array_fill(-1, $n - $m + $k + 3, -2)];
 
         for($q = 0, $max = $k - 1; $q <= $max; ++$q)
             $L[$q][-$q - 1] = $L[$q][-$q - 2] = $q - 1;
@@ -90,7 +90,7 @@ class Search {
 
                     $j            = $m + $d;
                     $i            = max(0, $j - $m);
-                    $offset[$q][] = array('i' => $i, 'j' => $j, 'l' => $j - $i);
+                    $offset[$q][] = ['i' => $i, 'j' => $j, 'l' => $j - $i];
                 }
             }
 
@@ -115,6 +115,4 @@ class Search {
 
         return $i;
     }
-}
-
 }

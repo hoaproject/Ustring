@@ -34,7 +34,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\String {
+namespace Hoa\String;
+
+use Hoa\Core;
 
 /**
  * Class \Hoa\String\Exception.
@@ -46,6 +48,4 @@ namespace Hoa\String {
  * @license    New BSD License
  */
 
-class Exception extends \Hoa\Core\Exception { }
-
-}
+class Exception extends Core\Exception { }

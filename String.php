@@ -34,18 +34,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace {
+namespace Hoa\String;
 
-from('Hoa')
-
-/**
- * \Hoa\String\Exception
- */
--> import('String.Exception');
-
-}
-
-namespace Hoa\String {
+use Hoa\Core;
 
 /**
  * Class \Hoa\String.
@@ -867,7 +858,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
                 throw new Exception(
                     '%s needs the class Normalizer to work properly, ' .
                     'or you can force a try by using %1$s(true).',
-                    1, array(__METHOD__));
+                    1, __METHOD__);
 
             $string        = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $this->_string);
             $this->_string = preg_replace('#(?:[\'"`^](\w))#u', '\1', $string);
@@ -905,13 +896,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 }
 
-}
-
-namespace {
-
 /**
  * Flex entity.
  */
-Hoa\Core\Consistency::flexEntity('Hoa\String\String');
-
-}
+Core\Consistency::flexEntity('Hoa\String\String');
