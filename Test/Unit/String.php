@@ -772,7 +772,7 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('ሇ')
 
             // U+10000 to U+10FFFF
-            ->when($result = LUT::fromCode(128169))
+            ->when($result = LUT::fromCode(0x1f4a9))
             ->then
                 ->string($result)
                     ->isEqualTo('💩');
@@ -803,7 +803,7 @@ class String extends Test\Unit\Suite {
             ->when($result = LUT::toCode('💩'))
             ->then
                 ->integer($result)
-                    ->isEqualTo(128169);
+                    ->isEqualTo(0x1f4a9);
     }
 
     public function case_to_binary_code ( ) {
