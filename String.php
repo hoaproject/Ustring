@@ -286,7 +286,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     public function compare ( $string ) {
 
         if(false === class_exists('Collator', false))
-            return min(-1, max(1, strcmp($this->_string, (string) $string)));
+            return strcmp($this->_string, (string) $string);
 
         return static::getCollator()->compare($this->_string, $string);
     }
