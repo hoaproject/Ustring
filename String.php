@@ -345,11 +345,14 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 
         $pattern = static::safePattern($pattern);
 
-        if(true === $global)
-            if(0 === $flags)
+        if(0 === $flags) {
+
+            if(true === $global)
                 $flags = static::GROUP_BY_PATTERN;
-            else
-                $flags &= ~PREG_SPLIT_OFFSET_CAPTURE;
+        }
+        else
+            $flags &= ~PREG_SPLIT_OFFSET_CAPTURE;
+
 
         $offset = strlen(mb_substr($this->_string, 0, $offset));
 
