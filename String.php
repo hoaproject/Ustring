@@ -788,9 +788,33 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public static function toCode ( $char ) {
 
-        $ucs = mb_convert_encoding($char, 'UCS-2LE', 'UTF-8');
+        $char = (string) $char;
+        $code = ord($char[0]);
 
-        return ord($ucs[1]) * 256 + ord($ucs[0]);
+        if(!($code & 0x80)) // 0xxxxxxx
+            return $code;
+
+        if(($code & 0xe0) === 0xc0) { // 110xxxxx
+
+            $bytes = 2;
+            $code  = $code & ~0xc0;
+        }
+        elseif(($code & 0xf0) == 0xe0) { // 1110xxxx
+
+            $bytes = 3;
+            $code  = $code & ~0xe0;
+        }
+
+        elseif(($code & 0xf8) === 0xf0) { // 11110xxx
+
+            $bytes = 4;
+            $code  = $code & ~0xf0;
+        }
+
+        for($i = 2; $i <= $bytes; $i++) // 10xxxxxx
+            $code = ($code << 6) + (ord($char[$i - 1]) & ~0x80);
+
+        return $code;
     }
 
     /**
