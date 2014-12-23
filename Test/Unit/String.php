@@ -813,25 +813,25 @@ class String extends Test\Unit\Suite {
             ->when($result = LUT::toBinaryCode('~'))
             ->then
                 ->string($result)
-                    ->isEqualTo('00000000000000000000000001111110')
+                    ->isEqualTo('01111110')
 
             // U+0080 to U+07FF
             ->when($result = LUT::toBinaryCode('§'))
             ->then
                 ->string($result)
-                    ->isEqualTo('00000000000000000000000010100111')
+                    ->isEqualTo('1100001010100111')
 
             // U+0800 to U+FFFF
             ->when($result = LUT::toBinaryCode('ሇ'))
             ->then
                 ->string($result)
-                    ->isEqualTo('00000000000000000001001000000111')
+                    ->isEqualTo('111000011000100010000111')
 
             // U+10000 to U+10FFFF
             ->when($result = LUT::toBinaryCode('💩'))
             ->then
                 ->string($result)
-                    ->isEqualTo('00000000000000011111010010101001');
+                    ->isEqualTo('11110000100111111001001010101001');
     }
 
     public function case_transcode_and_isUtf8 ( ) {

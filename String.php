@@ -818,16 +818,21 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
-     * Get a binary representation of the decimal code of a specific character.
+     * Get a binary representation of a specific character.
      *
      * @access  public
-     * @param   string  $char      Character.
-     * @param   int     $length    Length of the binary result.
+     * @param   string  $char    Character.
      * @return  string
      */
-    public static function toBinaryCode ( $char, $length = 32 ) {
+    public static function toBinaryCode ( $char ) {
 
-        return vsprintf('%0' . intval($length) . 'b', static::toCode($char));
+        $char = (string) $char;
+        $out  = null;
+
+        for($i = 0, $max = strlen($char); $i < $max; ++$i)
+            $out .= vsprintf('%08b', ord($char[$i]));
+
+        return $out;
     }
 
     /**
