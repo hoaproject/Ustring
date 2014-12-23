@@ -753,6 +753,25 @@ class String extends Test\Unit\Suite {
     public function case_from_code ( ) {
 
         $this
+            // U+0000 to U+007F
+            ->when($result = LUT::fromCode(0x7e))
+            ->then
+                ->string($result)
+                    ->isEqualTo('~')
+
+            // U+0080 to U+07FF
+            ->when($result = LUT::fromCode(0xa7))
+            ->then
+                ->string($result)
+                    ->isEqualTo('§')
+
+            // U+0800 to U+FFFF
+            ->when($result = LUT::fromCode(0x1207))
+            ->then
+                ->string($result)
+                    ->isEqualTo('ሇ')
+
+            // U+10000 to U+10FFFF
             ->when($result = LUT::fromCode(128169))
             ->then
                 ->string($result)
@@ -761,18 +780,58 @@ class String extends Test\Unit\Suite {
 
     public function case_to_code ( ) {
 
-        /*
         $this
+            // U+0000 to U+007F
+            ->when($result = LUT::toCode('~'))
+            ->then
+                ->integer($result)
+                    ->isEqualTo(0x7e)
+
+            // U+0080 to U+07FF
+            ->when($result = LUT::toCode('§'))
+            ->then
+                ->integer($result)
+                    ->isEqualTo(0xa7)
+
+            // U+0800 to U+FFFF
+            ->when($result = LUT::toCode('ሇ'))
+            ->then
+                ->integer($result)
+                    ->isEqualTo(0x1207)
+
+            // U+10000 to U+10FFFF
             ->when($result = LUT::toCode('💩'))
             ->then
                 ->integer($result)
                     ->isEqualTo(128169);
-        */
     }
 
     public function case_to_binary_code ( ) {
 
+        $this
+            // U+0000 to U+007F
+            ->when($result = LUT::toBinaryCode('~'))
+            ->then
+                ->string($result)
+                    ->isEqualTo('00000000000000000000000001111110')
 
+            // U+0080 to U+07FF
+            ->when($result = LUT::toBinaryCode('§'))
+            ->then
+                ->string($result)
+                    ->isEqualTo('00000000000000000000000010100111')
+
+            // U+0800 to U+FFFF
+            ->when($result = LUT::toBinaryCode('ሇ'))
+            ->then
+                ->string($result)
+                    ->isEqualTo('00000000000000000001001000000111')
+
+            // U+10000 to U+10FFFF
+            ->when($result = LUT::toBinaryCode('💩'))
+            ->then
+                ->string($result)
+                    ->isEqualTo('00000000000000011111010010101001');
     }
 
     public function case_transcode_and_isUtf8 ( ) {
