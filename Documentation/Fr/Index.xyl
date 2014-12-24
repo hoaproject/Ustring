@@ -474,12 +474,9 @@ $string->match(
 /**
  * Will output:
  *     int(931)
- *     string(32) "00000000000000000000001110100011"
+ *     string(32) "1100111010100011"
  *     string(2) "Σ"
  */</code></pre>
-  <p>Nous pouvons préciser la taille de la représentation binaire à l'aide du
-  second argument de la méthode <code>Hoa\String\String::toBinaryCode</code> (32
-  par défaut).</p>
 
   <h2 id="Algorithmes_de_recherche" for="main-toc">Algorithmes de recherche</h2>
 
