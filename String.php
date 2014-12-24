@@ -285,10 +285,10 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public function compare ( $string ) {
 
-        if(false === class_exists('Collator', false))
+        if(null === $collator = static::getCollator())
             return strcmp($this->_string, (string) $string);
 
-        return static::getCollator()->compare($this->_string, $string);
+        return $collator->compare($this->_string, $string);
     }
 
     /**
@@ -298,6 +298,9 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * @return  \Collator
      */
     public static function getCollator ( ) {
+
+        if(false === class_exists('Collator', false))
+            return null;
 
         if(null === static::$_collator)
             static::$_collator = new \Collator(setlocale(LC_COLLATE, null));

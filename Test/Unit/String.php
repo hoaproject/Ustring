@@ -57,10 +57,7 @@ class String extends Test\Unit\Suite {
             ->given(
                 $this->function->function_exists = function ( $name ) {
 
-                    if('mb_substr' === $name)
-                        return false;
-
-                    return true;
+                    return 'mb_substr' !== $name;
                 }
             )
             ->exception(function ( ) {
@@ -172,10 +169,7 @@ class String extends Test\Unit\Suite {
             ->given(
                 $this->function->class_exists = function ( $name ) {
 
-                    if('Collator' === $name)
-                        return false;
-
-                    return true;
+                    return 'Collator' !== $name;
                 },
                 $string = new LUT('b')
             )
@@ -278,7 +272,7 @@ class String extends Test\Unit\Suite {
                 ->integer($result)
                     ->isEqualTo(0)
                 ->array($matches)
-                    ->isEqualTo([]);
+                    ->isEmpty();
     }
 
     public function case_match_with_offset ( ) {
@@ -860,10 +854,7 @@ class String extends Test\Unit\Suite {
             ->given(
                 $this->function->class_exists = function ( $name ) {
 
-                    if('Normalizer' === $name)
-                        return false;
-
-                    return true;
+                    return 'Normalizer' !== $name;
                 },
                 $string = new LUT('Un été brûlant sur la côte')
             )
@@ -880,10 +871,7 @@ class String extends Test\Unit\Suite {
             ->given(
                 $this->function->class_exists = function ( $name ) {
 
-                    if('Normalizer' === $name)
-                        return false;
-
-                    return true;
+                    return 'Normalizer' !== $name;
                 },
                 $string = new LUT('Un été brûlant sur la côte')
             )
@@ -920,13 +908,10 @@ class String extends Test\Unit\Suite {
     public function case_toString ( ) {
 
         $this
-            ->given(
-                $datum  = $this->sample($this->realdom->regex('/\w{7,42}/')),
-                $string = new LUT($datum)
-            )
-            ->when($result = (string) $string)
+            ->given($datum = $this->sample($this->realdom->regex('/\w{7,42}/')))
+            ->when($result = new LUT($datum))
             ->then
-                ->string($result)
+                ->castToString($result)
                     ->isEqualTo($datum);
     }
 }
