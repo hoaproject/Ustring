@@ -299,7 +299,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public static function getCollator ( ) {
 
-        if(false === class_exists('Collator', false))
+        if(false === class_exists('Collator'))
             return null;
 
         if(null === static::$_collator)
@@ -496,7 +496,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
             return $this;
         }
 
-        if(false === class_exists('Normalizer', false)) {
+        if(false === class_exists('Normalizer')) {
 
             if(false === $try)
                 throw new Exception(
@@ -550,7 +550,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public static function getTransliterator ( $identifier ) {
 
-        if(false === class_exists('Transliterator', false))
+        if(false === class_exists('Transliterator'))
             return null;
 
         return \Transliterator::create($identifier);
