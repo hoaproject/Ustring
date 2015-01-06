@@ -462,6 +462,45 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
+     * Transliterate the string into another.
+     * See self::getTransliterator for more information.
+     *
+     * @access  public
+     * @param   string  $identifier    Identifier.
+     * @param   int     $start         Start.
+     * @param   int     $end           End.
+     * @return  \Hoa\String
+     * @throw   \Hoa\String\Exception
+     */
+    public function transliterate ( $identifier, $start = 0, $end = null ) {
+
+        if(null === $transliterator = static::getTransliterator($identifier))
+            throw new Exception(
+                '%s needs the class Transliterator to work propertly.',
+                2, __METHOD__);
+
+        $this->_string = $transliterator->transliterate($this->_string, $start, $end);
+
+        return $this;
+    }
+
+    /**
+     * Get transliterator.
+     * See http://userguide.icu-project.org/transforms/general for $identifier.
+     *
+     * @access  public
+     * @param   string  $identifier    Identifier.
+     * @return  \Transliterator
+     */
+    public static function getTransliterator ( $identifier ) {
+
+        if(false === class_exists('Transliterator', false))
+            return null;
+
+        return \Transliterator::create($identifier);
+    }
+
+    /**
      * Strip characters (default \s) of the current string.
      *
      * @access  public
