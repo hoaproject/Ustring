@@ -788,6 +788,25 @@ class String extends Test\Unit\Suite {
             });
     }
 
+    public function case_is_char_printable ( ) {
+
+        $this
+            ->when($result = LUT::isCharPrintable(LUT::fromCode(0x7f)))
+            ->then
+                ->boolean($result)
+                    ->isFalse()
+
+            ->when($result = LUT::isCharPrintable(LUT::fromCode(0xa0)))
+            ->then
+                ->boolean($result)
+                    ->isTrue()
+
+            ->when($result = LUT::isCharPrintable(LUT::fromCode(0x1100)))
+            ->then
+                ->boolean($result)
+                    ->isTrue();
+    }
+
     public function case_from_code ( ) {
 
         $this

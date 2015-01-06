@@ -892,6 +892,18 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
+     * Check whether the character is printable or not.
+     *
+     * @access  public
+     * @param   string  $char    Character.
+     * @return  bool
+     */
+    public static function isCharPrintable ( $char ) {
+
+        return 1 <= static::getCharWidth($char);
+    }
+
+    /**
      * Get a UTF-8 character from its decimal code representation.
      *
      * @access  public
