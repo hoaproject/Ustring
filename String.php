@@ -478,9 +478,20 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 
         $string = $this->_string;
 
-        if(null !== $transliterator = static::getTransliterator('Any-Latin; Latin-ASCII')) {
+        $transId = 'Any-Latin; ' .
+                   '[\p{S}] Name; ' .
+                   'Latin-ASCII';
 
-            $this->_string = $transliterator->transliterate($string);
+        if(null !== $transliterator = static::getTransliterator($transId)) {
+
+            $this->_string = preg_replace_callback(
+                '#\\\N\{([A-Z ]+)\}#u',
+                function ( Array $matches ) {
+
+                    return '(' . strtolower($matches[1]) . ')';
+                },
+                $transliterator->transliterate($string)
+            );
 
             return $this;
         }

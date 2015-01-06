@@ -934,7 +934,10 @@ class String extends Test\Unit\Suite {
                     => 'monica',
 
                     'क्ष'
-                    => 'ksa'
+                    => 'ksa',
+
+                    'أحبك 😀'
+                    => 'ahbk (grinning face)'
                 ]
             )
             ->when(function ( ) use ( $strings ) {
