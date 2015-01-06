@@ -744,6 +744,50 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo(LUT::RTL);
     }
 
+    public function case_get_char_width ( ) {
+
+        $this
+            ->given(
+                $data = [
+                    // 8-bit control character.
+                    [0x0,    0],
+                    [0x19,  -1],
+                    [0x7f,  -1],
+                    [0x9f,  -1],
+
+                    // Regular.
+                    [0xa0,   1],
+
+                    // To test the last return statement.
+                    [0x1100, 2],
+                    [0x2160, 1],
+                    [0x3f60, 2],
+                    [0x303f, 1],
+                    [0x2329, 2],
+                    [0xaed0, 2],
+                    [0x232a, 2],
+                    [0xffa4, 1],
+                    [0xfe10, 2],
+                    [0xfe30, 2],
+                    [0xff00, 2],
+                    [0xf900, 2]
+                ]
+            )
+            ->when(function ( ) use ( $data ) {
+
+                foreach($data as $datum) {
+
+                    list($code, $width) = $datum;
+
+                    $this
+                        ->when($result = LUT::getCharWidth(LUT::fromCode($code)))
+                        ->then
+                            ->integer($result)
+                                ->isEqualTo($width);
+                }
+            });
+    }
+
     public function case_from_code ( ) {
 
         $this
