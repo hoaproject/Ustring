@@ -462,6 +462,51 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
+     * Transform a UTF-8 string into an ASCII one.
+     * First, try with a transliterator. If not available, will fallback to a
+     * normalizer. If not available, will try something homemade.
+     *
+     * @access  public
+     * @param   bool  $try    Try something if \Normalizer is not present.
+     * @return  \Hoa\String
+     * @throw   \Hoa\String\Exception
+     */
+    public function toAscii ( $try = false ) {
+
+        if(0 === preg_match('#[\x80-\xff]#', $this->_string))
+            return $this;
+
+        $string = $this->_string;
+
+        if(null !== $transliterator = static::getTransliterator('Any-Latin; Latin-ASCII')) {
+
+            $this->_string = $transliterator->transliterate($string);
+
+            return $this;
+        }
+
+        if(false === class_exists('Normalizer', false)) {
+
+            if(false === $try)
+                throw new Exception(
+                    '%s needs the class Normalizer to work properly, ' .
+                    'or you can force a try by using %1$s(true).',
+                    1, __METHOD__);
+
+            $string        = static::transcode($string, 'UTF-8', 'ASCII//IGNORE//TRANSLIT');
+            $this->_string = preg_replace('#(?:[\'"`^](\w))#u', '\1', $string);
+
+            return $this;
+        }
+
+        $string        = \Normalizer::normalize($string, \Normalizer::NFKD);
+        $string        = preg_replace('#\p{Mn}+#u', '', $string);
+        $this->_string = static::transcode($string, 'UTF-8', 'ASCII//IGNORE//TRANSLIT');
+
+        return $this;
+    }
+
+    /**
      * Transliterate the string into another.
      * See self::getTransliterator for more information.
      *
@@ -902,41 +947,6 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 
         return (bool) preg_match('##u', $string);
     }
-
-    /**
-     * Transform a UTF-8 string into an ASCII one.
-     *
-     * @access  public
-     * @param   bool  $try    Try something if \Normalizer is not present.
-     * @return  \Hoa\String
-     * @throw   \Hoa\String\Exception
-     */
-    public function toAscii ( $try = false ) {
-
-        if(0 === preg_match('#[\x80-\xff]#', $this->_string))
-            return $this;
-
-        if(false === class_exists('Normalizer', false)) {
-
-            if(false === $try)
-                throw new Exception(
-                    '%s needs the class Normalizer to work properly, ' .
-                    'or you can force a try by using %1$s(true).',
-                    1, __METHOD__);
-
-            $string        = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $this->_string);
-            $this->_string = preg_replace('#(?:[\'"`^](\w))#u', '\1', $string);
-
-            return $this;
-        }
-
-        $string        = \Normalizer::normalize($this->_string, \Normalizer::NFKD);
-        $string        = preg_replace('#\p{Mn}+#u', '', $string);
-        $this->_string = iconv('UTF-8', 'ASCII//IGNORE//TRANSLIT', $string);
-
-        return $this;
-    }
-
 
     /**
      * Copy current object string
