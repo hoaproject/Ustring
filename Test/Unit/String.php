@@ -937,7 +937,10 @@ class String extends Test\Unit\Suite {
                     => 'ksa',
 
                     'أحبك 😀'
-                    => 'ahbk (grinning face)'
+                    => 'ahbk (grinning face)',
+
+                    '∀ i ∈ ℕ'
+                    => '(for all) i (element of) N'
                 ]
             )
             ->when(function ( ) use ( $strings ) {
