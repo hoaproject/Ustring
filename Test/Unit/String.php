@@ -915,9 +915,6 @@ class String extends Test\Unit\Suite {
                     'أحبك'
                     => 'ahbk',
 
-                    'رابتخالا وه اذه'
-                    => 'rabtkhala wh adhh',
-
                     'キャンパス'
                     => 'kyanpasu',
 
