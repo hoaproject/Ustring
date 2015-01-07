@@ -862,6 +862,68 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     }
 
     /**
+     * Get the number of column positions of a wide-character.
+     *
+     * This is a PHP implementation of wcwidth() and wcswidth() (defined in IEEE
+     * Std 1002.1-2001) for Unicode, by Markus Kuhn. Please, see
+     * http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c.
+     *
+     * The wcwidth(wc) function shall either return 0 (if wc is a null
+     * wide-character code), or return the number of column positions to be
+     * occupied by the wide-character code wc, or return -1 (if wc does not
+     * correspond to a printable wide-character code).
+     *
+     * @access  public
+     * @param   string  $char    Character.
+     * @return  int
+     */
+    public static function getCharWidth ( $char ) {
+
+        $char = (string) $char;
+        $c    = static::toCode($char);
+
+        // Test for 8-bit control characters.
+        if(0x0 === $c)
+            return 0;
+
+        if(0x20 > $c || (0x7f <= $c && $c < 0xa0))
+            return -1;
+
+        // Non-spacing characters.
+        if(   0xad !== $c
+           && 0    !== preg_match('#^[\p{Mn}\p{Me}\p{Cf}\x{1160}-\x{11ff}\x{200b}]#u', $char))
+            return 0;
+
+        // If we arrive here, $c is not a combining C0/C1 control character.
+        return 1 +
+            (0x1100 <= $c &&
+                (0x115f >= $c ||                        // Hangul Jamo init. consonants
+                 0x2329 === $c || 0x232a === $c ||
+                     (0x2e80 <= $c && 0xa4cf >= $c &&
+                      0x303f !== $c) ||                 // CJK…Yi
+                     (0xac00  <= $c && 0xd7a3 >= $c) || // Hangul Syllables
+                     (0xf900  <= $c && 0xfaff >= $c) || // CJK Compatibility Ideographs
+                     (0xfe10  <= $c && 0xfe19 >= $c) || // Vertical forms
+                     (0xfe30  <= $c && 0xfe6f >= $c) || // CJK Compatibility Forms
+                     (0xff00  <= $c && 0xff60 >= $c) || // Fullwidth Forms
+                     (0xffe0  <= $c && 0xffe6 >= $c) ||
+                     (0x20000 <= $c && 0x2fffd >= $c) ||
+                     (0x30000 <= $c && 0x3fffd >= $c)));
+    }
+
+    /**
+     * Check whether the character is printable or not.
+     *
+     * @access  public
+     * @param   string  $char    Character.
+     * @return  bool
+     */
+    public static function isCharPrintable ( $char ) {
+
+        return 1 <= static::getCharWidth($char);
+    }
+
+    /**
      * Get a UTF-8 character from its decimal code representation.
      *
      * @access  public
