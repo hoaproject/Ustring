@@ -758,6 +758,15 @@ class String extends Test\Unit\Suite {
                     // Regular.
                     [0xa0,   1],
 
+                    // Non-spacing characters mark.
+                    [0x300,  0], // in Mn
+                    [0x488,  0], // in Me
+                    [0x600,  0], // in Cf
+                    [0xad,   1], // in Cf, but the only exception
+                    [0x1160, 0],
+                    [0x11ff, 0],
+                    [0x200b, 0],
+
                     // To test the last return statement.
                     [0x1100, 2],
                     [0x2160, 1],
