@@ -796,7 +796,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 
         // Non-spacing characters.
         if(   0xad !== $c
-           && 0    !== preg_match('#^(\p{Mn}|\p{Me}|\p{Cf}|[\x{1160}-\x{11ff}]|\x{200b})$#u', $char))
+           && 0    !== preg_match('#^[\p{Mn}\p{Me}\p{Cf}\x{1160}-\x{11ff}\x{200b}]$#u', $char))
             return 0;
 
         // If we arrive here, $c is not a combining C0/C1 control character.
