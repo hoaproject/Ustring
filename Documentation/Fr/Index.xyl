@@ -8,7 +8,7 @@
   La bibliothèque <code>Hoa\String</code> propose plusieurs opérations sur des
   chaînes de caractères UTF-8.</p>
 
-  <h2 id="Table_des_matieres">Table des matières</h2>
+  <h2 id="Table_of_contents">Table des matières</h2>
 
   <tableofcontents id="main-toc" />
 
@@ -35,8 +35,7 @@
   des opérations de <strong>recherche</strong> sur des chaînes de
   caractères.</p>
 
-  <h2 id="Chaine_de_caracteres_Unicode" for="main-toc">Chaîne de caractères
-  Unicode</h2>
+  <h2 id="Unicode_strings" for="main-toc">Chaîne de caractères Unicode</h2>
 
   <p>La classe <code>Hoa\String\String</code> représente une chaîne de
   caractères Unicode <strong>UTF-8</strong> et permet de la manipuler
@@ -51,8 +50,7 @@ $arabic   = new Hoa\String\String('أحبك');
 $japanese = new Hoa\String\String('私はあなたを愛して');</code></pre>
   <p>Maintenant, voyons les opérations possibles sur ces trois chaînes.</p>
 
-  <h3 id="Manipulation_de_la_chaine" for="main-toc">Manipulation de la
-  chaîne</h3>
+  <h3 id="String_manipulation" for="main-toc">Manipulation de la chaîne</h3>
 
   <p>Commençons par les opérations <strong>élémentaires</strong>. Si nous
   voulons <strong>compter</strong> le nombre de caractères (et non pas
@@ -327,7 +325,7 @@ echo $arabic->toAscii(), "\n",
  *     )
  */</code></pre>
 
-  <h3 id="Comparaison_et_recherche" for="main-toc">Comparaison et recherche</h3>
+  <h3 id="Comparison_and_search" for="main-toc">Comparaison et recherche</h3>
 
   <p>Les chaînes peuvent également être <strong>comparées</strong> entre elles
   grâce à la méthode <code>Hoa\String\String::compare</code> :</p>
@@ -542,7 +540,7 @@ $string->match(
  *     string(2) "Σ"
  */</code></pre>
 
-  <h2 id="Algorithmes_de_recherche" for="main-toc">Algorithmes de recherche</h2>
+  <h2 id="Search_algorithms" for="main-toc">Algorithmes de recherche</h2>
 
   <p>La bibliothèque <code>Hoa\String</code> propose des algorithmes de
   <strong>recherches</strong> sophistiquées sur les chaînes de caractères à
