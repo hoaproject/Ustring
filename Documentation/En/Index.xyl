@@ -3,8 +3,34 @@
 <overlay xmlns="http://hoa-project.net/xyl/xylophone">
 <yield id="chapter">
 
-  <p class="warning">This chapter is not yet translated. Contributions are
-  welcomed!</p>
+  <p>Strings can sometimes be <strong>complex</strong>, especially when they use
+  the <code>Unicode</code> encoding format. The <code>Hoa\String</code> library
+  provides several operations on UTF-8 strings.</p>
+
+  <h2 id="Table_of_contents">Table of contents</h2>
+
+  <tableofcontents id="main-toc" />
+
+  <h2 id="Introduction" for="main-toc">Introduction</h2>
+
+  <p>When we manipulate strings, the <a href="http://unicode.org/">Unicode</a>
+  format establishes itself because of its <strong>compatibility</strong> with
+  historical formats (like ASCII) and its capacity to understand a
+  <strong>large</strong> range of characters and symbols for all cultures and
+  all regions in the world. PHP provides several tools to manipulate such
+  strings, like the following extensions:
+  <a href="http://php.net/mbstring"><code>mbstring</code></a>,
+  <a href="http://php.net/iconv"><code>iconv</code></a> or also the excellent
+  <a href="http://php.net/intl"><code>intl</code></a>  which is based on
+  <a href="http://icu-project.org/">ICU</a>, the reference implementation of
+  Unicode. Unfortunately, sometimes we have to mix these extensions to achieve
+  our aims and at the cost of a certain <strong>complexity</strong> along with
+  a regrettable <strong>verbosity</strong>.</p>
+  <p>The <code>Hoa\String</code> library answers to these issues by providing a
+  <strong>simple</strong> way to manipulate strings with
+  <strong>performance</strong> and <strong>efficiency</strong> in minds. It
+  also provides some evoluated algorithms to perform <strong>search</strong>
+  operations on strings.</p>
 
 </yield>
 </overlay>
