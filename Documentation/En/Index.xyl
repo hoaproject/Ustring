@@ -524,5 +524,80 @@ $string->match(
  *     string(32) "1100111010100011"
  *     string(2) "Σ"
  */</code></pre>
+
+  <h2 id="Search_algorithms" for="main-toc">Search algorithms</h2>
+
+  <p>The <code>Hoa\String</code> library provides sophisticated
+  <strong>search</strong> algorithms on strings through the
+  <code>Hoa\String\Search</code> class.</p>
+  <p>We will study the <code>Hoa\String\Search::approximated</code> algorithm
+  which searches a sub-string in a string up to <strong><em>k</em>
+  differences</strong> (a difference is an addition, a deletion or a
+  modification). Let's take the classical example of a DNA representation: We
+  will search all the sub-strings approximating <code>GATAA</code> with
+  1 difference (maximum) in <code>CAGATAAGAGAA</code>. So, we will write:</p>
+  <pre><code class="language-php">$x      = 'GATAA';
+$y      = 'CAGATAAGAGAA';
+$k      = 1;
+$search = Hoa\String\Search::approximated($y, $x, $k);
+$n      = count($search);
+
+echo 'Try to match ', $x, ' in ', $y, ' with at most ', $k, ' difference(s):', "\n";
+echo $n, ' match(es) found:', "\n";
+
+foreach($search as $position)
+    echo '    • ', substr($y, $position['i'], $position['l'), "\n";
+
+/**
+ * Will output:
+ *     Try to match GATAA in CAGATAAGAGAA with at most 1 difference(s):
+ *     4 match(es) found:
+ *         • AGATA
+ *         • GATAA
+ *         • ATAAG
+ *         • GAGAA
+ */</code></pre>
+  <p>This methods returns an array of arrays. Each sub-array represents a result
+  and contains three indexes: <code>i</code> for the position of the first
+  character (byte) of the result, <code>j</code> for the position of the last
+  character and <code>l</code> for the length of the result (simply
+  <code>j</code> - <code>i</code>). Thus, we can compute the results by using
+  our initial string (here <code class="language-php">$y</code>) and its
+  indexes.</p>
+  <p>With our example, we have four results. The first is <code>AGATA</code>,
+  being <code>GATA<em>A</em></code> with one moved character, and
+  <code>AGATA</code> exists in <code>C<em>AGATA</em>AGAGAA</code>.  The second
+  result is <code>GATAA</code>, our sub-string, which well and truly exists in
+  <code>CA<em>GATAA</em>GAGAA</code>. The third result is <code>ATAAG</code>,
+  being <code><em>G</em>ATAA</code> with one moved character, and
+  <code>ATAAG</code> exists in <code>CAG<em>ATAAG</em>AGAA</code>. Finally, the
+  last result is <code>GAGAA</code>, being <code>GA<em>T</em>AA</code> with one
+  modified character, and <code>GAGAA</code> exists in
+  <code>CAGATAA<em>GAGAA</em></code>.</p>
+  <p>Let's another example, more concrete this time. We will consider the
+  <code>--testIt --foobar --testThat --testAt</code> string (which represents
+  possible options of a command line), and we will search <code>--testot</code>,
+  an option that should have been given by the user. This option does not exist
+  as it is. We will then use our search algorithm with at most 1 difference.
+  Let's see:</p>
+  <pre><code class="language-php">$x      = 'testot';
+$y      = '--testIt --foobar --testThat --testAt';
+$k      = 1;
+$search = Hoa\String\Search::approximated($y, $x, $k);
+$n      = count($search);
+
+// …
+
+/**
+ * Will output:
+ *     Try to match testot in --testIt --foobar --testThat --testAt with at most 1 difference(s)
+ *     2 match(es) found:
+ *         • testIt
+ *         • testAt
+ */</code></pre>
+  <p>The <code>testIt</code> and <code>testAt</code> results are true options,
+  so we can suggest them to the user. This is a mechanism user by
+  <code>Hoa\Console</code> to suggest corrections to the user in case of a
+  mistyping.</p>
 </yield>
 </overlay>
