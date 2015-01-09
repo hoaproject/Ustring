@@ -599,5 +599,12 @@ $n      = count($search);
   so we can suggest them to the user. This is a mechanism user by
   <code>Hoa\Console</code> to suggest corrections to the user in case of a
   mistyping.</p>
+
+  <h2 id="Conclusion" for="main-toc">Conclusion</h2>
+
+  <p>The <code>Hoa\String</code> library provides facilities to manipulate
+  strings encoded with the Unicode format, but also to make sophisticated search
+  on strings.</p>
+
 </yield>
 </overlay>
