@@ -429,5 +429,78 @@ $string->match(
     0,
     true
 );</code></pre>
+
+  <h3 id="Characters" for="main-toc">Characters</h3>
+
+  <p>The <code>Hoa\String\String</code> class offers static methods working on a
+  single Unicode character. We have already mentionned the
+  <code>getCharDirection</code> method which allows to know the
+  <strong>direction</strong> of a character. We also have the
+  <code>getCharWidth</code> which counts the <strong>number of columns</strong>
+  necessary to print a single character. Thus:</p>
+  <pre><code class="language-php">var_dump(
+    Hoa\String\String::getCharWidth(Hoa\String\String::fromCode(0x7f)),
+    Hoa\String\String::getCharWidth('a'),
+    Hoa\String\String::getCharWidth('㽠')
+);
+
+/**
+ * Will output:
+ *     int(-1)
+ *     int(1)
+ *     int(2)
+ */</code></pre>
+  <p>This method returns -1 or 0 if the character is not
+  <strong>printable</strong> (for instance, if this is a control character, like
+  <code>0x7f</code> which corresponds to <code>DELETE</code>), 1 or more if this
+  is a character that can be printed. In our example, <code>㽠</code> requires
+  2 columns to be printed.</p>
+  <p>To get more semantics, we have the
+  <code>Hoa\String\String::isCharPrintable</code> method which allows to know
+  whether a character is printable or not.</p>
+  <p>If we would like to count the number of columns necessary for a whole
+  string, we have to use the <code>Hoa\String\String::getWidth</code> method.
+  Thus:</p>
+  <pre><code class="language-php">var_dump(
+    $french->getWidth(),
+    $arabic->getWidth(),
+    $japanese->getWidth()
+);
+
+/**
+ * Will output:
+ *     int(9)
+ *     int(4)
+ *     int(18)
+ */</code></pre>
+  <p>Try this in your terminal with a <strong>monospaced</strong> font. You will
+  observe that Japanese requires 18 columns to be printed. This measure is very
+  useful if we would like to know the length of a string to position it
+  efficiently.</p>
+  <p>The <code>getCharWidth</code> method is different of <code>getWidth</code>
+  because it includes control characters. This method is intended to be used,
+  for example, with terminals (please, see the
+  <a href="@hack:chapter=Console"><code>Hoa\Console</code> library</a>).</p>
+  <p>Finally, if this time we are not interested by Unicode characters but
+  rather by <strong>machine</strong> characters <code>char</code> (being
+  1 byte), we have an extra operation. The
+  <code>Hoa\String\String::getBytesLength</code> method will count the
+  <strong>length</strong> of the string in bytes:</p>
+  <pre><code class="language-php">var_dump(
+    $arabic->getBytesLength(),
+    $japanese->getBytesLength()
+);
+
+/**
+ * Will output:
+ *     int(8)
+ *     int(27)
+ */</code></pre>
+  <p>If we compare these results with the ones of the
+  <code>Hoa\String\String::count</code> method, we understand that the Arabic
+  characters are encoded with 2 bytes whereas Japanese characteres are encoded
+  with 3 bytes. We can also get a specific byte thanks to the
+  <code>Hoa\String\String::getByteAt</code> method. Once again, the index is not
+  bounded.</p>
 </yield>
 </overlay>
