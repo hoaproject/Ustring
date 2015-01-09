@@ -621,9 +621,9 @@ $n      = count($search);
 
   <h2 id="Conclusion" for="main-toc">Conclusion</h2>
 
-  <p>La classe <code>Hoa\String</code> propose des facilités pour manipuler des
-  chaînes encodées au format Unicode, mais aussi pour effectuer des recherches
-  sophistiquées sur des chaînes.</p>
+  <p>La bibliothèque <code>Hoa\String</code> propose des facilités pour
+  manipuler des chaînes encodées au format Unicode, mais aussi pour effectuer
+  des recherches sophistiquées sur des chaînes.</p>
 
 </yield>
 </overlay>
