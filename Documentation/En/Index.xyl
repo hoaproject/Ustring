@@ -502,5 +502,27 @@ $string->match(
   with 3 bytes. We can also get a specific byte thanks to the
   <code>Hoa\String\String::getByteAt</code> method. Once again, the index is not
   bounded.</p>
+
+  <h3 id="Code-point" for="main-toc">Code-point</h3>
+
+  <p>Each character is represented by an integer, called a
+  <strong>code-point</strong>. To get the code-point of a character, we can
+  use the <code>Hoa\String\String::toCode</code> static method, and to get a
+  character based on its code-point, we can use the
+  <code>Hoa\String\String::fromCode</code> static method. We also have the
+  <code>Hoa\String\String::toBinaryCode</code> method which returns the binary
+  representation of a character. Let's take an example:</p>
+  <pre><code class="language-php">var_dump(
+    Hoa\String\String::toCode('Σ'),
+    Hoa\String\String::toBinaryCode('Σ'),
+    Hoa\String\String::fromCode(0x1a9)
+);
+
+/**
+ * Will output:
+ *     int(931)
+ *     string(32) "1100111010100011"
+ *     string(2) "Σ"
+ */</code></pre>
 </yield>
 </overlay>
