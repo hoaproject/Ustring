@@ -223,7 +223,6 @@ echo $arabic->toAscii(), "\n",
  *     I (heavy black heart)️ Unicode
  *     (for all) i (element of) N
  */</code></pre>
-
   <p>Pour que cette méthode fonctionne correctement, il faut que l'extension
   <a href="http://php.net/intl"><code>intl</code></a> soit présente, pour que la
   classe <a href="http://php.net/transliterator"><code>Transliterator</code></a>
@@ -339,12 +338,12 @@ var_dump(
  *     string(-1)
  */</code></pre>
   <p>Cette méthode retourne -1 si la chaîne initiale vient avant (par ordre
-  alphabétique), 0 si elle est identique, et 1 si elle vient après. Si nous
+  alphabétique), 0 si elle est identique et 1 si elle vient après. Si nous
   voulons utiliser la pleine
   puissance du mécanisme sous-jacent, nous pouvons appeler la méthode statique
   <code>Hoa\String\String::getCollator</code> (si la classe
-  <a href="http://php.net/Collator"><code>Collator</code></a> existe, auquel
-  cas, <code>Hoa\String\String::compare</code> utilisera une comparaison simple
+  <a href="http://php.net/Collator"><code>Collator</code></a> existe, sinon
+  <code>Hoa\String\String::compare</code> utilisera une comparaison simple
   octet par octets sans tenir compte d'autres paramètres). Ainsi, si nous
   voulons trier un tableau de chaînes, nous écrirons plutôt :</p>
   <pre><code class="language-php">$strings = array('c', 'Σ', 'd', 'x', 'α', 'a');
