@@ -314,5 +314,120 @@ echo $arabic->toAscii(), "\n",
  *         [3] => ك
  *     )
  */</code></pre>
+
+  <h3 id="Comparison_and_search" for="main-toc">Comparison and search</h3>
+
+  <p>Strings can also be <strong>compared</strong> thanks to the
+  <code>Hoa\String\String::compare</code> method:</p>
+  <pre><code class="language-php">$string = new Hoa\String\String('abc');
+var_dump(
+    $string->compare('wxyz')
+);
+
+/**
+ * Will output:
+ *     string(-1)
+ */</code></pre>
+  <p>This methods returns -1 if the initial string comes before (in the
+  alphabetical order), 0 if it is identical and 1 if it comes after. If we
+  would like to use all the power of the underlying mechanism, we can call the
+  <code>Hoa\String\String::getCollator</code> static method (if the
+  <a href="http://php.net/Collator"><code>Collator</code></a> class exists, else
+  <code>Hoa\String\String::compare</code> will use a simple byte to bytes
+  comparison without taking care of the other parameters). Thus, if we would
+  like to sort an array of strings, we will write:</p>
+  <pre><code class="language-php">$strings = array('c', 'Σ', 'd', 'x', 'α', 'a');
+Hoa\String\String::getCollator()->sort($strings);
+print_r($strings);
+
+/**
+ * Could output:
+ *     Array
+ *     (
+ *         [0] => a
+ *         [1] => c
+ *         [2] => d
+ *         [3] => x
+ *         [4] => α
+ *         [5] => Σ
+ *     )
+ */</code></pre>
+  <p>Comparison between two strings depends on the <strong>locale</strong>, it
+  means of the localization of the system, like the language, the country, the
+  region etc. We can use the
+  <a href="@hack:chapter=Locale"><code>Hoa\Locale</code> library</a> to modify
+  these data, but it's not a dependence of <code>Hoa\String</code>.</p>
+  <p>We can also know if a string <strong>matches</strong> a certain pattern,
+  still expressed with a regular expression. To achieve that, we will use the
+  <code>Hoa\String\String::match</code> method. This method relies on the
+  <a href="http://php.net/preg_match"><code>preg_match</code></a> and
+  <a href="http://php.net/preg_match_all"><code>preg_match_all</code></a> PHP
+  functions, but by modifying the pattern's options to ensure the Unicode
+  support. We have the following parameters: the pattern, a variable passed by
+  reference to collect the matches, flags, an offset and finally a boolean
+  indicating whether the search is global or not (respectively if we have to use
+  <code>preg_match_all</code> or <code>preg_match</code>). By default, the
+  search is not global.</p>
+  <p>Thus, we will check that our French example contains <code>aime</code> with
+  a direct object complement:</p>
+  <pre><code class="language-php">$french->match('#(?:(?&amp;lt;direct_object>\w)[\'\b])aime#', $matches);
+var_dump($matches['direct_object']);
+
+/**
+ * Will output:
+ *     string(1) "t"
+ */</code></pre>
+  <p>This method returns <code>false</code> if an error is raised (for example
+  if the pattern is not correct), 0 if no match has been found, the number of
+  matches else.</p>
+  <p>Similarly, we can <strong>search</strong> and <strong>replace</strong>
+  sub-strings by other sub-strings based on a pattern, still expressed with a
+  regular expression. To achieve that, we will use the
+  <code>Hoa\String\String::replace</code> method. This method uses the
+  <a href="http://php.net/preg_replace"><code>preg_replace</code></a> and
+  <a href="http://php.net/preg_replace_callback"><code>preg_replace_callback</code></a>
+  PHP functions, but still by modifying the pattern's options to ensure the
+  Unicode support. As first argument, we find one or more patterns, as second
+  argument, one or more replacements and as last argument the limit of
+  replacements to apply. If the replacement is a callable, then the
+  <code>preg_replace_callback</code> function will be used.</p>
+  <p>Thus, we will modify our French example to be more polite:</p>
+  <pre><code class="language-php">$french->replace('#(?:\w[\'\b])(?&amp;lt;verb>aime)#', function ( $matches ) {
+
+    return 'vous ' . $matches['verb'];
+});
+
+echo $french;
+
+/**
+ * Will output:
+ *     Je vous aime
+ */</code></pre>
+  <p>The <code>Hoa\String\String</code> class provides constants which are
+  aliases of existing PHP constants and ensure a better readability of the
+  code:</p>
+  <ul>
+    <li><code>Hoa\String\String::WITHOUT_EMPTY</code>, alias of
+    <code>PREG_SPLIT_NO_EMPTY</code>,</li>
+    <li><code>Hoa\String\String::WITH_DELIMITERS</code>, alias of
+    <code>PREG_SPLIT_DELIM_CAPTURE</code>,</li>
+    <li><code>Hoa\String\String::WITH_OFFSET</code>, alias of
+    <code>PREG_OFFSET_CAPTURE</code> and
+    <code>PREG_SPLIT_OFFSET_CAPTURE</code>,</li>
+    <li><code>Hoa\String\String::GROUP_BY_PATTERN</code>, alias of
+    <code>PREG_PATTERN_ORDER</code>,</li>
+    <li><code>Hoa\String\String::GROUP_BY_TUPLE</code>, alias of
+    <code>PREG_SET_ORDER</code>.</li>
+  </ul>
+  <p>Because they are strict aliases, we can write:</p>
+  <pre><code class="language-php">$string = new Hoa\String\String('abc1 defg2 hikl3 xyz4');
+$string->match(
+    '#(\w+)(\d)#',
+    $matches,
+    Hoa\String\String::WITH_OFFSET
+  | Hoa\String\String::GROUP_BY_TUPLE,
+    0,
+    true
+);</code></pre>
 </yield>
 </overlay>
