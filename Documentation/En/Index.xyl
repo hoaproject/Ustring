@@ -201,7 +201,7 @@ echo $title->toAscii();
  *     Un ete brulant sur la cote
  */</code></pre>
   <p>We can also transform from Arabic or Japanese to ASCII. Symbols, like
-  Mathemetical symbols or emojis, are also transformed:</p>
+  Mathemeticals symbols or emojis, are also transformed:</p>
   <pre><code class="language-php">$emoji = new Hoa\String\String('I ❤ Unicode');
 $maths = new Hoa\String\String('∀ i ∈ ℕ');
 
