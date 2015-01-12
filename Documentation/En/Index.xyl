@@ -143,7 +143,7 @@ $japanese = new Hoa\String\String('私はあなたを愛して');</code></pre>
   the end or both, still by using the <code>Hoa\String\String::BEGINNING</code>
   and <code>Hoa\String\String::END</code> constants.</p>
   <p>If we would like to remove other characters, we can use its first argument
-  which must be an regular expression. Finally, its second argument allows to
+  which must be a regular expression. Finally, its second argument allows to
   specify the side where to remove characters: at the beginning, at the end or
   both, still by using the <code>Hoa\String\String::BEGINNING</code> and
   <code>Hoa\String\String::END</code> constants. We can combine these constants
@@ -574,7 +574,7 @@ foreach($search as $position)
   last result is <code>GAGAA</code>, being <code>GA<em>T</em>AA</code> with one
   modified character, and <code>GAGAA</code> exists in
   <code>CAGATAA<em>GAGAA</em></code>.</p>
-  <p>Let's another example, more concrete this time. We will consider the
+  <p>Another example, more concrete this time. We will consider the
   <code>--testIt --foobar --testThat --testAt</code> string (which represents
   possible options of a command line), and we will search <code>--testot</code>,
   an option that should have been given by the user. This option does not exist

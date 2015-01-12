@@ -206,8 +206,8 @@ echo $title->toAscii();
  *     Un ete brulant sur la cote
  */</code></pre>
   <p>Nous pouvons aussi transformer de l'arabe ou du japonais vers de l'ASCII.
-  Les symboles, comme les symboles Mathématique ou les emojis, sont aussi
-  transformer :</p>
+  Les symboles, comme les symboles Mathématiques ou les emojis, sont aussi
+  transformés :</p>
   <pre><code class="language-php">$emoji = new Hoa\String\String('I ❤ Unicode');
 $maths = new Hoa\String\String('∀ i ∈ ℕ');
 
@@ -446,7 +446,7 @@ $string->match(
   <h3 id="Characters" for="main-toc">Caractères</h3>
 
   <p>La classe <code>Hoa\String\String</code> offre des méthodes statiques
-  travaillant sur un seul caractère Unicode. Nous avons déjà évoquer la méthode
+  travaillant sur un seul caractère Unicode. Nous avons déjà évoqué la méthode
   <code>getCharDirection</code> qui permet de connaître la
   <strong>direction</strong> d'un caractère. Nous trouvons aussi
   <code>getCharWidth</code> qui calcule le <strong>nombre de colonnes</strong>
@@ -489,7 +489,7 @@ $string->match(
   <p>Essayez dans un terminal avec une police <strong>mono-espacée</strong>.
   Vous verrez que le japonais demande 18 colonnes pour s'afficher. Cette mesure
   est très utile si nous voulons connaître la largeur d'une chaîne pour la
-  positionner efficacement.</p>
+  positionner correctement.</p>
   <p>La méthode <code>getCharWidth</code> est différente de
   <code>getWidth</code> car elle prend en compte des caractères de contrôles.
   Elle est destinée à être utilisée, par exemple, avec des terminaux (voir
