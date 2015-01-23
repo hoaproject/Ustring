@@ -5,7 +5,7 @@
 
   <p>Les chaînes de caractères peuvent parfois être <strong>complexes</strong>,
   particulièrement lorsqu'elles utilisent l'encodage <strong>Unicode</strong>.
-  La bibliothèque <code>Hoa\String</code> propose plusieurs opérations de
+  La bibliothèque <code>Hoa\String</code> propose plusieurs opérations sur des
   chaînes de caractères UTF-8.</p>
 
   <h2 id="Table_des_matieres">Table des matières</h2>
@@ -105,7 +105,7 @@ $japanese = new Hoa\String\String('私はあなたを愛して');</code></pre>
   <code>Hoa\String\String::append</code> et
   <code>Hoa\String\String::prepend</code>. Ces méthodes, comme la plupart de
   celles qui modifient la chaîne, retournent l'objet lui-même, ce afin de
-  chaîner les méthodes. Par exemple :</p>
+  chaîner les appels. Par exemple :</p>
   <pre><code class="language-php">echo $french->append('… et toi, m\'aimes-tu ?')->prepend('Mam\'zelle ! ');
 
 /**
@@ -171,7 +171,7 @@ $japanese = new Hoa\String\String('私はあなたを愛して');</code></pre>
  */</code></pre>
   <p>Si nous voulons obtenir un caractère en particulier, nous pouvons exploiter
   l'interface <code>ArrayAccess</code>. Par exemple, pour obtenir le premier
-  caractère de chacun de notre exemple (en les reprenant depuis le début) :</p>
+  caractère de chacun de nos exemples (en les reprenant depuis le début) :</p>
   <pre><code class="language-php">var_dump(
     $french[0],
     $arabic[0],
@@ -198,9 +198,8 @@ echo $french;
  *     Je t'aime !
  */</code></pre>
   <p>Une autre méthode fort utile est la transformation en
-  <strong>ASCII</strong>. Attention, ce n'est <em>naturellement</em> pas
-  toujours possible. Par exemple, nous pouvons transformer du français en ASCII
-  mais pas de l'arabe en ASCII. Ainsi :</p>
+  <strong>ASCII</strong>. Attention, ce n'est pas toujours possible, selon votre
+  installation. Par exemple :</p>
   <pre><code class="language-php">$title = new Hoa\String\String('Un été brûlant sur la côte');
 echo $title->toAscii();
 
@@ -208,14 +207,46 @@ echo $title->toAscii();
  * Will output:
  *     Un ete brulant sur la cote
  */</code></pre>
+  <p>Nous pouvons aussi transformer de l'arabe ou du japonais vers de l'ASCII.
+  Les symboles, comme les symboles Mathématique ou les emojis, sont aussi
+  transformer :</p>
+  <pre><code class="language-php">$emoji = new Hoa\String\String('I ❤ Unicode');
+$maths = new Hoa\String\String('∀ i ∈ ℕ');
+
+echo $arabic->toAscii(), "\n",
+     $japanese->toAscii(), "\n",
+     $emoji->toAscii(), "\n",
+     $maths->toAscii(), "\n";
+
+/**
+ * Will output:
+ *     ahbk
+ *     sihaanatawo aishite
+ *     I (heavy black heart)️ Unicode
+ *     (for all) i (element of) N
+ */</code></pre>
+
   <p>Pour que cette méthode fonctionne correctement, il faut que l'extension
   <a href="http://php.net/intl"><code>intl</code></a> soit présente, pour que la
-  classe <a href="http://php.net/normalizer"><code>Normalizer</code></a> existe.
-  Si cette classe n'existe pas, la méthode
+  classe <a href="http://php.net/transliterator"><code>Transliterator</code></a>
+  existe. Si elle n'existe pas, la classe
+  <a href="http://php.net/normalizer"><code>Normalizer</code></a> doit exister.
+  Si cette classe n'existe pas non plus, la méthode
   <code>Hoa\String\String::toAscii</code> peut quand même essayer une
   transformation mais moins efficace. Pour cela, il faut passer
   <code>true</code> en seul argument. Ce tour de force est déconseillé dans la
   plupart des cas.</p>
+  <p>Nous trouvons également la méthode <code>getTransliterator</code> qui
+  retourne un objet <code>Transliterator</code>, ou <code>null</code> si cette
+  classe n'existe pas. Cette méthode prend en argument un identifiant de
+  translitération. Nous conseillons de
+  <a href="http://userguide.icu-project.org/transforms/general">lire la
+  documentation sur le translitérateur d'ICU</a> pour comprendre cet
+  identifiant. La méthode <code>transliterate</code> permet de translitérer la
+  chaîne courante à partir d'un identifiant et d'un index de début et de
+  fin. Elle fonctionne de la même façon que la méthode
+  <a href="http://php.net/transliterator.transliterate"><code>Transliterator::transliterate</code></a>.</p>
+
   <p>Plus généralement, pour des changements d'<strong>encodage</strong> brut,
   nous pouvons utiliser la méthode statique
   <code>Hoa\String\String::transcode</code>, avec en premier argument une chaîne
@@ -295,47 +326,6 @@ echo $title->toAscii();
  *         [3] => ك
  *     )
  */</code></pre>
-  <p>Si cette fois nous ne nous intéressons pas aux caractères Unicode mais aux
-  caractères <strong>machines</strong> <code>char</code> (soit 1 octet), nous
-  avons quelques opérations supplémentaires. La première est
-  <code>Hoa\String\String::getBytesLength</code> qui va compter la
-  <strong>taille</strong> de la chaîne en octets :</p>
-  <pre><code class="language-php">var_dump(
-    $arabic->getBytesLength(),
-    $japanese->getBytesLength()
-);
-
-/**
- * Will output:
- *     int(8)
- *     int(27)
- */</code></pre>
-  <p>Si nous comparons ces résultats avec ceux de la méthode
-  <code>Hoa\String\String::count</code>, nous comprenons que les caractères
-  arabes sont encodés sur 2 octets alors que les caractères japonais sont
-  encodés sur 3 octets. Nous pouvons également obtenir un octet précis à l'aide
-  de la méthode <code>Hoa\String\String::getByteAt</code>. Encore une fois,
-  l'index n'est pas borné.</p>
-  <p>Enfin, une autre méthode bien pratique est
-  <code>Hoa\String\String::getWidth</code> qui calcule la
-  <strong>largeur</strong> d'une chaîne, c'est à dire le nombre de colonnes
-  utilisées par cette chaîne lors de son affichage. Ainsi :</p>
-  <pre><code class="language-php">var_dump(
-    $french->getWidth(),
-    $arabic->getWidth(),
-    $japanese->getWidth()
-);
-
-/**
- * Will output:
- *     int(9)
- *     int(4)
- *     int(18)
- */</code></pre>
-  <p>Essayez dans un terminal avec une police <strong>mono-espacée</strong>.
-  Vous verrez que le japonais demande 18 colonnes pour s'afficher. Cette mesure
-  est très utile si nous voulons connaître la largeur d'une chaîne pour la
-  positionner efficacement.</p>
 
   <h3 id="Comparaison_et_recherche" for="main-toc">Comparaison et recherche</h3>
 
@@ -377,7 +367,7 @@ print_r($strings);
  */</code></pre>
   <p>La comparaison entre deux chaînes dépend de la <strong>locale</strong>,
   c'est à dire de la régionalisation du système, comme la langue, le pays, la
-  région etc. Nous pouvons utiliser <a href="@lh:chapter=Locale">la
+  région etc. Nous pouvons utiliser <a href="@hack:chapter=Locale">la
   bibliothèque <code>Hoa\Locale</code></a> pour modifier ces données, mais ce
   n'est pas une dépendance de <code>Hoa\String</code> pour autant.</p>
   <p>Nous pouvons également savoir si une chaîne <strong>correspond</strong> à
@@ -387,7 +377,7 @@ print_r($strings);
   <a href="http://php.net/preg_match"><code>preg_match</code></a> et
   <a href="http://php.net/preg_match_all"><code>preg_match_all</code></a> de
   PHP, mais en modifiant les options du motif afin qu'il supporte Unicode. Nous
-  avons les paramètres suivant : le motif, une variable par référence pour
+  avons les paramètres suivants : le motif, une variable par référence pour
   récupérer les captures, les <em lang="en">flags</em>, la position de début de
   recherche (<em lang="en">offset</em>) et enfin un booléen indiquant si la
   recherche est globale ou non (respectivement si nous devons utiliser
@@ -456,6 +446,80 @@ $string->match(
     true
 );</code></pre>
 
+  <h3 id="Characters" for="main-toc">Caractères</h3>
+
+  <p>La classe <code>Hoa\String\String</code> offre des méthodes statiques
+  travaillant sur un seul caractère Unicode. Nous avons déjà évoquer la méthode
+  <code>getCharDirection</code> qui permet de connaître la
+  <strong>direction</strong> d'un caractère. Nous trouvons aussi
+  <code>getCharWidth</code> qui calcule le <strong>nombre de colonnes</strong>
+  nécessaires pour l'affichage d'un seul caractère. Ainsi :</p>
+  <pre><code class="language-php">var_dump(
+    Hoa\String\String::getCharWidth(Hoa\String\String::fromCode(0x7f)),
+    Hoa\String\String::getCharWidth('a'),
+    Hoa\String\String::getCharWidth('㽠')
+);
+
+/**
+ * Will output:
+ *     int(-1)
+ *     int(1)
+ *     int(2)
+ */</code></pre>
+  <p>Cette méthode retourne -1 ou 0 si le caractère n'est pas
+  <strong>imprimable</strong> (par exemple si c'est un caractère de contrôle,
+  comme <code>0x7f</code> qui correspond à <code>DELETE</code>), 1 ou plus si
+  c'est un caractère qui peut être imprimé. Dans notre exemple, <code>㽠</code>
+  s'imprime sur 2 colonnes.</p>
+  <p>Pour plus de sémantique, nous avons accès à la méthode
+  <code>Hoa\String\String::isCharPrintable</code> qui permet de savoir si un
+  caractère est imprimable ou pas.</p>
+  <p>Si nous voulons calculer le nombre de colonnes pour tout une chaîne, il
+  faut utiliser la méthode <code>Hoa\String\String::getWidth</code>.
+  Ainsi :</p>
+  <pre><code class="language-php">var_dump(
+    $french->getWidth(),
+    $arabic->getWidth(),
+    $japanese->getWidth()
+);
+
+/**
+ * Will output:
+ *     int(9)
+ *     int(4)
+ *     int(18)
+ */</code></pre>
+  <p>Essayez dans un terminal avec une police <strong>mono-espacée</strong>.
+  Vous verrez que le japonais demande 18 colonnes pour s'afficher. Cette mesure
+  est très utile si nous voulons connaître la largeur d'une chaîne pour la
+  positionner efficacement.</p>
+  <p>La méthode <code>getCharWidth</code> est différente de
+  <code>getWidth</code> car elle prend en compte des caractères de contrôles.
+  Elle est destinée à être utilisée, par exemple, avec des terminaux (voir
+  <a href="@hack:chapter=Console">la bibliothèque
+  <code>Hoa\Console</code></a>).</p>
+  <p>Enfin, si cette fois nous ne nous intéressons pas aux caractères Unicode
+  mais aux caractères <strong>machines</strong> <code>char</code> (soit 1
+  octet), nous avons une opération supplémentaire. La méthode
+  <code>Hoa\String\String::getBytesLength</code> va compter la
+  <strong>taille</strong> de la chaîne en octets :</p>
+  <pre><code class="language-php">var_dump(
+    $arabic->getBytesLength(),
+    $japanese->getBytesLength()
+);
+
+/**
+ * Will output:
+ *     int(8)
+ *     int(27)
+ */</code></pre>
+  <p>Si nous comparons ces résultats avec ceux de la méthode
+  <code>Hoa\String\String::count</code>, nous comprenons que les caractères
+  arabes sont encodés sur 2 octets alors que les caractères japonais sont
+  encodés sur 3 octets. Nous pouvons également obtenir un octet précis à l'aide
+  de la méthode <code>Hoa\String\String::getByteAt</code>. Encore une fois,
+  l'index n'est pas borné.</p>
+
   <h3 id="Code-point" for="main-toc">Code-point</h3>
 
   <p>Chaque caractère est représenté en machine par un entier, appelé
@@ -474,12 +538,9 @@ $string->match(
 /**
  * Will output:
  *     int(931)
- *     string(32) "00000000000000000000001110100011"
+ *     string(32) "1100111010100011"
  *     string(2) "Σ"
  */</code></pre>
-  <p>Nous pouvons préciser la taille de la représentation binaire à l'aide du
-  second argument de la méthode <code>Hoa\String\String::toBinaryCode</code> (32
-  par défaut).</p>
 
   <h2 id="Algorithmes_de_recherche" for="main-toc">Algorithmes de recherche</h2>
 

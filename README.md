@@ -111,6 +111,22 @@ var_dump(
 );
 ```
 
+We can also transform any text into ASCII:
+
+```php
+$emoji = new Hoa\String\String('I ❤ Unicode');
+$maths = new Hoa\String\String('∀ i ∈ ℕ');
+
+echo $emoji->toAscii(), "\n",
+     $maths->toAscii(), "\n";
+
+/**
+ * Will output:
+ *     I (heavy black heart) Unicode
+ *     (for all) i (element of) N
+ */
+```
+
 ### Search algorithm
 
 The `Hoa\String\Search` implements search algorithms on strings.
