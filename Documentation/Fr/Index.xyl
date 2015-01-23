@@ -8,7 +8,7 @@
   La bibliothèque <code>Hoa\String</code> propose plusieurs opérations sur des
   chaînes de caractères UTF-8.</p>
 
-  <h2 id="Table_des_matieres">Table des matières</h2>
+  <h2 id="Table_of_contents">Table des matières</h2>
 
   <tableofcontents id="main-toc" />
 
@@ -35,8 +35,7 @@
   des opérations de <strong>recherche</strong> sur des chaînes de
   caractères.</p>
 
-  <h2 id="Chaine_de_caracteres_Unicode" for="main-toc">Chaîne de caractères
-  Unicode</h2>
+  <h2 id="Unicode_strings" for="main-toc">Chaîne de caractères Unicode</h2>
 
   <p>La classe <code>Hoa\String\String</code> représente une chaîne de
   caractères Unicode <strong>UTF-8</strong> et permet de la manipuler
@@ -51,8 +50,7 @@ $arabic   = new Hoa\String\String('أحبك');
 $japanese = new Hoa\String\String('私はあなたを愛して');</code></pre>
   <p>Maintenant, voyons les opérations possibles sur ces trois chaînes.</p>
 
-  <h3 id="Manipulation_de_la_chaine" for="main-toc">Manipulation de la
-  chaîne</h3>
+  <h3 id="String_manipulation" for="main-toc">Manipulation de la chaîne</h3>
 
   <p>Commençons par les opérations <strong>élémentaires</strong>. Si nous
   voulons <strong>compter</strong> le nombre de caractères (et non pas
@@ -208,8 +206,8 @@ echo $title->toAscii();
  *     Un ete brulant sur la cote
  */</code></pre>
   <p>Nous pouvons aussi transformer de l'arabe ou du japonais vers de l'ASCII.
-  Les symboles, comme les symboles Mathématique ou les emojis, sont aussi
-  transformer :</p>
+  Les symboles, comme les symboles Mathématiques ou les emojis, sont aussi
+  transformés :</p>
   <pre><code class="language-php">$emoji = new Hoa\String\String('I ❤ Unicode');
 $maths = new Hoa\String\String('∀ i ∈ ℕ');
 
@@ -225,7 +223,6 @@ echo $arabic->toAscii(), "\n",
  *     I (heavy black heart)️ Unicode
  *     (for all) i (element of) N
  */</code></pre>
-
   <p>Pour que cette méthode fonctionne correctement, il faut que l'extension
   <a href="http://php.net/intl"><code>intl</code></a> soit présente, pour que la
   classe <a href="http://php.net/transliterator"><code>Transliterator</code></a>
@@ -327,7 +324,7 @@ echo $arabic->toAscii(), "\n",
  *     )
  */</code></pre>
 
-  <h3 id="Comparaison_et_recherche" for="main-toc">Comparaison et recherche</h3>
+  <h3 id="Comparison_and_search" for="main-toc">Comparaison et recherche</h3>
 
   <p>Les chaînes peuvent également être <strong>comparées</strong> entre elles
   grâce à la méthode <code>Hoa\String\String::compare</code> :</p>
@@ -341,12 +338,12 @@ var_dump(
  *     string(-1)
  */</code></pre>
   <p>Cette méthode retourne -1 si la chaîne initiale vient avant (par ordre
-  alphabétique), 0 si elle est identique, et 1 si elle vient après. Si nous
+  alphabétique), 0 si elle est identique et 1 si elle vient après. Si nous
   voulons utiliser la pleine
   puissance du mécanisme sous-jacent, nous pouvons appeler la méthode statique
   <code>Hoa\String\String::getCollator</code> (si la classe
-  <a href="http://php.net/Collator"><code>Collator</code></a> existe, auquel
-  cas, <code>Hoa\String\String::compare</code> utilisera une comparaison simple
+  <a href="http://php.net/Collator"><code>Collator</code></a> existe, sinon
+  <code>Hoa\String\String::compare</code> utilisera une comparaison simple
   octet par octets sans tenir compte d'autres paramètres). Ainsi, si nous
   voulons trier un tableau de chaînes, nous écrirons plutôt :</p>
   <pre><code class="language-php">$strings = array('c', 'Σ', 'd', 'x', 'α', 'a');
@@ -449,7 +446,7 @@ $string->match(
   <h3 id="Characters" for="main-toc">Caractères</h3>
 
   <p>La classe <code>Hoa\String\String</code> offre des méthodes statiques
-  travaillant sur un seul caractère Unicode. Nous avons déjà évoquer la méthode
+  travaillant sur un seul caractère Unicode. Nous avons déjà évoqué la méthode
   <code>getCharDirection</code> qui permet de connaître la
   <strong>direction</strong> d'un caractère. Nous trouvons aussi
   <code>getCharWidth</code> qui calcule le <strong>nombre de colonnes</strong>
@@ -492,7 +489,7 @@ $string->match(
   <p>Essayez dans un terminal avec une police <strong>mono-espacée</strong>.
   Vous verrez que le japonais demande 18 colonnes pour s'afficher. Cette mesure
   est très utile si nous voulons connaître la largeur d'une chaîne pour la
-  positionner efficacement.</p>
+  positionner correctement.</p>
   <p>La méthode <code>getCharWidth</code> est différente de
   <code>getWidth</code> car elle prend en compte des caractères de contrôles.
   Elle est destinée à être utilisée, par exemple, avec des terminaux (voir
@@ -542,7 +539,7 @@ $string->match(
  *     string(2) "Σ"
  */</code></pre>
 
-  <h2 id="Algorithmes_de_recherche" for="main-toc">Algorithmes de recherche</h2>
+  <h2 id="Search_algorithms" for="main-toc">Algorithmes de recherche</h2>
 
   <p>La bibliothèque <code>Hoa\String</code> propose des algorithmes de
   <strong>recherches</strong> sophistiquées sur les chaînes de caractères à
@@ -624,9 +621,9 @@ $n      = count($search);
 
   <h2 id="Conclusion" for="main-toc">Conclusion</h2>
 
-  <p>La classe <code>Hoa\String</code> propose des facilités pour manipuler des
-  chaînes encodées au format Unicode, mais aussi pour effectuer des recherches
-  sophistiquées sur des chaînes.</p>
+  <p>La bibliothèque <code>Hoa\String</code> propose des facilités pour
+  manipuler des chaînes encodées au format Unicode, mais aussi pour effectuer
+  des recherches sophistiquées sur des chaînes.</p>
 
 </yield>
 </overlay>
