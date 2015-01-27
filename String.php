@@ -532,7 +532,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 
         if(null === $transliterator = static::getTransliterator($identifier))
             throw new Exception(
-                '%s needs the class Transliterator to work propertly.',
+                '%s needs the class Transliterator to work properly.',
                 2, __METHOD__);
 
         $this->_string = $transliterator->transliterate($this->_string, $start, $end);
