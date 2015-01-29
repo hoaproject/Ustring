@@ -794,8 +794,9 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
             $this->_direction = static::LTR;
 
             // Check for LRM or RLM/ARM
-            $hasLRM      = 0 !== preg_match('#\x{200e}#u', $this->_string);
-            $hasRLMOrARM = 0 !== preg_match('#\x{200f}|\x{061c}#u', $this->_string);
+            $hasLRM      = 0 !== preg_match('#\x{' . dechex(self::LRM) . '}#u', $this->_string);
+            $hasRLMOrARM = 0 !== preg_match('#\x{' . dechex(self::RLM) . '}|\x{'
+                                            . dechex(self::ARM) . '}#u', $this->_string);
 
             if($hasLRM || $hasRLMOrARM) {
                 if($hasLRM && $hasRLMOrARM)
@@ -810,11 +811,12 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 
                 // Check for RLE, RLO or RLI in LTR context -> BIDI
                 if(    static::LTR === $this->_direction
-                   &&            0 !== preg_match('#\x{202b}|\x{202e}|\x{2067}#u', $this->_string))
+                   &&            0 !== preg_match('#\x{' . dechex(self::RLE) . '}|\x{'
+                                        . dechex(self::RLO) . '}|\x{' . dechex(self::RLI) . '}#u', $this->_string))
                         $this->_direction = static::BIDI;
                 // Check for LRE, LRO or LRI in RTL context -> BIDI
                 elseif(static::RTL === $this->_direction
-                       &&        0 !== preg_match('#\x{202a}|\x{202d}|\x{2066}#u', $this->_string))
+                       &&        0 !== preg_match('#\x{' . dechex(self::LRE) . '}|\x{' . dechex(self::LRO) . '}|\x{' . dechex(self::LRI) . '}#u', $this->_string))
                         $this->_direction = static::BIDI;
                 // Check every other character
                 else {
