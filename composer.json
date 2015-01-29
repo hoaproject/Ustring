@@ -24,6 +24,9 @@
         "hoa/core"    : "~2.0",
         "ext-iconv"   : "*"
     },
+    "require-dev": {
+        "hoa/test": "~1.0"
+    },
     "autoload": {
         "psr-4": {
             "Hoa\\String\\": "."
