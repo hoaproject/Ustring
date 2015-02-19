@@ -1,3 +1,19 @@
+# 2.15.02.19
+
+  * Add the CHANGELOG.md file. (Ivan Enderlin, 2015-02-19T09:11:32+01:00)
+  * Add `require-dev` with `hoa/test`. (Ivan Enderlin, 2015-01-29T14:55:20+01:00)
+  * Add `hoa string:fromcode` and `hoa string:tocode`. (Ivan Enderlin, 2015-01-23T22:29:55+01:00)
+  * Translate the documentation in English. (Ivan Enderlin, 2015-01-23T19:27:04+01:00)
+  * Add examples, present new features and update links in the documentation. (Ivan Enderlin, 2015-01-23T19:27:00+01:00)
+  * Implement the `getCharWidth` method. (Ivan Enderlin, 2015-01-07T11:00:06+01:00)
+  * Accept other `intl` implementations. (Ivan Enderlin, 2015-01-06T13:42:20+01:00)
+  * Remove a useless test. (Ivan Enderlin, 2015-01-06T11:24:39+01:00)
+  * Add more tests for Math symbols. (Ivan Enderlin, 2015-01-06T11:22:53+01:00)
+  * Add emoji and other symbols supports to `toAscii`. (Ivan Enderlin, 2015-01-06T11:17:32+01:00)
+  * Update `toAscii` to use a transliterator. (Ivan Enderlin, 2015-01-06T10:58:07+01:00)
+  * Add transliterator support. (Ivan Enderlin, 2015-01-06T10:57:30+01:00)
+  * Happy new year! (Ivan Enderlin, 2015-01-05T14:52:34+01:00)
+
 # 2.14.12.24
 
   * Clean code. (Julien Bianchi, 2014-12-24T08:44:59+01:00)
