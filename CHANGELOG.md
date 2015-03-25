@@ -1,3 +1,8 @@
+# 2.15.03.25
+
+  * `toCode` supports invalid UTF-8 character. (Ivan Enderlin, 2015-03-25T08:52:52+01:00)
+  * Fix a typo in an exception message. (bureX, 2015-01-27T01:41:08+01:00)
+
 # 2.15.02.19
 
   * Add the CHANGELOG.md file. (Ivan Enderlin, 2015-02-19T09:11:32+01:00)
