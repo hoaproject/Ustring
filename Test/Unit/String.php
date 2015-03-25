@@ -744,6 +744,72 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo(LUT::RTL);
     }
 
+    public function case_get_direction ( ) {
+
+        $LRM = LUT::fromCode(LUT::LRM);
+        $RLM = LUT::fromCode(LUT::RLM);
+        $ARM = LUT::fromCode(LUT::ARM);
+        $RLE = LUT::fromCode(LUT::RLE);
+        $LRE = LUT::fromCode(LUT::LRE);
+        $PDF = LUT::fromCode(LUT::PDF);
+
+        $this
+            ->given($string = new LUT('Left'))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::LTR)
+
+            ->given($string = new LUT('اليمين'))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::RTL)
+
+            ->given($string = new LUT('Left & اليمين'))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::BIDI)
+
+            ->given($string = new LUT($LRM . 'اليمين'))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::LTR)
+
+            ->given($string = new LUT($RLM .'Left'))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::RTL)
+
+            ->given($string = new LUT($ARM .'Left'))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::RTL)
+
+            ->given($string = new LUT($LRM .'Both?' . $RLM))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::BIDI)
+
+            ->given($string = new LUT('Left' . $RLE .'اليمين'))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::BIDI)
+
+            ->given($string = new LUT('اليمين' . $LRE .'Left'))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::BIDI)
+
+            ->given($string = new LUT('اليمين' . $RLE .'اليمين'))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::RTL)
+
+            ->given($string = new LUT('Left' . $LRE .'Left'))
+            ->when($result = $string->getDirection())
+                ->integer($result)
+                    ->isEqualto(LUT::LTR);
+    }
+
     public function case_get_char_width ( ) {
 
         $this

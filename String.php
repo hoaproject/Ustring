@@ -69,6 +69,13 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     const RTL              = 1;
 
     /**
+     * Bi-Directional.
+     *
+     * @const int
+     */
+    const BIDI             = 2;
+
+    /**
      * ZERO WIDTH NON-BREAKING SPACE (ZWNPBSP, aka byte-order mark, BOM).
      *
      * @const int
@@ -90,6 +97,13 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     const RLM              = 0x200f;
 
     /**
+     * ARABIC LETTER MARK.
+     *
+     * @const int
+     */
+    const ARM              = 0x061c;
+
+    /**
      * LEFT-TO-RIGHT EMBEDDING.
      *
      * @const int
@@ -109,6 +123,27 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      * @const int
      */
     const PDF              = 0x202c;
+
+    /**
+     * LEFT-TO-RIGHT ISOLATE.
+     *
+     * @const int
+     */
+    const LRI              = 0x2066;
+
+    /**
+     * RIGHT-TO-LEFT ISOLATE.
+     *
+     * @const int
+     */
+    const RLI              = 0x2067;
+
+    /**
+     * POP DIRECTIONAL ISOLATE.
+     *
+     * @const int
+     */
+    const PDI              = 0x2069;
 
     /**
      * LEFT-TO-RIGHT OVERRIDE.
@@ -746,7 +781,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
 
     /**
      * Get direction of the current string.
-     * Please, see the self::LTR and self::RTL constants.
+     * Please, see the self::LTR, self::RTL and self::BIDI constants.
      * It does not yet support embedding directions.
      *
      * @access  public
@@ -755,32 +790,61 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
     public function getDirection ( ) {
 
         if(null === $this->_direction) {
+            // Default
+            $this->_direction = static::LTR;
 
-            if(null === $this->_string)
-                $this->_direction = static::LTR;
-            else
-                $this->_direction = static::getCharDirection(
-                    mb_substr($this->_string, 0, 1)
-                );
+            // Check for LRM or RLM/ARM
+            $hasLRM      = 0 !== preg_match('#\x{' . dechex(self::LRM) . '}#u', $this->_string);
+            $hasRLMOrARM = 0 !== preg_match('#\x{' . dechex(self::RLM) . '}|\x{'
+                                            . dechex(self::ARM) . '}#u', $this->_string);
+
+            if($hasLRM || $hasRLMOrARM) {
+                if($hasLRM && $hasRLMOrARM)
+                    $this->_direction = static::BIDI;
+                elseif($hasLRM)
+                    $this->_direction = static::LTR;
+                else
+                    $this->_direction = static::RTL;
+            }
+            else {
+                $this->_direction = static::getCharDirection(mb_substr($this->_string, 0, 1));
+
+                // Check for RLE, RLO or RLI in LTR context -> BIDI
+                if(    static::LTR === $this->_direction
+                   &&            0 !== preg_match('#\x{' . dechex(self::RLE) . '}|\x{'
+                                        . dechex(self::RLO) . '}|\x{' . dechex(self::RLI) . '}#u', $this->_string))
+                        $this->_direction = static::BIDI;
+                // Check for LRE, LRO or LRI in RTL context -> BIDI
+                elseif(static::RTL === $this->_direction
+                       &&        0 !== preg_match('#\x{' . dechex(self::LRE) . '}|\x{' . dechex(self::LRO) . '}|\x{' . dechex(self::LRI) . '}#u', $this->_string))
+                        $this->_direction = static::BIDI;
+                // Check every other character
+                else {
+                    foreach ($this as $char) {
+                        if ($this->_direction !== $this->getCharDirection($char)) {
+                            $this->_direction = static::BIDI;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         return $this->_direction;
     }
 
     /**
-     * Get character of a specific character.
-     * Please, see the self::LTR and self::RTL constants.
+     * Returns true if a specific character is RTL.
      *
      * @access  public
      * @param   string  $char    Character.
-     * @return  int
+     * @return  bool
      */
-    public static function getCharDirection ( $char ) {
-
+    public static function isRTL ( $char ) {
         $c = static::toCode($char);
 
         if(!(0x5be <= $c && 0x10b7f >= $c))
-            return static::LTR;
+            return false;
 
         if(0x85e >= $c) {
 
@@ -814,10 +878,14 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
                || (0x830 <= $c && 0x83e >= $c)
                || (0x840 <= $c && 0x858 >= $c)
                ||  0x85e === $c)
-                return static::RTL;
+                return true;
         }
-        elseif(0x200f === $c)
-            return static::RTL;
+        elseif(   static::RLM === $c
+               || static::ARM === $c
+               || static::RLO === $c
+               || static::RLE === $c
+               || static::RLI === $c)
+            return true;
         elseif(0xfb1d <= $c) {
 
             if(    0xfb1d === $c
@@ -855,10 +923,33 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
                || (0x10b40 <= $c && 0x10b55 >= $c)
                || (0x10b58 <= $c && 0x10b72 >= $c)
                || (0x10b78 <= $c && 0x10b7f >= $c))
-                return static::RTL;
+                return true;
         }
 
-        return static::LTR;
+        return false;
+    }
+
+    /**
+     * Returns true if a specific character is LTR.
+     *
+     * @access  public
+     * @param   string  $char    Character.
+     * @return  bool
+     */
+    public static function isLTR ( $char ) {
+        return !self::isRTL($char);
+    }
+
+    /**
+     * Get direction of a specific character.
+     * Please, see the self::LTR and self::RTL constants.
+     *
+     * @access  public
+     * @param   string  $char    Character.
+     * @return  int
+     */
+    public static function getCharDirection ( $char ) {
+        return  self::isRTL($char) ? static::RTL : static::LTR;
     }
 
     /**
