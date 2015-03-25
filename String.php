@@ -948,8 +948,9 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate {
      */
     public static function toCode ( $char ) {
 
-        $char = (string) $char;
-        $code = ord($char[0]);
+        $char  = (string) $char;
+        $code  = ord($char[0]);
+        $bytes = 1;
 
         if(!($code & 0x80)) // 0xxxxxxx
             return $code;
