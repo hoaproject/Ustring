@@ -85,8 +85,9 @@ var_dump(
 We are also able to iterate over the string:
 
 ```php
-foreach($arabic as $letter)
+foreach ($arabic as $letter) {
     var_dump($letter);
+}
 
 /**
  * Will output:
@@ -117,8 +118,9 @@ We can also transform any text into ASCII:
 $emoji = new Hoa\String\String('I ❤ Unicode');
 $maths = new Hoa\String\String('∀ i ∈ ℕ');
 
-echo $emoji->toAscii(), "\n",
-     $maths->toAscii(), "\n";
+echo
+    $emoji->toAscii(), "\n",
+    $maths->toAscii(), "\n";
 
 /**
  * Will output:
@@ -137,15 +139,16 @@ monotony). If we search the word `GATAA` in `CAGATAAGAGAA` with 1 difference, we
 will do:
 
 ```php
-$search    = Hoa\String\Search::approximated(
+$search = Hoa\String\Search::approximated(
     $haystack = 'CAGATAAGAGAA',
     $needle   = 'GATAA',
     $k        = 1
 );
 $solutions = array();
 
-foreach($search as $pos)
+foreach ($search as $pos) {
     $solutions[] = substr($haystack, $pos['i'], $pos['l']);
+}
 ```
 
 We will found `AGATA`, `GATAA`, `ATAAG` and `GAGAA`.

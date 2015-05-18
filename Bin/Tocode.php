@@ -8,7 +8,7 @@
  *
  * New BSD License
  *
- * Copyright © 2007-2015, Ivan Enderlin. All rights reserved.
+ * Copyright © 2007-2015, Hoa community. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -44,17 +44,15 @@ use Hoa\String;
  *
  * Transform a character into its code. Please, see Hoa\String\String::toCode.
  *
- * @author     Ivan Enderlin <ivan.enderlin@hoa-project.net>
- * @copyright  Copyright © 2007-2015 Ivan Enderlin.
+ * @copyright  Copyright © 2007-2015 Hoa community
  * @license    New BSD License
  */
-
-class Tocode extends Console\Dispatcher\Kit {
-
+class Tocode extends Console\Dispatcher\Kit
+{
     /**
      * Options description.
      *
-     * @var \Hoa\String\Bin\Tocode array
+     * @var array
      */
     protected $options = [
         ['base', Console\GetOption::REQUIRED_ARGUMENT, 'b'],
@@ -67,28 +65,29 @@ class Tocode extends Console\Dispatcher\Kit {
     /**
      * The entry method.
      *
-     * @access  public
      * @return  int
      */
-    public function main ( ) {
-
+    public function main()
+    {
         $base = 16;
 
-        while(false !== $c = $this->getOption($v)) switch($c) {
+        while (false !== $c = $this->getOption($v)) {
+            switch ($c) {
+                case 'b':
+                    $base = intval($v);
 
-            case 'b':
-                $base = intval($v);
-              break;
+                    break;
 
-            case '__ambiguous':
-                $this->resolveOptionAmbiguity($v);
-              break;
+                case '__ambiguous':
+                    $this->resolveOptionAmbiguity($v);
 
-            case 'h':
-            case '?':
-            default:
-                return $this->usage();
-              break;
+                    break;
+
+                case 'h':
+                case '?':
+                default:
+                    return $this->usage();
+            }
         }
 
         $this->parser->listInputs($char);
@@ -103,17 +102,17 @@ class Tocode extends Console\Dispatcher\Kit {
     /**
      * The command usage.
      *
-     * @access  public
      * @return  int
      */
-    public function usage ( ) {
-
-        echo 'Usage   : string:tocode <char>', "\n",
-             'Options :', "\n",
-             $this->makeUsageOptionsList([
-                 'b'    => 'Get the code in a specific base (16 by default).',
-                 'help' => 'This help.'
-             ]), "\n";
+    public function usage()
+    {
+        echo
+            'Usage   : string:tocode <char>', "\n",
+            'Options :', "\n",
+            $this->makeUsageOptionsList([
+                'b'    => 'Get the code in a specific base (16 by default).',
+                'help' => 'This help.'
+            ]), "\n";
 
         return;
     }

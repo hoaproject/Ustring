@@ -8,7 +8,7 @@
  *
  * New BSD License
  *
- * Copyright © 2007-2015, Ivan Enderlin. All rights reserved.
+ * Copyright © 2007-2015, Hoa community. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -36,39 +36,35 @@
 
 namespace Hoa\String\Test\Unit;
 
-use Hoa\Test;
 use Hoa\String as LUT;
+use Hoa\Test;
 
 /**
  * Class \Hoa\String\Test\Unit\String.
  *
  * Test suite of the string class.
  *
- * @author     Ivan Enderlin <ivan.enderlin@hoa-project.net>
- * @copyright  Copyright © 2007-2015 Ivan Enderlin.
+ * @copyright  Copyright © 2007-2015 Hoa community
  * @license    New BSD License
  */
-
-class String extends Test\Unit\Suite {
-
-    public function case_no_mbstring ( ) {
-
+class String extends Test\Unit\Suite
+{
+    public function case_no_mbstring()
+    {
         $this
             ->given(
-                $this->function->function_exists = function ( $name ) {
-
+                $this->function->function_exists = function ($name) {
                     return 'mb_substr' !== $name;
                 }
             )
-            ->exception(function ( ) {
-
+            ->exception(function () {
                 new LUT();
             })
                 ->isInstanceOf('Hoa\String\Exception');
     }
 
-    public function case_append_ltr ( ) {
-
+    public function case_append_ltr()
+    {
         $this
             ->given($string = new LUT('je'))
             ->when($result = $string->append(' t\'aime'))
@@ -79,8 +75,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('je t\'aime');
     }
 
-    public function case_append_rtl ( ) {
-
+    public function case_append_rtl()
+    {
         $this
             ->given($string = new LUT('أ'))
             ->when($result = $string->append('حبك'))
@@ -91,8 +87,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('أحبك');
     }
 
-    public function case_prepend_ltr ( ) {
-
+    public function case_prepend_ltr()
+    {
         $this
             ->given($string = new LUT(' t\'aime'))
             ->when($result = $string->prepend('je'))
@@ -103,8 +99,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('je t\'aime');
     }
 
-    public function case_prepend_rtl ( ) {
-
+    public function case_prepend_rtl()
+    {
         $this
             ->given($string = new LUT('ك'))
             ->when($result = $string->prepend('أحب'))
@@ -115,8 +111,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('أحبك');
     }
 
-    public function case_pad_beginning_ltr ( ) {
-
+    public function case_pad_beginning_ltr()
+    {
         $this
             ->given($string = new LUT('je t\'aime'))
             ->when($result = $string->pad(20, '👍 💩 😄 ❤️ ', LUT::BEGINNING))
@@ -127,8 +123,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('👍 💩 😄 ❤️ 👍 je t\'aime');
     }
 
-    public function case_pad_beginning_rtl ( ) {
-
+    public function case_pad_beginning_rtl()
+    {
         $this
             ->given($string = new LUT('أحبك'))
             ->when($result = $string->pad(20, '👍 💩 😄 ❤️ ', LUT::BEGINNING))
@@ -139,8 +135,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('👍 💩 😄 ❤️ 👍 💩 😄 ❤أحبك');
     }
 
-    public function case_pad_end_ltr ( ) {
-
+    public function case_pad_end_ltr()
+    {
         $this
             ->given($string = new LUT('je t\'aime'))
             ->when($result = $string->pad(20, '👍 💩 😄 ❤️ ', LUT::END))
@@ -151,8 +147,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('je t\'aime👍 💩 😄 ❤️ 👍 ');
     }
 
-    public function case_pad_end_rtl ( ) {
-
+    public function case_pad_end_rtl()
+    {
         $this
             ->given($string = new LUT('أحبك'))
             ->when($result = $string->pad(20, '👍 💩 😄 ❤️ ', LUT::END))
@@ -163,12 +159,11 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('أحبك👍 💩 😄 ❤️ 👍 💩 😄 ❤');
     }
 
-    public function case_compare_no_collator ( ) {
-
+    public function case_compare_no_collator()
+    {
         $this
             ->given(
-                $this->function->class_exists = function ( $name ) {
-
+                $this->function->class_exists = function ($name) {
                     return 'Collator' !== $name;
                 },
                 $string = new LUT('b')
@@ -176,8 +171,8 @@ class String extends Test\Unit\Suite {
             ->case_compare();
     }
 
-    public function case_compare ( ) {
-
+    public function case_compare()
+    {
         $this
             ->given($string = new LUT('b'))
             ->when($result = $string->compare('a'))
@@ -196,8 +191,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo(-1);
     }
 
-    public function case_collator ( ) {
-
+    public function case_collator()
+    {
         $this
             ->given(
                 $this->function->setlocale = 'fr_FR',
@@ -209,8 +204,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('fr');
     }
 
-    public function case_safe_unsafe_pattern ( ) {
-
+    public function case_safe_unsafe_pattern()
+    {
         $this
             ->given($pattern = '/foo/i')
             ->when($result = LUT::safePattern($pattern))
@@ -219,8 +214,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualto('/foo/iu');
     }
 
-    public function case_safe_safe_pattern ( ) {
-
+    public function case_safe_safe_pattern()
+    {
         $this
             ->given($pattern = '/foo/ui')
             ->when($result = LUT::safePattern($pattern))
@@ -229,8 +224,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualto('/foo/ui');
     }
 
-    public function case_match_default ( ) {
-
+    public function case_match_default()
+    {
         $this
             ->given(
                 $pattern = '/💩/u',
@@ -246,8 +241,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_match_offset ( ) {
-
+    public function case_match_offset()
+    {
         $this
             ->given(
                 $pattern = '/💩/u',
@@ -275,8 +270,8 @@ class String extends Test\Unit\Suite {
                     ->isEmpty();
     }
 
-    public function case_match_with_offset ( ) {
-
+    public function case_match_with_offset()
+    {
         $this
             ->given(
                 $pattern = '/💩/u',
@@ -295,8 +290,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_match_all_default ( ) {
-
+    public function case_match_all_default()
+    {
         $this
             ->given(
                 $pattern = '/💩/u',
@@ -315,8 +310,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_match_all_with_offset ( ) {
-
+    public function case_match_all_with_offset()
+    {
         $this
             ->given(
                 $pattern = '/💩/u',
@@ -341,8 +336,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_match_all_grouped_by_pattern ( ) {
-
+    public function case_match_all_grouped_by_pattern()
+    {
         $this
             ->given(
                 $pattern = '/(💩)/u',
@@ -365,8 +360,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_match_all_grouped_by_tuple ( ) {
-
+    public function case_match_all_grouped_by_tuple()
+    {
         $this
             ->given(
                 $pattern = '/(💩)/u',
@@ -389,8 +384,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_replace ( ) {
-
+    public function case_replace()
+    {
         $this
             ->given($string = new LUT('❤️ 💩 💩'))
             ->when($result = $string->replace('/💩/u', '😄'))
@@ -401,8 +396,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('❤️ 😄 😄');
     }
 
-    public function case_replace_limited ( ) {
-
+    public function case_replace_limited()
+    {
         $this
             ->given($string = new LUT('❤️ 💩 💩'))
             ->when($result = $string->replace('/💩/u', '😄', 1))
@@ -413,8 +408,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('❤️ 😄 💩');
     }
 
-    public function case_split_default ( ) {
-
+    public function case_split_default()
+    {
         $this
             ->given($string = new LUT('❤️💩❤️💩❤️'))
             ->when($result = $string->split('/💩/'))
@@ -427,8 +422,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_split_default_limited ( ) {
-
+    public function case_split_default_limited()
+    {
         $this
             ->given($string = new LUT('❤️💩❤️💩❤️'))
             ->when($result = $string->split('/💩/', 1))
@@ -439,8 +434,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_split_with_delimiters ( ) {
-
+    public function case_split_with_delimiters()
+    {
         $this
             ->given($string = new LUT('❤️💩❤️💩❤️'))
             ->when($result = $string->split('/💩/', -1, $string::WITH_DELIMITERS))
@@ -453,8 +448,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_split_with_offset ( ) {
-
+    public function case_split_with_offset()
+    {
         $this
             ->given($string = new LUT('❤️💩❤️💩❤️'))
             ->when($result = $string->split('/💩/', -1, $string::WITH_OFFSET))
@@ -476,8 +471,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_iterator_ltr ( ) {
-
+    public function case_iterator_ltr()
+    {
         $this
             ->given($string = new LUT('je t\'aime'))
             ->when($result = iterator_to_array($string))
@@ -496,8 +491,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_iterator_rtl ( ) {
-
+    public function case_iterator_rtl()
+    {
         $this
             ->given($string = new LUT('أحبك'))
             ->when($result = iterator_to_array($string))
@@ -511,8 +506,8 @@ class String extends Test\Unit\Suite {
                     ]);
     }
 
-    public function case_to_lower ( ) {
-
+    public function case_to_lower()
+    {
         $this
             ->given($string = new LUT('Σ \'ΑΓΑΠΏ'))
             ->when($result = $string->toLowerCase())
@@ -531,8 +526,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('je t\'aime');
     }
 
-    public function case_to_upper ( ) {
-
+    public function case_to_upper()
+    {
         $this
             ->given($string = new LUT('σ \'αγαπώ'))
             ->when($result = $string->toUpperCase())
@@ -551,8 +546,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('JE T\'AIME');
     }
 
-    public function case_trim_default ( ) {
-
+    public function case_trim_default()
+    {
         $this
             ->given($string = new LUT('💩💩❤️💩💩'))
             ->when($result = $string->trim('💩'))
@@ -563,8 +558,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('❤️');
     }
 
-    public function case_trim_beginning ( ) {
-
+    public function case_trim_beginning()
+    {
         $this
             ->given($string = new LUT('💩💩❤️💩💩'))
             ->when($result = $string->trim('💩', $string::BEGINNING))
@@ -575,8 +570,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('❤️💩💩');
     }
 
-    public function case_trim_end ( ) {
-
+    public function case_trim_end()
+    {
         $this
             ->given($string = new LUT('💩💩❤️💩💩'))
             ->when($result = $string->trim('💩', $string::END))
@@ -587,8 +582,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('💩💩❤️');
     }
 
-    public function case_offset_get_ltr ( ) {
-
+    public function case_offset_get_ltr()
+    {
         $this
             ->given($string = new LUT('je t\'aime'))
             ->when($result = $string[0])
@@ -602,8 +597,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('e');
     }
 
-    public function case_offset_get_rtl ( ) {
-
+    public function case_offset_get_rtl()
+    {
         $this
             ->given($string = new LUT('أحبك'))
             ->when($result = $string[0])
@@ -617,8 +612,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('ك');
     }
 
-    public function case_offset_set ( ) {
-
+    public function case_offset_set()
+    {
         $this
             ->given($string = new LUT('أحبﻙ'))
             ->when($string[-1] = 'ك')
@@ -627,12 +622,11 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('أحبك');
     }
 
-    public function case_offset_unset ( ) {
-
+    public function case_offset_unset()
+    {
         $this
             ->given($string = new LUT('أحبك😄'))
-            ->when(function ( ) use ( $string ) {
-
+            ->when(function () use ($string) {
                 unset($string[-1]);
             })
             ->then
@@ -640,8 +634,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('أحبك');
     }
 
-    public function case_reduce ( ) {
-
+    public function case_reduce()
+    {
         $this
             ->given($string = new LUT('أحبك'))
             ->when($result = $string->reduce(0, 1))
@@ -652,8 +646,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('أ');
     }
 
-    public function case_count ( ) {
-
+    public function case_count()
+    {
         $this
             ->given($string = new LUT('je t\'aime'))
             ->when($result = count($string))
@@ -674,8 +668,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo(1);
     }
 
-    public function case_byte_at ( ) {
-
+    public function case_byte_at()
+    {
         $this
             ->given($string = new LUT('💩'))
             ->when($result = $string->getByteAt(0))
@@ -704,8 +698,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo(0xa9);
     }
 
-    public function case_bytes_length ( ) {
-
+    public function case_bytes_length()
+    {
         $this
             ->given($string = new LUT('💩'))
             ->when($result = $string->getBytesLength())
@@ -714,8 +708,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo(4);
     }
 
-    public function case_get_width ( ) {
-
+    public function case_get_width()
+    {
         $this
             ->given($string = new LUT('💩'))
             ->when($result = $string->getWidth())
@@ -730,8 +724,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo(2);
     }
 
-    public function case_get_char_direction ( ) {
-
+    public function case_get_char_direction()
+    {
         $this
             ->when($result = LUT::getCharDirection('A'))
             ->then
@@ -744,8 +738,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo(LUT::RTL);
     }
 
-    public function case_get_char_width ( ) {
-
+    public function case_get_char_width()
+    {
         $this
             ->given(
                 $data = [
@@ -782,10 +776,8 @@ class String extends Test\Unit\Suite {
                     [0xf900, 2]
                 ]
             )
-            ->when(function ( ) use ( $data ) {
-
-                foreach($data as $datum) {
-
+            ->when(function () use ($data) {
+                foreach ($data as $datum) {
                     list($code, $width) = $datum;
 
                     $this
@@ -797,8 +789,8 @@ class String extends Test\Unit\Suite {
             });
     }
 
-    public function case_is_char_printable ( ) {
-
+    public function case_is_char_printable()
+    {
         $this
             ->when($result = LUT::isCharPrintable(LUT::fromCode(0x7f)))
             ->then
@@ -816,8 +808,8 @@ class String extends Test\Unit\Suite {
                     ->isTrue();
     }
 
-    public function case_from_code ( ) {
-
+    public function case_from_code()
+    {
         $this
             // U+0000 to U+007F
             ->when($result = LUT::fromCode(0x7e))
@@ -844,8 +836,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('💩');
     }
 
-    public function case_to_code ( ) {
-
+    public function case_to_code()
+    {
         $this
             // U+0000 to U+007F
             ->when($result = LUT::toCode('~'))
@@ -872,8 +864,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo(0x1f4a9);
     }
 
-    public function case_to_binary_code ( ) {
-
+    public function case_to_binary_code()
+    {
         $this
             // U+0000 to U+007F
             ->when($result = LUT::toBinaryCode('~'))
@@ -900,8 +892,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('11110000100111111001001010101001');
     }
 
-    public function case_transcode_and_isUtf8 ( ) {
-
+    public function case_transcode_and_isUtf8()
+    {
         $this
             ->given($uΣ = 'Σ')
             ->when($Σ = LUT::transcode($uΣ, 'UTF-8', 'UTF-16'))
@@ -920,29 +912,26 @@ class String extends Test\Unit\Suite {
                     ->isTrue();
     }
 
-    public function case_to_ascii_no_transliterator_no_normalizer ( ) {
-
+    public function case_to_ascii_no_transliterator_no_normalizer()
+    {
         $this
             ->given(
-                $this->function->class_exists = function ( $name ) {
-
+                $this->function->class_exists = function ($name) {
                     return false === in_array($name, ['Transliterator', 'Normalizer']);
                 },
                 $string = new LUT('Un été brûlant sur la côte')
             )
-            ->exception(function ( ) use ( $string ) {
-
+            ->exception(function () use ($string) {
                 $string->toAscii();
             })
                 ->isInstanceOf('Hoa\String\Exception');
     }
 
-    public function case_to_ascii_no_transliterator_no_normalizer_try ( ) {
-
+    public function case_to_ascii_no_transliterator_no_normalizer_try()
+    {
         $this
             ->given(
-                $this->function->class_exists = function ( $name ) {
-
+                $this->function->class_exists = function ($name) {
                     return false === in_array($name, ['Transliterator', 'Normalizer']);
                 },
                 $string = new LUT('Un été brûlant sur la côte')
@@ -955,12 +944,11 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('Un ete brulant sur la cote');
     }
 
-    public function case_to_ascii_no_transliterator ( ) {
-
+    public function case_to_ascii_no_transliterator()
+    {
         $this
             ->given(
-                $this->function->class_exists = function ( $name ) {
-
+                $this->function->class_exists = function ($name) {
                     return 'Transliterator' !== $name;
                 },
                 $string = new LUT('Un été brûlant sur la côte')
@@ -973,8 +961,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo('Un ete brulant sur la cote');
     }
 
-    public function case_to_ascii ( ) {
-
+    public function case_to_ascii()
+    {
         $this
             ->given(
                 $strings = [
@@ -1012,9 +1000,8 @@ class String extends Test\Unit\Suite {
                     => '(for all) i (element of) N'
                 ]
             )
-            ->when(function ( ) use ( $strings ) {
-
-                foreach($strings as $original => $asciied)
+            ->when(function () use ($strings) {
+                foreach ($strings as $original => $asciied) {
                     $this
                         ->given($string = new LUT($original))
                         ->when($result = $string->toAscii())
@@ -1023,11 +1010,12 @@ class String extends Test\Unit\Suite {
                                 ->isIdenticalTo($string)
                             ->string((string) $result)
                                 ->isEqualTo($asciied);
+                }
             });
     }
 
-    public function case_copy ( ) {
-
+    public function case_copy()
+    {
         $this
             ->given($string = new LUT('foo'))
             ->when($result = $string->copy())
@@ -1036,8 +1024,8 @@ class String extends Test\Unit\Suite {
                     ->isEqualTo($string);
     }
 
-    public function case_toString ( ) {
-
+    public function case_toString()
+    {
         $this
             ->given($datum = $this->sample($this->realdom->regex('/\w{7,42}/')))
             ->when($result = new LUT($datum))

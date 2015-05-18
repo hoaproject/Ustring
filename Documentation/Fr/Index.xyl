@@ -211,10 +211,11 @@ echo $title->toAscii();
   <pre><code class="language-php">$emoji = new Hoa\String\String('I ❤ Unicode');
 $maths = new Hoa\String\String('∀ i ∈ ℕ');
 
-echo $arabic->toAscii(), "\n",
-     $japanese->toAscii(), "\n",
-     $emoji->toAscii(), "\n",
-     $maths->toAscii(), "\n";
+echo
+    $arabic->toAscii(), "\n",
+    $japanese->toAscii(), "\n",
+    $emoji->toAscii(), "\n",
+    $maths->toAscii(), "\n";
 
 /**
  * Will output:
@@ -294,8 +295,9 @@ echo $arabic->toAscii(), "\n",
   <code>IteratorAggregate</code>, soit la méthode
   <code>Hoa\String\String::getIterator</code>. Voyons plutôt sur l'exemple en
   arabe :</p>
-  <pre><code class="language-php">foreach($arabic as $letter)
+  <pre><code class="language-php">foreach ($arabic as $letter) {
     echo $letter, "\n";
+}
 
 /**
  * Will output:
@@ -406,8 +408,7 @@ var_dump($matches['direct_object']);
   alors la fonction <code>preg_replace_callback</code> sera utilisée.</p>
   <p>Ainsi, nous allons modifier notre exemple français pour qu'il soit plus
   poli :</p>
-  <pre><code class="language-php">$french->replace('#(?:\w[\'\b])(?&amp;lt;verb>aime)#', function ( $matches ) {
-
+  <pre><code class="language-php">$french->replace('#(?:\w[\'\b])(?&amp;lt;verb>aime)#', function ($matches) {
     return 'vous ' . $matches['verb'];
 });
 
@@ -561,8 +562,9 @@ $n      = count($search);
 echo 'Try to match ', $x, ' in ', $y, ' with at most ', $k, ' difference(s):', "\n";
 echo $n, ' match(es) found:', "\n";
 
-foreach($search as $position)
+foreach ($search as $position) {
     echo '    • ', substr($y, $position['i'], $position['l'), "\n";
+}
 
 /**
  * Will output:

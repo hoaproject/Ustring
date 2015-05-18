@@ -8,7 +8,7 @@
  *
  * New BSD License
  *
- * Copyright © 2007-2015, Ivan Enderlin. All rights reserved.
+ * Copyright © 2007-2015, Hoa community. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -41,25 +41,22 @@ namespace Hoa\String;
  *
  * Some algorithms about search in strings.
  *
- * @author     Ivan Enderlin <ivan.enderlin@hoa-project.net>
- * @copyright  Copyright © 2007-2015 Ivan Enderlin.
+ * @copyright  Copyright © 2007-2015 Hoa community
  * @license    New BSD License
  */
-
-class Search {
-
+class Search
+{
     /**
      * Search by approximated patterns, with k differences based upon the
      * principle diagonal monotony.
      *
-     * @access  public
      * @param   string  $y    Haystack.
      * @param   string  $x    Needle.
      * @param   int     $k    Number of differences.
      * @return  array
      */
-    public static function approximated ( $y, $x, $k ) {
-
+    public static function approximated($y, $x, $k)
+    {
         $x      = (string) $x;
         $y      = (string) $y;
         $m      = strlen($x);
@@ -67,12 +64,12 @@ class Search {
         $offset = [];
         $L      = [-1 => array_fill(-1, $n - $m + $k + 3, -2)];
 
-        for($q = 0, $max = $k - 1; $q <= $max; ++$q)
+        for ($q = 0, $max = $k - 1; $q <= $max; ++$q) {
             $L[$q][-$q - 1] = $L[$q][-$q - 2] = $q - 1;
+        }
 
-        for($q = 0; $q <= $k; ++$q)
-            for($d = -$q, $max = $n - $m + $k - $q; $d <= $max; ++$d) {
-
+        for ($q = 0; $q <= $k; ++$q) {
+            for ($d = -$q, $max = $n - $m + $k - $q; $d <= $max; ++$d) {
                 $l         = min(
                                  max(
                                      $L[$q - 1][$d - 1],
@@ -81,18 +78,18 @@ class Search {
                                  ),
                                  $m - 1
                              );
-                $a         = substr($x, $l + 1     , $m - $l     );
+                $a         = substr($x, $l + 1, $m - $l);
                 $b         = substr($y, $l + 1 + $d, $n - $l - $d);
                 $L[$q][$d] = $l + static::lcp($a, $b);
 
-                if(        $L[$q][$d] == $m - 1
-                   || $d + $L[$q][$d] == $n - 1) {
-
+                if ($L[$q][$d] == $m - 1 ||
+                    $d + $L[$q][$d] == $n - 1) {
                     $j            = $m + $d;
                     $i            = max(0, $j - $m);
                     $offset[$q][] = ['i' => $i, 'j' => $j, 'l' => $j - $i];
                 }
             }
+        }
 
         return empty($offset) ? $offset : $offset[$k];
     }
@@ -100,18 +97,18 @@ class Search {
     /**
      * Length of the longest common prefixes.
      *
-     * @access  public
      * @param   string  $x    Word.
      * @param   string  $y    Word.
      * @return  int
      */
-    public static function lcp ( $x, $y ) {
-
+    public static function lcp($x, $y)
+    {
         $max = min(strlen($x), strlen($y));
         $i   = 0;
 
-        while($i < $max && $x[$i] == $y[$i])
+        while ($i < $max && $x[$i] == $y[$i]) {
             ++$i;
+        }
 
         return $i;
     }
