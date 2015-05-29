@@ -1,6 +1,6 @@
 {
-    "name"       : "hoa/string",
-    "description": "The Hoa\\String library.",
+    "name"       : "hoa/ustring",
+    "description": "The Hoa\\Ustring library.",
     "type"       : "library",
     "keywords"   : ["library", "string", "unicode", "search"],
     "homepage"   : "http://hoa-project.net/",
@@ -29,15 +29,15 @@
     },
     "autoload": {
         "psr-4": {
-            "Hoa\\String\\": "."
+            "Hoa\\Ustring\\": "."
         }
     },
     "suggest": {
-        "ext-intl": "To get a better Hoa\\String::toAscii() and Hoa\\String::compareTo()."
+        "ext-intl": "To get a better Hoa\\Ustring::toAscii() and Hoa\\Ustring::compareTo()."
     },
     "extra"     : {
         "branch-alias": {
-            "dev-master": "2.x-dev"
+            "dev-master": "3.x-dev"
         }
     }
 }

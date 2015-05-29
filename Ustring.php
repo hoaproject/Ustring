@@ -34,12 +34,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\String;
+namespace Hoa\Ustring;
 
 use Hoa\Core;
 
 /**
- * Class \Hoa\String.
+ * Class \Hoa\Ustring.
  *
  * This class represents a UTF-8 string.
  * Please, see:
@@ -50,7 +50,7 @@ use Hoa\Core;
  * @copyright  Copyright © 2007-2015 Hoa community
  * @license    New BSD License
  */
-class String implements \ArrayAccess, \Countable, \IteratorAggregate
+class Ustring implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * Left-To-Right.
@@ -223,7 +223,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
      * Append a substring to the current string, i.e. add to the end.
      *
      * @param   string  $substring    Substring to append.
-     * @return  \Hoa\String
+     * @return  \Hoa\Ustring
      */
     public function append($substring)
     {
@@ -236,7 +236,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
      * Prepend a substring to the current string, i.e. add to the start.
      *
      * @param   string  $substring    Substring to append.
-     * @return  \Hoa\String
+     * @return  \Hoa\Ustring
      */
     public function prepend($substring)
     {
@@ -252,7 +252,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param   string  $piece     Piece.
      * @param   int     $side      Whether we append at the end or the beginning
      *                             of the current string.
-     * @return  \Hoa\String
+     * @return  \Hoa\Ustring
      */
     public function pad($length, $piece, $side = self::END)
     {
@@ -385,7 +385,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param   mixed   $replacement    Replacement(s) (please, see
      *                                  preg_replace() documentation).
      * @param   int     $limit          Maximum of replacements. -1 for unbound.
-     * @return  \Hoa\String
+     * @return  \Hoa\Ustring
      */
     public function replace($pattern, $replacement, $limit = -1)
     {
@@ -445,7 +445,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Perform a lowercase folding on the current string.
      *
-     * @return  \Hoa\String
+     * @return  \Hoa\Ustring
      */
     public function toLowerCase()
     {
@@ -457,7 +457,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Perform an uppercase folding on the current string.
      *
-     * @return  \Hoa\String
+     * @return  \Hoa\Ustring
      */
     public function toUpperCase()
     {
@@ -472,8 +472,8 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
      * normalizer. If not available, will try something homemade.
      *
      * @param   bool  $try    Try something if \Normalizer is not present.
-     * @return  \Hoa\String
-     * @throws  \Hoa\String\Exception
+     * @return  \Hoa\Ustring
+     * @throws  \Hoa\Ustring\Exception
      */
     public function toAscii($try = false)
     {
@@ -529,8 +529,8 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param   string  $identifier    Identifier.
      * @param   int     $start         Start.
      * @param   int     $end           End.
-     * @return  \Hoa\String
-     * @throws  \Hoa\String\Exception
+     * @return  \Hoa\Ustring
+     * @throws  \Hoa\Ustring\Exception
      */
     public function transliterate($identifier, $start = 0, $end = null)
     {
@@ -569,7 +569,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param   string  $regex    Characters to remove.
      * @param   int     $side     Whether we trim the beginning, the end or both
      *                            sides, of the current string.
-     * @return  \Hoa\String
+     * @return  \Hoa\Ustring
      */
     public function trim($regex = '\s', $side = 3 /* static::BEGINNING | static::END */)
     {
@@ -633,7 +633,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param   int     $offset    Offset (can be negative and unbound).
      * @param   string  $value     Value.
-     * @return  \Hoa\String
+     * @return  \Hoa\Ustring
      */
     public function offsetSet($offset, $value)
     {
@@ -677,7 +677,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param   int  $start     Position of first character.
      * @param   int  $length    Maximum number of characters.
-     * @return  \Hoa\String
+     * @return  \Hoa\Ustring
      */
     public function reduce($start, $length = null)
     {
@@ -1013,7 +1013,7 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Copy current object string
      *
-     * @return \Hoa\String
+     * @return \Hoa\Ustring
      */
     public function copy()
     {
@@ -1034,4 +1034,4 @@ class String implements \ArrayAccess, \Countable, \IteratorAggregate
 /**
  * Flex entity.
  */
-Core\Consistency::flexEntity('Hoa\String\String');
+Core\Consistency::flexEntity('Hoa\Ustring\Ustring');

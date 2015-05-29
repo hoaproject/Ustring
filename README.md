@@ -3,7 +3,7 @@
 Hoa is a **modular**, **extensible** and **structured** set of PHP libraries.
 Moreover, Hoa aims at being a bridge between industrial and research worlds.
 
-# Hoa\String ![state](http://central.hoa-project.net/State/String)
+# Hoa\Ustring ![state](http://central.hoa-project.net/State/Ustring)
 
 This library allows to manipulate UTF-8 strings easily with some search
 algorithms.
@@ -32,14 +32,14 @@ search algorithm.
 
 ### Natural UTF-8 strings manipulation
 
-The `Hoa\String\String` class allows to manipulate easily UTF-8 strings in a
+The `Hoa\Ustring\Ustring` class allows to manipulate easily UTF-8 strings in a
 very natural way. This class implements the `\ArrayAccess`, `\Countable` and
 `\IteratorAggregate` interfaces. We will use the following examples:
 
 ```php
-$french   = new Hoa\String\String('Je t\'aime');
-$arabic   = new Hoa\String\String('أحبك');
-$japanese = new Hoa\String\String('私はあなたを愛して');
+$french   = new Hoa\Ustring\Ustring('Je t\'aime');
+$arabic   = new Hoa\Ustring\Ustring('أحبك');
+$japanese = new Hoa\Ustring\Ustring('私はあなたを愛して');
 ```
 
 To get the first character, we will do:
@@ -57,9 +57,9 @@ modulo) indexes.
 
 We note that it cares about text **direction**. Look at `$arabic[0]`, it returns
 `أ` and not `ك`. To get the direction, we can use the
-`Hoa\String\String::getDirection` method (which call the
-`Hoa\String\String::getCharDirection` static method), it returns either
-`Hoa\String\String::LTR` (`0`) or `Hoa\String\String::RTL` (`1`):
+`Hoa\Ustring\Ustring::getDirection` method (which call the
+`Hoa\Ustring\Ustring::getCharDirection` static method), it returns either
+`Hoa\Ustring\Ustring::LTR` (`0`) or `Hoa\Ustring\Ustring::RTL` (`1`):
 
 ```php
 var_dump(
@@ -70,7 +70,7 @@ var_dump(
 ```
 
 Text direction is also important for the `append`, `prepend`, `pad`… methods on
-`Hoa\String\String` for example. 
+`Hoa\Ustring\Ustring` for example. 
 
 To get the length of a string, we can use the `count` function:
 
@@ -102,21 +102,21 @@ Again, text direction is useful here. For `$arabic`, the iteration is done from
 right to left.
 
 Some static methods are helpful, such as `fromCode`, `toCode` or `isUtf8` on
-`Hoa\String\String`:
+`Hoa\Ustring\Ustring`:
 
 ```php
 var_dump(
-    Hoa\String\String::fromCode(0x1a9), // string(2) "Ʃ"
-    Hoa\String\String::toCode('Ʃ'),     // int(425) == 0x1a9
-    Hoa\String\String::isUtf8('Ʃ')      // bool(true)
+    Hoa\Ustring\Ustring::fromCode(0x1a9), // string(2) "Ʃ"
+    Hoa\Ustring\Ustring::toCode('Ʃ'),     // int(425) == 0x1a9
+    Hoa\Ustring\Ustring::isUtf8('Ʃ')      // bool(true)
 );
 ```
 
 We can also transform any text into ASCII:
 
 ```php
-$emoji = new Hoa\String\String('I ❤ Unicode');
-$maths = new Hoa\String\String('∀ i ∈ ℕ');
+$emoji = new Hoa\Ustring\Ustring('I ❤ Unicode');
+$maths = new Hoa\Ustring\Ustring('∀ i ∈ ℕ');
 
 echo
     $emoji->toAscii(), "\n",
@@ -131,15 +131,15 @@ echo
 
 ### Search algorithm
 
-The `Hoa\String\Search` implements search algorithms on strings.
+The `Hoa\Ustring\Search` implements search algorithms on strings.
 
-For example, the `Hoa\String\Search::approximated` method make a search by
+For example, the `Hoa\Ustring\Search::approximated` method make a search by
 approximated patterns (with *k* differences based upon the principle diagonal
 monotony). If we search the word `GATAA` in `CAGATAAGAGAA` with 1 difference, we
 will do:
 
 ```php
-$search = Hoa\String\Search::approximated(
+$search = Hoa\Ustring\Search::approximated(
     $haystack = 'CAGATAAGAGAA',
     $needle   = 'GATAA',
     $k        = 1

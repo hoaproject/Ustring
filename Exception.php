@@ -34,12 +34,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\String;
+namespace Hoa\Ustring;
 
 use Hoa\Core;
 
 /**
- * Class \Hoa\String\Exception.
+ * Class \Hoa\Ustring\Exception.
  *
  * Extending the \Hoa\Core\Exception class.
  *

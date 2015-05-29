@@ -34,15 +34,15 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\String\Bin;
+namespace Hoa\Ustring\Bin;
 
 use Hoa\Console;
-use Hoa\String;
+use Hoa\Ustring;
 
 /**
- * Class Hoa\String\Bin\Fromcode.
+ * Class Hoa\Ustring\Bin\Fromcode.
  *
- * Get a character from its code. Please, see Hoa\String\String::fromCode.
+ * Get a character from its code. Please, see Hoa\Ustring\Ustring::fromCode.
  *
  * @copyright  Copyright © 2007-2015 Hoa community
  * @license    New BSD License
@@ -92,7 +92,7 @@ class Fromcode extends Console\Dispatcher\Kit
 
         $this->parser->listInputs($code);
 
-        $char = String::fromCode(base_convert($code, $base, 10));
+        $char = Ustring::fromCode(base_convert($code, $base, 10));
 
         echo $char;
 

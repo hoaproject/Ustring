@@ -34,13 +34,13 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\String\Test\Unit;
+namespace Hoa\Ustring\Test\Unit;
 
-use Hoa\String as LUT;
+use Hoa\Ustring as LUT;
 use Hoa\Test;
 
 /**
- * Class \Hoa\String\Test\Unit\Search.
+ * Class \Hoa\Ustring\Test\Unit\Search.
  *
  * Test suite of the search algorithms.
  *

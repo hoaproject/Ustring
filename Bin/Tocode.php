@@ -34,15 +34,15 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\String\Bin;
+namespace Hoa\Ustring\Bin;
 
 use Hoa\Console;
-use Hoa\String;
+use Hoa\Ustring;
 
 /**
- * Class Hoa\String\Bin\Tocode.
+ * Class Hoa\Ustring\Bin\Tocode.
  *
- * Transform a character into its code. Please, see Hoa\String\String::toCode.
+ * Transform a character into its code. Please, see Hoa\Ustring\Ustring::toCode.
  *
  * @copyright  Copyright © 2007-2015 Hoa community
  * @license    New BSD License
@@ -92,7 +92,7 @@ class Tocode extends Console\Dispatcher\Kit
 
         $this->parser->listInputs($char);
 
-        $code = base_convert((string) String::toCode($char), 10, $base);
+        $code = base_convert((string) Ustring::toCode($char), 10, $base);
 
         echo $code, "\n";
 

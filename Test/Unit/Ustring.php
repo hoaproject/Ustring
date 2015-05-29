@@ -34,20 +34,20 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\String\Test\Unit;
+namespace Hoa\Ustring\Test\Unit;
 
-use Hoa\String as LUT;
+use Hoa\Ustring as LUT;
 use Hoa\Test;
 
 /**
- * Class \Hoa\String\Test\Unit\String.
+ * Class \Hoa\Ustring\Test\Unit\Ustring.
  *
  * Test suite of the string class.
  *
  * @copyright  Copyright © 2007-2015 Hoa community
  * @license    New BSD License
  */
-class String extends Test\Unit\Suite
+class Ustring extends Test\Unit\Suite
 {
     public function case_no_mbstring()
     {
@@ -60,7 +60,7 @@ class String extends Test\Unit\Suite
             ->exception(function () {
                 new LUT();
             })
-                ->isInstanceOf('Hoa\String\Exception');
+                ->isInstanceOf('Hoa\Ustring\Exception');
     }
 
     public function case_append_ltr()
@@ -924,7 +924,7 @@ class String extends Test\Unit\Suite
             ->exception(function () use ($string) {
                 $string->toAscii();
             })
-                ->isInstanceOf('Hoa\String\Exception');
+                ->isInstanceOf('Hoa\Ustring\Exception');
     }
 
     public function case_to_ascii_no_transliterator_no_normalizer_try()

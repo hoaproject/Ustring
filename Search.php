@@ -34,10 +34,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace Hoa\String;
+namespace Hoa\Ustring;
 
 /**
- * Class \Hoa\String\Search.
+ * Class \Hoa\Ustring\Search.
  *
  * Some algorithms about search in strings.
  *
