@@ -1,3 +1,13 @@
+# 3.15.05.29
+
+  * Update installation section. (Ivan Enderlin, 2015-05-29T14:13:22+02:00)
+  * Rename `Hoa\String` to `Hoa\Ustring`. (Ivan Enderlin, 2015-05-29T12:24:23+02:00)
+  * Move to PSR-1 and PSR-2. (Ivan Enderlin, 2015-05-18T09:49:37+02:00)
+
+# 3.15.05.29
+
+
+
 # 2.15.03.25
 
   * `toCode` supports invalid UTF-8 character. (Ivan Enderlin, 2015-03-25T08:52:52+01:00)
