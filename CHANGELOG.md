@@ -1,3 +1,9 @@
+# 3.15.07.28
+
+  * Fix CS. (Ivan Enderlin, 2015-07-28T14:13:48+02:00)
+  * Fix the CHANGELOG. (Ivan Enderlin, 2015-07-28T14:13:27+02:00)
+  * Prepare 3.15.05.29. (Ivan Enderlin, 2015-05-29T15:36:54+02:00)
+
 # 3.15.05.29
 
   * Update installation section. (Ivan Enderlin, 2015-05-29T14:13:22+02:00)
