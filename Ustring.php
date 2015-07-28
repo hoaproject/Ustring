@@ -946,7 +946,7 @@ class Ustring implements \ArrayAccess, \Countable, \IteratorAggregate
         $code  = ord($char[0]);
         $bytes = 1;
 
-        if (!($code & 0x80)) {// 0xxxxxxx
+        if (!($code & 0x80)) { // 0xxxxxxx
             return $code;
         }
 
@@ -961,7 +961,7 @@ class Ustring implements \ArrayAccess, \Countable, \IteratorAggregate
             $code  = $code & ~0xf0;
         }
 
-        for ($i = 2; $i <= $bytes; $i++) {// 10xxxxxx
+        for ($i = 2; $i <= $bytes; $i++) { // 10xxxxxx
             $code = ($code << 6) + (ord($char[$i - 1]) & ~0x80);
         }
 
