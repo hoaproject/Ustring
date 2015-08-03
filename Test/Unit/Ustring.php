@@ -36,8 +36,8 @@
 
 namespace Hoa\Ustring\Test\Unit;
 
-use Hoa\Ustring as LUT;
 use Hoa\Test;
+use Hoa\Ustring as LUT;
 
 /**
  * Class \Hoa\Ustring\Test\Unit\Ustring.
@@ -49,7 +49,16 @@ use Hoa\Test;
  */
 class Ustring extends Test\Unit\Suite
 {
-    public function case_no_mbstring()
+    public function case_check_mbstring()
+    {
+        $this
+            ->given($this->function->function_exists = true)
+            ->then
+                ->boolean(LUT::checkMbString())
+                    ->isTrue();
+    }
+
+    public function case_check_no_mbstring()
     {
         $this
             ->given(
