@@ -21,8 +21,7 @@
         "source": "http://git.hoa-project.net/"
     },
     "require": {
-        "hoa/core"    : "~2.0",
-        "ext-iconv"   : "*"
+        "hoa/core": "~2.0"
     },
     "require-dev": {
         "hoa/test": "~1.0"
@@ -33,7 +32,8 @@
         }
     },
     "suggest": {
-        "ext-intl": "To get a better Hoa\\Ustring::toAscii() and Hoa\\Ustring::compareTo()."
+        "ext-iconv": "ext/iconv must be present (or a third implementation) to use Hoa\\Ustring::transcode().",
+        "ext-intl" : "To get a better Hoa\\Ustring::toAscii() and Hoa\\Ustring::compareTo()."
     },
     "extra"     : {
         "branch-alias": {

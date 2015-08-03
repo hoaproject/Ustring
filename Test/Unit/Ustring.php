@@ -901,6 +901,20 @@ class Ustring extends Test\Unit\Suite
                     ->isEqualTo('11110000100111111001001010101001');
     }
 
+    public function case_transcode_no_iconv()
+    {
+        $this
+            ->given(
+                $this->function->function_exists = function ($name) {
+                    return 'iconv' !== $name;
+                }
+            )
+            ->exception(function () {
+                LUT::transcode('foo', 'UTF-8');
+            })
+                ->isInstanceOf('Hoa\Ustring\Exception');
+    }
+
     public function case_transcode_and_isUtf8()
     {
         $this

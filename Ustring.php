@@ -222,6 +222,16 @@ class Ustring implements \ArrayAccess, \Countable, \IteratorAggregate
     }
 
     /**
+     * Check if ext/iconv is available.
+     *
+     * @return  bool
+     */
+    public static function checkIconv()
+    {
+        return function_exists('iconv');
+    }
+
+    /**
      * Append a substring to the current string, i.e. add to the end.
      *
      * @param   string  $substring    Substring to append.
@@ -995,9 +1005,18 @@ class Ustring implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param   string  $from      Original encoding.
      * @param   string  $to        Final encoding.
      * @return  string
+     * @throws  \Hoa\Ustring\Exception
      */
     public static function transcode($string, $from, $to = 'UTF-8')
     {
+        if (false === static::checkIconv()) {
+            throw new Exception(
+                '%s needs the iconv extension.',
+                2,
+                __CLASS__
+            );
+        }
+
         return iconv($from, $to, $string);
     }
 
