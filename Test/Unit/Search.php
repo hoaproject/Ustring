@@ -36,8 +36,8 @@
 
 namespace Hoa\Ustring\Test\Unit;
 
-use Hoa\Ustring as LUT;
 use Hoa\Test;
+use Hoa\Ustring as LUT;
 
 /**
  * Class \Hoa\Ustring\Test\Unit\Search.
