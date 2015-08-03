@@ -1,3 +1,9 @@
+# 3.15.08.03
+
+  * `ext/iconv` is suggested, no longer required. (Ivan Enderlin, 2015-08-03T07:06:46+02:00)
+  * Fix CS. (Ivan Enderlin, 2015-08-03T07:05:10+02:00)
+  * Test `ext/mbstring` availability globally. (Ivan Enderlin, 2015-08-03T07:04:30+02:00)
+
 # 3.15.07.28
 
   * Fix CS. (Ivan Enderlin, 2015-07-28T14:13:48+02:00)
