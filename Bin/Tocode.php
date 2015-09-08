@@ -107,7 +107,7 @@ class Tocode extends Console\Dispatcher\Kit
     public function usage()
     {
         echo
-            'Usage   : string:tocode <char>', "\n",
+            'Usage   : ustring:tocode <char>', "\n",
             'Options :', "\n",
             $this->makeUsageOptionsList([
                 'b'    => 'Get the code in a specific base (16 by default).',

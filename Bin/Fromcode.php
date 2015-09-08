@@ -107,7 +107,7 @@ class Fromcode extends Console\Dispatcher\Kit
     public function usage()
     {
         echo
-            'Usage   : string:fromcode <char>', "\n",
+            'Usage   : ustring:fromcode <char>', "\n",
             'Options :', "\n",
             $this->makeUsageOptionsList([
                 'b'    => 'Specify the base of the code (16 by default).',

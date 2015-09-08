@@ -12,7 +12,7 @@ algorithms.
 
 With [Composer](http://getcomposer.org/), to include this library into your
 dependencies, you need to require
-[`hoa/string`](https://packagist.org/packages/hoa/string):
+[`hoa/ustring`](https://packagist.org/packages/hoa/ustring):
 
 ```json
 {
