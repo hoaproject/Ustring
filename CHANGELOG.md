@@ -1,3 +1,8 @@
+# 3.15.11.09
+
+  * Fixed leftover typos (string -> ustring) (David Thalmann, 2015-09-08T14:45:12+02:00)
+  * Add a `.gitignore` file. (Stéphane HULARD, 2015-08-03T11:49:32+02:00)
+
 # 3.15.08.03
 
   * `ext/iconv` is suggested, no longer required. (Ivan Enderlin, 2015-08-03T07:06:46+02:00)
