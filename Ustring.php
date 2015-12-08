@@ -36,7 +36,7 @@
 
 namespace Hoa\Ustring;
 
-use Hoa\Core;
+use Hoa\Consistency;
 
 /**
  * Class \Hoa\Ustring.
@@ -1055,7 +1055,7 @@ class Ustring implements \ArrayAccess, \Countable, \IteratorAggregate
 /**
  * Flex entity.
  */
-Core\Consistency::flexEntity('Hoa\Ustring\Ustring');
+Consistency::flexEntity('Hoa\Ustring\Ustring');
 
 if (false === Ustring::checkMbString()) {
     throw new Exception(
