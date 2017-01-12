@@ -8,7 +8,7 @@
  *
  * New BSD License
  *
- * Copyright © 2007-2016, Hoa community. All rights reserved.
+ * Copyright © 2007-2017, Hoa community. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -47,7 +47,7 @@ use Hoa\Consistency;
  *     • http://unicode.org/reports/tr9/;
  *     • http://www.unicode.org/Public/6.0.0/ucd/UnicodeData.txt.
  *
- * @copyright  Copyright © 2007-2016 Hoa community
+ * @copyright  Copyright © 2007-2017 Hoa community
  * @license    New BSD License
  */
 class Ustring implements \ArrayAccess, \Countable, \IteratorAggregate
@@ -200,7 +200,6 @@ class Ustring implements \ArrayAccess, \Countable, \IteratorAggregate
      * Construct a UTF-8 string.
      *
      * @param   string  $string    String.
-     * @return  void
      */
     public function __construct($string = null)
     {
