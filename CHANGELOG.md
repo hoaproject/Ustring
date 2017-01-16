@@ -1,3 +1,10 @@
+# 4.17.01.16
+
+  * Quality: Happy new year! (Alexis von Glasow, 2017-01-12T14:01:18+01:00)
+  * Test: Add the `Decorrelated` interface. (Ivan Enderlin, 2016-10-25T07:58:13+02:00)
+  * Documentation: New `README.md` file. (Ivan Enderlin, 2016-10-18T15:10:49+02:00)
+  * Documentation: Update `support` properties. (Ivan Enderlin, 2016-10-11T08:45:51+02:00)
+
 # 4.16.01.11
 
   * Quality: Drop PHP5.4. (Ivan Enderlin, 2016-01-11T09:15:27+01:00)
