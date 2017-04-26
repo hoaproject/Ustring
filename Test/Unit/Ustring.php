@@ -69,7 +69,7 @@ class Ustring extends Test\Unit\Suite
             ->exception(function () {
                 new LUT();
             })
-                ->isInstanceOf('Hoa\Ustring\Exception');
+                ->isInstanceOf(LUT\Exception::class);
     }
 
     public function case_append_ltr()
@@ -912,7 +912,7 @@ class Ustring extends Test\Unit\Suite
             ->exception(function () {
                 LUT::transcode('foo', 'UTF-8');
             })
-                ->isInstanceOf('Hoa\Ustring\Exception');
+                ->isInstanceOf(LUT\Exception::class);
     }
 
     public function case_transcode_and_isUtf8()
@@ -947,7 +947,7 @@ class Ustring extends Test\Unit\Suite
             ->exception(function () use ($string) {
                 $string->toAscii();
             })
-                ->isInstanceOf('Hoa\Ustring\Exception');
+                ->isInstanceOf(LUT\Exception::class);
     }
 
     public function case_to_ascii_no_transliterator_no_normalizer_try()
