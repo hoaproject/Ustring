@@ -58,20 +58,6 @@ class Ustring extends Test\Unit\Suite
                     ->isTrue();
     }
 
-    public function case_check_no_mbstring()
-    {
-        $this
-            ->given(
-                $this->function->function_exists = function ($name) {
-                    return 'mb_substr' !== $name;
-                }
-            )
-            ->exception(function () {
-                new LUT();
-            })
-                ->isInstanceOf(LUT\Exception::class);
-    }
-
     public function case_append_ltr()
     {
         $this
