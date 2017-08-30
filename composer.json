@@ -32,7 +32,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Hoa\\Ustring\\": "."
+            "Hoa\\Ustring\\"     : "Source",
+            "Hoa\\Ustring\\Bin\\": "Bin"
         }
     },
     "suggest": {
