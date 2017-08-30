@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -40,16 +42,11 @@ use Hoa\Test;
 use Hoa\Ustring as LUT;
 
 /**
- * Class \Hoa\Ustring\Test\Unit\Search.
- *
  * Test suite of the search algorithms.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Search extends Test\Unit\Suite
 {
-    public function case_approximated()
+    public function case_approximated(): void
     {
         $this
             ->given(

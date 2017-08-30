@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -40,19 +42,12 @@ use Hoa\Console;
 use Hoa\Ustring;
 
 /**
- * Class Hoa\Ustring\Bin\Tocode.
- *
  * Transform a character into its code. Please, see Hoa\Ustring\Ustring::toCode.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Tocode extends Console\Dispatcher\Kit
 {
     /**
      * Options description.
-     *
-     * @var array
      */
     protected $options = [
         ['base', Console\GetOption::REQUIRED_ARGUMENT, 'b'],
@@ -64,10 +59,8 @@ class Tocode extends Console\Dispatcher\Kit
 
     /**
      * The entry method.
-     *
-     * @return  int
      */
-    public function main()
+    public function main(): ?int
     {
         $base = 16;
 
@@ -96,15 +89,13 @@ class Tocode extends Console\Dispatcher\Kit
 
         echo $code, "\n";
 
-        return;
+        return 0;
     }
 
     /**
      * The command usage.
-     *
-     * @return  int
      */
-    public function usage()
+    public function usage(): void
     {
         echo
             'Usage   : ustring:tocode <char>', "\n",
@@ -113,8 +104,6 @@ class Tocode extends Console\Dispatcher\Kit
                 'b'    => 'Get the code in a specific base (16 by default).',
                 'help' => 'This help.'
             ]), "\n";
-
-        return;
     }
 }
 

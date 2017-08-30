@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -40,16 +42,11 @@ use Hoa\Test;
 use Hoa\Ustring as LUT;
 
 /**
- * Class \Hoa\Ustring\Test\Unit\Issue.
- *
  * Test suite of detected issues.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Issue extends Test\Unit\Suite implements Test\Decorrelated
 {
-    public function case_github_26()
+    public function case_github_26(): void
     {
         $this
             ->when($result = LUT::toCode(chr(160)))

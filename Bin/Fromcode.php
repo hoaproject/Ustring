@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -40,12 +42,7 @@ use Hoa\Console;
 use Hoa\Ustring;
 
 /**
- * Class Hoa\Ustring\Bin\Fromcode.
- *
  * Get a character from its code. Please, see Hoa\Ustring\Ustring::fromCode.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Fromcode extends Console\Dispatcher\Kit
 {
@@ -64,10 +61,8 @@ class Fromcode extends Console\Dispatcher\Kit
 
     /**
      * The entry method.
-     *
-     * @return  int
      */
-    public function main()
+    public function main(): ?int
     {
         $base = 16;
 
@@ -96,15 +91,13 @@ class Fromcode extends Console\Dispatcher\Kit
 
         echo $char;
 
-        return;
+        return 0;
     }
 
     /**
      * The command usage.
-     *
-     * @return  int
      */
-    public function usage()
+    public function usage(): void
     {
         echo
             'Usage   : ustring:fromcode <char>', "\n",
@@ -113,8 +106,6 @@ class Fromcode extends Console\Dispatcher\Kit
                 'b'    => 'Specify the base of the code (16 by default).',
                 'help' => 'This help.'
             ]), "\n";
-
-        return;
     }
 }
 

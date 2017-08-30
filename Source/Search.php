@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Hoa
  *
@@ -37,25 +39,15 @@
 namespace Hoa\Ustring;
 
 /**
- * Class \Hoa\Ustring\Search.
- *
  * Some algorithms about search in strings.
- *
- * @copyright  Copyright © 2007-2017 Hoa community
- * @license    New BSD License
  */
 class Search
 {
     /**
      * Search by approximated patterns, with k differences based upon the
      * principle diagonal monotony.
-     *
-     * @param   string  $y    Haystack.
-     * @param   string  $x    Needle.
-     * @param   int     $k    Number of differences.
-     * @return  array
      */
-    public static function approximated($y, $x, $k)
+    public static function approximated(string $y, string $x, int $k): array
     {
         $x      = (string) $x;
         $y      = (string) $y;
@@ -96,12 +88,8 @@ class Search
 
     /**
      * Length of the longest common prefixes.
-     *
-     * @param   string  $x    Word.
-     * @param   string  $y    Word.
-     * @return  int
      */
-    public static function lcp($x, $y)
+    public static function lcp(string $x, string $y): int
     {
         $max = min(strlen($x), strlen($y));
         $i   = 0;
