@@ -44,12 +44,14 @@ cache:
 
 before_script:
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
+  - phpenv config-add custom.ini
   - if [[ ! $ENABLE_XDEBUG ]]; then
       phpenv config-rm xdebug.ini || echo "ext-xdebug is not available, cannot remove it.";
     fi
 
 script:
   - composer install
+  - php -i | grep 'ICU version'
   - vendor/bin/hoa test:run
   - if [[ $ENABLE_DEVTOOLS ]]; then
       composer global require friendsofphp/php-cs-fixer;
