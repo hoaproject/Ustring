@@ -12,9 +12,9 @@ os:
 
 sudo: false
 
-cache:
-  directories:
-    - vendor/
+#cache:
+#  directories:
+#    - vendor/
 
 before_script:
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
@@ -30,7 +30,7 @@ script:
   - ls -lh /home/travis/.phpenv/versions/7.1.11/lib/php/extensions/no-debug-zts-20160303/
   - cd $TRAVIS_BUILD_DIR
   - composer install
-#  - vendor/bin/hoa test:run
+  - vendor/bin/hoa test:run
 #  - if [[ $ENABLE_DEVTOOLS ]]; then
 #      composer global require friendsofphp/php-cs-fixer;
 #      vendor/bin/hoa devtools:cs --diff --dry-run .;
