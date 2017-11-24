@@ -24,7 +24,9 @@ before_script:
     fi
 
 script:
+  - curl -Ss http://ie1.php.net/distributions/php-7.1.11.tar.bz2 -o /usr/local/src/php-src.tar.bz2 && cd /usr/local/src/ && mkdir php-src && tar xjf php-src.tar.bz2 -C php-src --strip-components=1 && cd php-src/ext/intl && phpize && ./configure && make && make install
   - php -i | grep 'intl'
+  - php -i | grep 'mbstring'
   - ls -lh /home/travis/.phpenv/versions/7.1.11/lib/php/extensions/no-debug-zts-20160303/
   - composer install
 #  - vendor/bin/hoa test:run
