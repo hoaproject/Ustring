@@ -28,6 +28,7 @@ script:
   - php -i | grep 'intl'
   - php -i | grep 'mbstring'
   - ls -lh /home/travis/.phpenv/versions/7.1.11/lib/php/extensions/no-debug-zts-20160303/
+  - cd $TRAVIS_BUILD_DIR
   - composer install
 #  - vendor/bin/hoa test:run
 #  - if [[ $ENABLE_DEVTOOLS ]]; then
