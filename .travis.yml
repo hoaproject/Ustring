@@ -12,10 +12,6 @@ os:
 
 sudo: false
 
-#cache:
-#  directories:
-#    - vendor/
-
 before_script:
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
   - phpenv config-add custom.ini
@@ -24,17 +20,14 @@ before_script:
     fi
 
 script:
+  - phpenv config-rm intl.ini
   - curl -Ss http://ie1.php.net/distributions/php-7.1.11.tar.bz2 -o /home/travis/php-src.tar.bz2 && cd /home/travis/ && mkdir php-src && tar xjf php-src.tar.bz2 -C php-src --strip-components=1 && cd php-src/ext/intl && phpize && ./configure && make && make install
   - php -i | grep 'intl'
   - php -i | grep 'mbstring'
-  - ls -lh /home/travis/.phpenv/versions/7.1.11/lib/php/extensions/no-debug-zts-20160303/
+  - tree /home/travis/.phpenv/versions/7.1.11/lib/php/extensions
   - cd $TRAVIS_BUILD_DIR
   - composer install
   - vendor/bin/hoa test:run
-#  - if [[ $ENABLE_DEVTOOLS ]]; then
-#      composer global require friendsofphp/php-cs-fixer;
-#      vendor/bin/hoa devtools:cs --diff --dry-run .;
-#    fi
 
 addons:
   apt:
@@ -49,3 +42,4 @@ addons:
     - locales
     - language-pack-en
     - language-pack-fr
+    - tree
