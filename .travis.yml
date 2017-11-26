@@ -12,6 +12,10 @@ os:
 
 sudo: false
 
+cache:
+    directories:
+      - vendor/
+
 before_script:
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
   - if [[ ! $ENABLE_XDEBUG ]]; then
