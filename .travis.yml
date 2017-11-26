@@ -20,10 +20,9 @@ before_script:
     fi
 
 script:
-  - phpenv config-rm intl.ini
+  - grep -Rni 'intl.so' /home/travis
   - curl -Ss http://ie1.php.net/distributions/php-7.1.11.tar.bz2 -o /home/travis/php-src.tar.bz2 && cd /home/travis/ && mkdir php-src && tar xjf php-src.tar.bz2 -C php-src --strip-components=1 && cd php-src/ext/intl && phpize && ./configure && make && make install
   - php -i | grep 'intl'
-  - php -i | grep 'mbstring'
   - tree /home/travis/.phpenv/versions/7.1.11/lib/php/extensions
   - cd $TRAVIS_BUILD_DIR
   - composer install
