@@ -24,6 +24,7 @@ before_script:
   - cd $TRAVIS_BUILD_DIR
 
 script:
+  - ls -lha
   - composer install
   - vendor/bin/hoa test:run
 
