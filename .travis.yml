@@ -27,17 +27,3 @@ script:
   - composer install
   - vendor/bin/hoa test:run
 
-addons:
-  apt:
-    packages:
-    - libicu-dev
-    - unicode
-    - unicode-data
-    - ttf-ancient-fonts
-    - xfonts-efont-unicode
-    - unifont
-    - ttf-unifont
-    - locales
-    - language-pack-en
-    - language-pack-fr
-    - tree
