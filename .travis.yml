@@ -2,7 +2,7 @@ language: php
 
 matrix:
   include:
-    - php: 7.1
+    - php: 7.0
       env:
         - ENABLE_XDEBUG=true
   fast_finish: true
@@ -11,10 +11,6 @@ os:
   - linux
 
 sudo: false
-
-cache:
-    directories:
-      - vendor/
 
 before_script:
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
