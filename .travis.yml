@@ -17,13 +17,11 @@ before_script:
   - if [[ ! $ENABLE_XDEBUG ]]; then
       phpenv config-rm xdebug.ini || echo "ext-xdebug is not available, cannot remove it.";
     fi
-  - curl -Ss http://ie1.php.net/distributions/php-7.1.11.tar.bz2 -o /home/travis/php-src.tar.bz2 && cd /home/travis/ && mkdir php-src && tar xjf php-src.tar.bz2 -C php-src --strip-components=1 && cd php-src/ext/intl && phpize && ./configure && make && make install
-  - php -i | grep 'intl'
-  - tree /home/travis/.phpenv/versions/7.1.11/lib/php/extensions
+  - echo $TRAVIS_PHP_VERSION
+  - curl -Ss http://ie1.php.net/distributions/php-$TRAVIS_PHP_VERSION.tar.bz2 -o /home/travis/php-src.tar.bz2 && cd /home/travis/ && mkdir php-src && tar xjf php-src.tar.bz2 -C php-src --strip-components=1 && cd php-src/ext/intl && phpize && ./configure && make && make install
   - cd $TRAVIS_BUILD_DIR
 
 script:
-  - ls -lha
   - composer install
   - vendor/bin/hoa test:run
 
@@ -39,5 +37,3 @@ addons:
     - ttf-unifont
     - locales
     - language-pack-en
-    - language-pack-fr
-    - tree
