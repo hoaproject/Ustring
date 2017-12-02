@@ -2,64 +2,35 @@ language: php
 
 matrix:
   include:
-    - php: 5.5
-    - php: 5.6
-    - php: 7.0
     - php: 7.1
       env:
         - ENABLE_XDEBUG=true
-    - php: 7.1
-      env:
-        - ENABLE_DEVTOOLS=true
-    - php: nightly
-    - php: hhvm-3.12
-      sudo: required
-      dist: trusty
-      group: edge
-    - php: hhvm
-      sudo: required
-      dist: trusty
-      group: edge
-  allow_failures:
-    - php: nightly
-    - php: hhvm-3.12
-    - php: hhvm
   fast_finish: true
 
 os:
   - linux
 
-notifications:
-  irc: "chat.freenode.net#hoaproject"
-
 sudo: false
-
-env:
-  global:
-    - secure: "AAAAB3NzaC1yc2EAAAADAQABAAAAgQCecwgg2D4ihDiYD9Af7hU7oroL108l1BJaxZ9N0GXmoaJj3JOHKjXgUjizhma5nftXRBJOcIhT4GsLAnFeNKgJv/97cAvm7miHeTLYPOiOpkrf/Zl7UIQ0MKSX91YKdneAGRDFaY0Tq5B9KjK68vu0Cof35h+cf59Ld3hTzrGPZw=="
-
-cache:
-  directories:
-    - vendor/
 
 before_script:
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
   - if [[ ! $ENABLE_XDEBUG ]]; then
       phpenv config-rm xdebug.ini || echo "ext-xdebug is not available, cannot remove it.";
     fi
+  - curl -Ss http://ie1.php.net/distributions/php-7.1.11.tar.bz2 -o /home/travis/php-src.tar.bz2 && cd /home/travis/ && mkdir php-src && tar xjf php-src.tar.bz2 -C php-src --strip-components=1 && cd php-src/ext/intl && phpize && ./configure && make && make install
+  - php -i | grep 'intl'
+  - tree /home/travis/.phpenv/versions/7.1.11/lib/php/extensions
+  - cd $TRAVIS_BUILD_DIR
 
 script:
+  - ls -lha
   - composer install
-  - php -i | grep 'ICU version'
   - vendor/bin/hoa test:run
-  - if [[ $ENABLE_DEVTOOLS ]]; then
-      composer global require friendsofphp/php-cs-fixer;
-      vendor/bin/hoa devtools:cs --diff --dry-run .;
-    fi
 
 addons:
   apt:
     packages:
+    - libicu-dev
     - unicode
     - unicode-data
     - ttf-ancient-fonts
@@ -69,4 +40,4 @@ addons:
     - locales
     - language-pack-en
     - language-pack-fr
-
+    - tree
