@@ -42,6 +42,9 @@ before_script:
     fi
   - cd /home/travis/php-src/ext/intl && make install
   - cd $TRAVIS_BUILD_DIR
+  - echo -e 'LANG=fr_FR.UTF-8' > /etc/default/locale
+  - dpkg-reconfigure -f noninteractive locales
+  - locale
 
 script:
   - composer install
