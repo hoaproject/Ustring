@@ -10,9 +10,13 @@ matrix:
         - ENABLE_XDEBUG=true
         - PHP_SRC_VERSION=7.1.11
     - php: 7.2
+      env:
         - PHP_SRC_VERSION=7.2.0
     - php: nightly
+      env:
         - PHP_SRC_VERSION=7.2.0
+  allow_failures:
+    - php: nightly
   fast_finish: true
 
 os:
