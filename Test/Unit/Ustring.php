@@ -192,8 +192,8 @@ class Ustring extends Test\Unit\Suite
             )
             ->when($result = $collator->getLocale(\Locale::VALID_LOCALE))
             ->then
-                ->string($result)
-                    ->isEqualTo('fr');
+                ->boolean(in_array($result, ['fr', 'fr_FR']))
+                    ->isTrue();
     }
 
     public function case_safe_unsafe_pattern(): void
