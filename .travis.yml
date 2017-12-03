@@ -23,13 +23,14 @@ env:
 cache:
   directories:
     - vendor/
+    - /home/travis/php-src
 
 before_script:
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
   - if [[ ! $ENABLE_XDEBUG ]]; then
       phpenv config-rm xdebug.ini || echo "ext-xdebug is not available, cannot remove it.";
     fi
-  - if [[ ! -d /home/travis/php-src ]]; then
+  - if [[ `ls /home/travis/php-src | wc -l` -eq 0 ]]; then
       curl -Ss "http://ie1.php.net/distributions/php-${PHP_SRC_VERSION}.tar.bz2" -o /home/travis/php-src.tar.bz2;
       cd /home/travis/;
       mkdir php-src;
