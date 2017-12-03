@@ -23,7 +23,6 @@ env:
 cache:
   directories:
     - vendor/
-    - /home/travis/php-src
 
 before_script:
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
