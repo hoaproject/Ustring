@@ -11,14 +11,27 @@ matrix:
 os:
   - linux
 
+notifications:
+  irc: "chat.freenode.net#hoaproject"
+
 sudo: false
+
+env:
+  global:
+    - secure: "AAAAB3NzaC1yc2EAAAADAQABAAAAgQCecwgg2D4ihDiYD9Af7hU7oroL108l1BJaxZ9N0GXmoaJj3JOHKjXgUjizhma5nftXRBJOcIhT4GsLAnFeNKgJv/97cAvm7miHeTLYPOiOpkrf/Zl7UIQ0MKSX91YKdneAGRDFaY0Tq5B9KjK68vu0Cof35h+cf59Ld3hTzrGPZw=="
+
+cache:
+  directories:
+    - vendor/
+    - /home/travis/php-src
 
 before_script:
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
   - if [[ ! $ENABLE_XDEBUG ]]; then
       phpenv config-rm xdebug.ini || echo "ext-xdebug is not available, cannot remove it.";
     fi
-  - curl -Ss "http://ie1.php.net/distributions/php-${PHP_SRC_VERSION}.tar.bz2" -o /home/travis/php-src.tar.bz2 && cd /home/travis/ && mkdir php-src && tar xjf php-src.tar.bz2 -C php-src --strip-components=1 && cd php-src/ext/intl && phpize && ./configure && make && make install
+  - [[ ! -d /home/travis/php-src ]] && curl -Ss "http://ie1.php.net/distributions/php-${PHP_SRC_VERSION}.tar.bz2" -o /home/travis/php-src.tar.bz2 && cd /home/travis/ && mkdir php-src && tar xjf php-src.tar.bz2 -C php-src --strip-components=1 && cd php-src/ext/intl && phpize && ./configure && make
+  - cd /home/travis/php-src/ext/intl && make install
   - cd $TRAVIS_BUILD_DIR
 
 script:
@@ -37,3 +50,4 @@ addons:
     - ttf-unifont
     - locales
     - language-pack-en
+    - language-pack-fr
