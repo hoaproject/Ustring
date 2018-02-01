@@ -5,8 +5,8 @@
 ---
 
 <p align="center">
-  <a href="https://travis-ci.org/hoaproject/ustring"><img src="https://img.shields.io/travis/hoaproject/ustring/master.svg" alt="Build status" /></a>
-  <a href="https://coveralls.io/github/hoaproject/ustring?branch=master"><img src="https://img.shields.io/coveralls/hoaproject/ustring/master.svg" alt="Code coverage" /></a>
+  <a href="https://travis-ci.org/hoaproject/Ustring"><img src="https://img.shields.io/travis/hoaproject/Ustring/master.svg" alt="Build status" /></a>
+  <a href="https://coveralls.io/github/hoaproject/Ustring?branch=master"><img src="https://img.shields.io/coveralls/hoaproject/Ustring/master.svg" alt="Code coverage" /></a>
   <a href="https://packagist.org/packages/hoa/ustring"><img src="https://img.shields.io/packagist/dt/hoa/ustring.svg" alt="Packagist" /></a>
   <a href="https://hoa-project.net/LICENSE"><img src="https://img.shields.io/packagist/l/hoa/ustring.svg" alt="License" /></a>
 </p>

@@ -423,7 +423,7 @@ class Ustring implements \ArrayAccess, \Countable, \IteratorAggregate
                 );
             }
 
-            $string        = static::transcode($string, 'UTF-8', 'ASCII//IGNORE//TRANSLIT');
+            $string        = static::transcode($string, 'UTF-8', 'ASCII//TRANSLIT');
             $this->_string = preg_replace('#(?:[\'"`^](\w))#u', '\1', $string);
 
             return $this;
@@ -431,7 +431,7 @@ class Ustring implements \ArrayAccess, \Countable, \IteratorAggregate
 
         $string        = \Normalizer::normalize($string, \Normalizer::NFKD);
         $string        = preg_replace('#\p{Mn}+#u', '', $string);
-        $this->_string = static::transcode($string, 'UTF-8', 'ASCII//IGNORE//TRANSLIT');
+        $this->_string = static::transcode($string, 'UTF-8', 'ASCII//TRANSLIT');
 
         return $this;
     }
